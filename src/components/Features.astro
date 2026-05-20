@@ -1,33 +1,33 @@
 ---
-const techs = [
-  { name: "Astro SSR", desc: "Framework web con renderizado en servidor para maxima velocidad y SEO." },
-  { name: "TypeScript", desc: "Tipado estatico para un codigo robusto y mantenible." },
-  { name: "TailwindCSS", desc: "Estilos utilitarios modernos con diseno responsive y consistente." },
-  { name: "Prisma", desc: "ORM tipado para PostgreSQL con migraciones seguras y consultas eficientes." },
-  { name: "PostgreSQL (Supabase)", desc: "Base de datos relacional escalable con backup y autenticacion integrada." },
-  { name: "Stripe", desc: "Plataforma de pagos y suscripciones con facturacion profesional." },
-  { name: "Resend", desc: "Email API para notificaciones transaccionales y automaticas." },
-  { name: "Zod", desc: "Validacion de esquemas en tiempo de ejecucion para datos seguros." },
-  { name: "HMAC sessions", desc: "Sesiones firmadas criptograficamente con proteccion contra manipulacion." },
-  { name: "Vercel (serverless)", desc: "Plataforma de despliegue con funciones serverless y CDN global." },
+const features = [
+  { name: "CRM inteligente", desc: "Gestion automatica de leads con clasificacion por intencion de compra y seguimiento inteligente." },
+  { name: "Automatizacion de ventas", desc: "Flujos autonomos que capturan, cualifican y cierran leads sin intervencion manual." },
+  { name: "Agentes IA", desc: "Sistemas de IA que responden, cualifican y proponen automaticamente 24/7." },
+  { name: "Generacion de documentos", desc: "Propuestas comerciales, contratos y facturas generados automaticamente con IA." },
+  { name: "Pipeline automatizado", desc: "Los leads avanzan solos por tu embudo. Sin arrastrar tarjetas manualmente." },
+  { name: "Reporting automatico", desc: "Informes de conversion, ROI y rendimiento generados cada semana automaticamente." },
+  { name: "API REST", desc: "Integracion con tus herramientas existentes via API documentada y webhooks." },
+  { name: "Seguridad empresarial", desc: "Datos cifrados, sesiones HMAC, rate limiting y cumplimiento RGPD." },
+  { name: "99.9% uptime", desc: "Infraestructura serverless con CDN global y redundancia automatica." },
+  { name: "Soporte prioritario", desc: "Respuesta en menos de 4 horas para clientes Premium y Business." },
 ];
 ---
 
 <section id="technology" class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="tech-heading">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center" data-reveal>
-      <span class="inline-flex items-center rounded-full border border-purple-300/20 bg-purple-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-purple-200/80 uppercase">Infraestructura</span>
-      <h2 id="tech-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Infraestructura tecnica</h2>
-      <p class="mt-4 text-base text-white/50">Construido con tecnologias modernas y probadas para garantizar rendimiento, seguridad y escalabilidad en produccion.</p>
+      <span class="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-cyan-200/80 uppercase">Funcionalidades</span>
+      <h2 id="tech-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Todo lo que necesitas para automatizar</h2>
+      <p class="mt-4 text-base text-white/50">Sistemas de IA operativa que reemplazan tareas manuales en tu proceso comercial completo.</p>
     </div>
 
     <div class="mt-16 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-      {techs.map((t, i) => (
-        <div class="feature-card flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-300/20 hover:bg-purple-300/[0.03] hover:shadow-[0_8px_30px_-20px_rgba(168,85,247,0.2)]" data-reveal data-delay={i * 60}>
-          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-[10px] font-bold tracking-wider text-white/30 transition-colors duration-300 group-hover:text-purple-200/50">{String(i + 1).padStart(2, "0")}</span>
+      {features.map((f, i) => (
+        <div class="feature-card flex items-start gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/20 hover:bg-cyan-300/[0.03] hover:shadow-[0_8px_30px_-20px_rgba(34,211,238,0.2)]" data-reveal data-delay={i * 60}>
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-[10px] font-bold tracking-wider text-white/30">{String(i + 1).padStart(2, "0")}</span>
           <div>
-            <span class="text-sm font-medium text-white">{t.name}</span>
-            <p class="text-xs text-white/40 mt-0.5">{t.desc}</p>
+            <span class="text-sm font-medium text-white">{f.name}</span>
+            <p class="text-xs text-white/40 mt-0.5">{f.desc}</p>
           </div>
         </div>
       ))}
