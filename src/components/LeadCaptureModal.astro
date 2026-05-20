@@ -25,7 +25,15 @@
         <div class="flex items-start justify-between gap-5">
           <div>
             <p class="text-xs font-medium uppercase tracking-[0.18em] text-cyan-200/80">
-              Análisis gratuito
+              Analisis de operaciones
+            </p>
+
+            <h2 id="lead-modal-title" class="mt-3 text-2xl font-semibold tracking-tight text-white">
+              Solicita tu analisis gratuito
+            </h2>
+
+            <p class="mt-2 text-sm leading-relaxed text-white/55">
+              Identificamos que procesos de tu negocio pueden automatizarse con IA y te entregamos un plan claro.
             </p>
 
             <h2 id="lead-modal-title" class="mt-3 text-2xl font-semibold tracking-tight text-white">
@@ -118,7 +126,7 @@
           class="group relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-white px-6 py-3.5 font-semibold text-black shadow-[0_18px_55px_-26px_rgba(255,255,255,0.9)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_70px_-24px_rgba(34,211,238,0.9)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
         >
           <span class="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-cyan-200/70 to-transparent transition duration-700 group-hover:translate-x-[120%]"></span>
-          <span id="lead-submit-label" class="relative">Solicitar llamada</span>
+          <span id="lead-submit-label" class="relative">Solicitar analisis de operaciones</span>
           <span
             id="lead-submit-spinner"
             class="relative ml-3 hidden h-4 w-4 animate-spin rounded-full border-2 border-black/20 border-t-black"
@@ -220,7 +228,7 @@
   const setLoading = (state) => {
     isLoading = state;
     submitBtn.disabled = state;
-    submitLabel.textContent = state ? "Enviando..." : "Solicitar llamada";
+    submitLabel.textContent = state ? "Enviando..." : "Solicitar analisis de operaciones";
     submitSpinner.classList.toggle("hidden", !state);
   };
 

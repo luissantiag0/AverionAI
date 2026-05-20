@@ -13,18 +13,18 @@ const isLoggedIn = !!user;
 const isPremium = user?.isPremium === true || user?.role === "admin" || user?.role === "owner";
 ---
 
-<BaseLayout title="Pricing | AverionAI" description="Planes flexibles para automatización con IA. Empieza gratis, escala con Premium o Business.">
+<BaseLayout title="Planes | AverionAI — Infraestructura de IA para Empresas" description="Planes de infraestructura de IA para empresas. Empieza gratis, escala con sistemas de automatizacion en produccion.">
   <Navbar />
   <main class="min-h-screen bg-[#07070A]">
     <section class="container py-20 md:py-28">
       <div class="mx-auto max-w-3xl text-center">
-        <p class="text-xs uppercase tracking-[0.18em] text-cyan-100/70">Pricing</p>
+        <p class="text-xs uppercase tracking-[0.18em] text-cyan-100/70">Planes</p>
         <h1 class="mt-4 text-4xl font-semibold tracking-tight text-white md:text-6xl">
-          Planes simples,<br />
-          <span class="text-gradient">resultados reales</span>
+          Infraestructura de IA,<br />
+          <span class="text-gradient">escalable desde el dia uno</span>
         </h1>
         <p class="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/58 md:text-base">
-          Elige el plan que mejor se adapte a tu negocio. Todos incluyen infraestructura SSR segura y datos en tiempo real.
+          Sistemas de automatizacion en produccion. Empieza con la plataforma, añade implementacion personalizada cuando lo necesites.
         </p>
       </div>
 
@@ -46,7 +46,7 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
             {isLoggedIn ? (
               <a href={isPremium ? "/premium/dashboard" : "/dashboard"} class="btn-secondary w-full justify-center text-center">{isPremium ? "Ir al panel" : "Acceder gratis"}</a>
             ) : (
-              <a href="/register" class="btn-secondary w-full justify-center text-center">Crear cuenta gratis</a>
+              <a href="/register" class="btn-secondary w-full justify-center text-center">Empezar ahora</a>
             )}
           </div>
         </div>
@@ -55,7 +55,7 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
         <div class="premium-panel relative overflow-hidden border-cyan-300/30 bg-[linear-gradient(135deg,rgba(34,211,238,0.12),rgba(255,255,255,0.04)_48%,rgba(16,185,129,0.1))] p-6 shadow-[0_26px_95px_-58px_rgba(34,211,238,0.9)] md:p-8">
           <div class="absolute right-4 top-4 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-medium tracking-[0.12em] text-cyan-200">Recomendado</div>
           <h2 class="text-2xl font-semibold text-white">Premium</h2>
-          <p class="mt-2 text-sm text-white/50">Máximo potencial en automatización</p>
+          <p class="mt-2 text-sm text-white/50">Automatizacion en produccion</p>
           <p class="mt-6"><span class="text-5xl font-bold text-white">29</span><span class="text-sm text-white/40"> €/mes</span></p>
           <ul class="mt-8 grid gap-3 text-sm" role="list">
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Todo lo de Free</li>
@@ -71,22 +71,22 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
             ) : isLoggedIn ? (
               <button type="button" data-checkout-trigger="premium" class="btn-primary w-full justify-center text-center">Suscribirse ahora</button>
             ) : (
-              <a href="/register" class="btn-primary w-full justify-center text-center">Crear cuenta y suscribirse</a>
+              <a href="/register" class="btn-primary w-full justify-center text-center">Empezar ahora</a>
             )}
           </div>
         </div>
 
         <!-- Business -->
         <div class="premium-panel relative overflow-hidden border-emerald-300/40 bg-[linear-gradient(135deg,rgba(16,185,129,0.12),rgba(255,255,255,0.04)_48%,rgba(34,211,238,0.08))] p-6 shadow-[0_26px_95px_-58px_rgba(16,185,129,0.9)] ring-1 ring-emerald-300/20 md:p-8">
-          <div class="absolute right-4 top-4 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-medium tracking-[0.12em] text-emerald-200">Mejor opción</div>
+          <div class="absolute right-4 top-4 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-medium tracking-[0.12em] text-emerald-200">Mejor opcion</div>
           <h2 class="text-2xl font-semibold text-white">Business</h2>
           <p class="mt-2 text-sm text-white/50">Para equipos y empresas en crecimiento</p>
           <p class="mt-6"><span class="text-5xl font-bold text-white">79</span><span class="text-sm text-white/40"> €/mes</span></p>
           <ul class="mt-8 grid gap-3 text-sm" role="list">
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Todo lo de Premium</li>
-            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Usuarios múltiples</li>
+            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Usuarios multiples</li>
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Roles y permisos</li>
-            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> API pública</li>
+            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> API publica</li>
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Integraciones personalizadas</li>
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> SLA y soporte dedicado</li>
           </ul>
@@ -96,7 +96,7 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
             ) : isLoggedIn ? (
               <button type="button" data-checkout-trigger="business" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Elegir Business</button>
             ) : (
-              <a href="/register" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Crear cuenta y elegir Business</a>
+              <a href="/register" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Empezar ahora</a>
             )}
           </div>
         </div>
