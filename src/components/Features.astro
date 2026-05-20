@@ -13,18 +13,18 @@ const techs = [
 ];
 ---
 
-<section id="technology" class="border-t border-white/[0.06] py-24 md:py-28">
+<section id="technology" class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="tech-heading">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center" data-reveal>
-      <span class="inline-flex items-center rounded-full border border-purple-300/20 bg-purple-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-purple-200/80 uppercase">Tecnologia</span>
-      <h2 class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Stack tecnologico</h2>
-      <p class="mt-4 text-base text-white/50">Construido con tecnologias modernas y probadas para garantizar rendimiento, seguridad y escalabilidad.</p>
+      <span class="inline-flex items-center rounded-full border border-purple-300/20 bg-purple-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-purple-200/80 uppercase">Infraestructura</span>
+      <h2 id="tech-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Infraestructura tecnica</h2>
+      <p class="mt-4 text-base text-white/50">Construido con tecnologias modernas y probadas para garantizar rendimiento, seguridad y escalabilidad en produccion.</p>
     </div>
 
     <div class="mt-16 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
       {techs.map((t, i) => (
-        <div class="flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-300/20 hover:bg-purple-300/[0.03] hover:shadow-[0_8px_30px_-20px_rgba(168,85,247,0.2)]" data-reveal data-delay={i * 60}>
-          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-[10px] font-bold tracking-wider text-white/30">{String(i + 1).padStart(2, "0")}</span>
+        <div class="feature-card flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-300/20 hover:bg-purple-300/[0.03] hover:shadow-[0_8px_30px_-20px_rgba(168,85,247,0.2)]" data-reveal data-delay={i * 60}>
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-[10px] font-bold tracking-wider text-white/30 transition-colors duration-300 group-hover:text-purple-200/50">{String(i + 1).padStart(2, "0")}</span>
           <div>
             <span class="text-sm font-medium text-white">{t.name}</span>
             <p class="text-xs text-white/40 mt-0.5">{t.desc}</p>

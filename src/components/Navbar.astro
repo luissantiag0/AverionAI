@@ -10,19 +10,19 @@ const user = await getCurrentUser(token);
 const isLoggedIn = !!user;
 ---
 
-<header class="site-header sticky top-0 z-50 border-b border-white/10 bg-[#07070A]/72 backdrop-blur-xl transition-all duration-300 ease-in-out" data-site-header>
+<header class="site-header sticky top-0 z-50 border-b border-white/10 bg-[#07070A]/72 backdrop-blur-xl transition-all duration-300 ease-in-out" data-site-header role="banner">
   <div class="site-header-inner container flex min-h-16 items-center justify-between gap-4 transition-all duration-300 ease-in-out">
     <BrandLogo markClass="h-8 w-8" textClass="text-lg" />
 
-    <nav class="hidden items-center gap-7 text-sm md:flex md:flex-1 md:justify-center">
+    <nav class="hidden items-center gap-7 text-sm md:flex md:flex-1 md:justify-center" aria-label="Navegacion principal">
       <a href="/pricing" class="text-white/55 transition hover:text-cyan-100">
         Pricing
       </a>
 
       {!isLoggedIn && (
         <>
-          <a href="/#services" class="text-white/55 transition hover:text-cyan-100">
-            Servicios
+          <a href="/#systems" class="text-white/55 transition hover:text-cyan-100">
+            Sistemas
           </a>
           <a href="/#technology" class="text-white/55 transition hover:text-cyan-100">
             Tecnologia
@@ -58,7 +58,7 @@ const isLoggedIn = !!user;
       {!isLoggedIn && (
         <>
           <a href="/login" class="btn-secondary px-4 py-2.5 text-sm hidden sm:inline-flex">Iniciar sesion</a>
-          <a href="/register" class="btn-primary px-5 py-2.5 text-sm">Probar gratis</a>
+          <a href="/register" class="btn-primary px-5 py-2.5 text-sm">Empezar ahora</a>
         </>
       )}
       {isLoggedIn && (

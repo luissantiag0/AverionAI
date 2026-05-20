@@ -1,59 +1,59 @@
 ---
 const faqs = [
   {
-    question: "¿Qué es AverionAI?",
+    question: "¿Que tipo de empresas obtienen resultados con AverionAI?",
     answer:
-      "AverionAI es una plataforma para gestionar leads, automatizar seguimiento y usar IA en procesos comerciales sin añadir complejidad al equipo."
+      "Empresas de 10 a 50 empleados que reciben consultas o leads de forma recurrente — inmobiliarias, clínicas, despachos profesionales, e-commerce y servicios. Si tu equipo pierde tiempo respondiendo manualmente o siguiendo oportunidades en Excel, AverionAI automatiza ese proceso."
   },
   {
-    question: "¿Cómo funciona?",
+    question: "¿Cuanto cuesta una implementacion personalizada?",
     answer:
-      "Recoge solicitudes desde tus formularios, las organiza en un CRM interno y te ayuda a priorizar cada oportunidad con estados, notas y seguimiento claro."
+      "Las implementaciones parten desde €500 dependiendo de la complejidad de los flujos, el numero de integraciones y el nivel de personalizacion de los agentes de IA. El analisis inicial es gratuito y te entrega un presupuesto cerrado antes de empezar."
   },
   {
-    question: "¿Qué ventajas tiene frente a un CRM tradicional?",
+    question: "¿En cuanto tiempo se ven los primeros resultados?",
     answer:
-      "Está pensado para actuar, no solo para almacenar contactos: combina captación, pipeline, alertas, notas y automatización en un flujo más ágil."
+      "El sistema se despliega en 7-14 dias. Los primeros resultados — leads respondidos en menos de 2 minutos, consultas cualificadas automaticamente, seguimientos ejecutandose solos — se ven desde el primer dia de produccion."
   },
   {
-    question: "¿Qué incluye el plan gratuito?",
+    question: "¿Que pasa con mis datos y el cumplimiento RGPD?",
     answer:
-      "Incluye un análisis inicial para detectar oportunidades de automatización y entender cómo AverionAI puede ayudarte a gestionar mejor tus leads."
+      "Todo se procesa cumpliendo el RGPD y la LOPD española. Los datos se almacenan en servidores europeos con cifrado de extremo a extremo. Tu eres el propietario de todos los datos — no los compartimos con terceros. Podemos configurar el sistema para que datos sensibles no pasen por la IA."
   },
   {
-    question: "¿Cómo se gestionan los leads?",
+    question: "¿Puedo ver un ejemplo aplicado a mi sector?",
     answer:
-      "Cada lead se guarda en el panel, puede cambiar de estado, recibir notas internas y avanzar por el pipeline para que no se pierda ninguna oportunidad."
+      "Si. Durante el analisis gratuito te mostramos un caso real de tu sector con numeros concretos: cuantos leads se recuperan, cuanto tiempo se ahorra y cual es el retorno estimado. Sin compromiso."
   },
   {
-    question: "¿Necesito conocimientos técnicos?",
+    question: "¿Que incluye el analisis de operaciones gratuito?",
     answer:
-      "No. El panel está diseñado para que cualquier persona pueda revisar leads, actualizar estados y dar seguimiento sin depender de un equipo técnico."
+      "Un analisis de tus flujos operativos actuales, identificacion de oportunidades de automatizacion con mayor retorno, estimacion de impacto economico y un plan de implementacion con plazos y precios cerrados. Todo en una sesion de 30 minutos."
   },
   {
-    question: "¿Cómo protege AverionAI mis datos?",
+    question: "¿Necesito conocimientos tecnicos para usar el sistema?",
     answer:
-      "Usa autenticación de administrador, sesiones seguras y una base de datos privada para que la información comercial quede protegida y controlada."
+      "No. El panel de control esta diseñado para que cualquier persona pueda monitorizar flujos, revisar metricas y ajustar parametros sin depender de un equipo tecnico. La implementacion inicial la hacemos nosotros."
   },
   {
-    question: "¿Puedo cancelar cuando quiera?",
+    question: "¿Se conecta con las herramientas que ya usamos?",
     answer:
-      "Sí. La idea es que AverionAI se adapte a tu operación, no que te ate a procesos rígidos. Puedes pausar o cancelar el servicio cuando lo necesites."
+      "Si. AverionAI se integra con CRM, email, calendarios, WhatsApp, pasarelas de pago y cualquier sistema con API. No reemplazamos tus herramientas actuales — las potenciamos con IA."
   },
   {
-    question: "¿Qué diferencia AverionAI de otros CRM?",
+    question: "¿Que diferencia AverionAI de un chatbot convencional?",
     answer:
-      "AverionAI une CRM, automatización e IA en una experiencia más enfocada a velocidad comercial, seguimiento real y reducción de trabajo manual."
+      "Un chatbot responde con reglas predefinidas. AverionAI usa IA para entender la intencion real del cliente, hacer seguimiento personalizado, cualificar leads, agendar citas y ejecutar flujos completos sin intervencion humana. Es un sistema operativo, no un contestador."
   },
   {
-    question: "¿Para qué tipo de negocios sirve?",
+    question: "¿Puedo cancelar o pausar el servicio?",
     answer:
-      "Funciona especialmente bien para empresas, startups, servicios profesionales y negocios que reciben leads y necesitan responder con más rapidez."
+      "Si. AverionAI se adapta a tu operacion, no al reves. Puedes pausar o cancelar cuando lo necesites. Nuestros clientes no se van porque el sistema se paga solo con los leads que recupera."
   }
 ];
 ---
 
-<section id="faq" class="relative border-t border-white/10 bg-[#07070A] py-24 md:py-32">
+<section id="faq" class="relative border-t border-white/10 bg-[#07070A] py-24 md:py-32" aria-labelledby="faq-heading">
   <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent"></div>
   <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,0.11),transparent_28rem),radial-gradient(circle_at_82%_45%,rgba(16,185,129,0.08),transparent_30rem)]"></div>
 
@@ -64,12 +64,12 @@ const faqs = [
           Preguntas frecuentes
         </span>
 
-        <h2 class="mt-5 max-w-xl text-3xl font-semibold tracking-tight text-white md:text-5xl">
+        <h2 id="faq-heading" class="mt-5 max-w-xl text-3xl font-semibold tracking-tight text-white md:text-5xl">
           Dudas claras antes de dar el siguiente paso
         </h2>
 
         <p class="mt-5 max-w-lg text-base leading-relaxed text-white/60 md:text-lg">
-          Resolvemos lo esencial sobre AverionAI, la gestión de leads y cómo empezar sin fricción.
+          Resolvemos lo esencial sobre costes, plazos, integraciones y cumplimiento normativo.
         </p>
 
         <div class="premium-panel animated-border mt-8 p-5">
@@ -78,32 +78,34 @@ const faqs = [
           </p>
 
           <p class="mt-2 text-sm leading-relaxed text-white/55">
-            Solicita un análisis gratuito y recibe una visión clara de qué procesos puedes automatizar primero.
+            Solicita un analisis de operaciones gratuito y recibe un mapa claro de que procesos puedes automatizar primero.
           </p>
 
           <button
             type="button"
             data-open-lead-modal
             class="btn-primary mt-5 w-full sm:w-auto"
+            aria-label="Solicitar analisis de operaciones gratuito"
           >
-            Solicitar análisis gratuito
+            Solicitar analisis de operaciones
           </button>
         </div>
       </div>
 
-      <div class="grid gap-4">
+      <div class="grid gap-4" role="list">
         {faqs.map((item, index) => (
           <details
             class="faq-item interactive-card group p-0"
             data-reveal
             open={index === 0}
+            role="listitem"
           >
             <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-5 text-left md:px-6">
               <span class="text-base font-semibold leading-snug text-white md:text-lg">
                 {item.question}
               </span>
 
-              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-xl leading-none text-cyan-100 transition duration-300 group-hover:border-cyan-300/40 group-hover:bg-cyan-300/10 group-open:rotate-45">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-xl leading-none text-cyan-100 transition duration-300 group-hover:border-cyan-300/40 group-hover:bg-cyan-300/10 group-open:rotate-45" aria-hidden="true">
                 +
               </span>
             </summary>

@@ -1,0 +1,168 @@
+---
+import BusinessLayout from "../../layouts/BusinessLayout.astro";
+export const prerender = false;
+
+const exportTypes = [
+  {
+    id: "leads",
+    title: "Leads",
+    desc: "Exporta todos los leads con sus datos, etapa, canal de captacion y fecha.",
+    icon: "M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z",
+    count: "150 registros",
+  },
+  {
+    id: "documents",
+    title: "Documentos",
+    desc: "Facturas, pitch decks, ebooks e informes generados con metadatos completos.",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    count: "110 registros",
+  },
+  {
+    id: "automations",
+    title: "Automatizaciones",
+    desc: "Historial de ejecuciones, tasas de exito, tiempos y configuracion de flujos.",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    count: "412 registros",
+  },
+  {
+    id: "activity",
+    title: "Actividad",
+    desc: "Timeline completo de eventos, cambios y acciones de todos los usuarios.",
+    icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+    count: "1.248 registros",
+  },
+];
+
+const formats = [
+  { id: "csv", label: "CSV", desc: "Compatible con Excel, Google Sheets y cualquier herramienta de analisis.", icon: "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
+  { id: "json", label: "JSON", desc: "Formato estructurado ideal para integraciones y desarrollo.", icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" },
+  { id: "pdf", label: "PDF", desc: "Informe visual listo para compartir con el equipo o clientes.", icon: "M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" },
+];
+
+const exportHistory = [
+  { date: "2026-05-19 14:32", type: "Leads", format: "CSV", user: "Ana Garcia", status: "completado" },
+  { date: "2026-05-18 09:15", type: "Documentos", format: "PDF", user: "Carlos Lopez", status: "completado" },
+  { date: "2026-05-17 16:48", type: "Automatizaciones", format: "JSON", user: "Ana Garcia", status: "completado" },
+  { date: "2026-05-16 11:20", type: "Actividad", format: "CSV", user: "Maria Perez", status: "completado" },
+  { date: "2026-05-15 08:05", type: "Leads", format: "JSON", user: "Admin", status: "completado" },
+  { date: "2026-05-14 17:30", type: "Documentos", format: "CSV", user: "Carlos Lopez", status: "error" },
+  { date: "2026-05-13 10:42", type: "Automatizaciones", format: "PDF", user: "Ana Garcia", status: "completado" },
+  { date: "2026-05-12 13:55", type: "Actividad", format: "JSON", user: "Admin", status: "completado" },
+];
+---
+
+<BusinessLayout title="Exportaciones">
+  <section class="rounded-2xl border border-white/[0.06] bg-[linear-gradient(135deg,rgba(34,211,238,0.06),rgba(255,255,255,0.02)_48%,rgba(16,185,129,0.05))] p-6 md:p-8">
+    <p class="text-xs uppercase tracking-[0.18em] text-cyan-100/70">Exportaciones</p>
+    <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white md:text-5xl">Exportar datos</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/50">Descarga tus datos en el formato que necesites para analisis externos o backups.</p>
+  </section>
+
+  <section class="mt-6">
+    <p class="text-sm font-medium text-white/60 mb-4">Selecciona que datos exportar</p>
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {exportTypes.map((t, i) => (
+        <button type="button" class="export-type-btn premium-panel p-5 text-left transition-all duration-300 hover:-translate-y-1 cursor-pointer w-full hover:border-cyan-300/30" data-export={t.id} data-reveal data-delay={i * 60}>
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10">
+            <svg class="h-5 w-5 text-cyan-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={t.icon}/></svg>
+          </div>
+          <h3 class="mt-4 text-sm font-semibold text-white">{t.title}</h3>
+          <p class="mt-1.5 text-xs leading-relaxed text-white/45">{t.desc}</p>
+          <p class="mt-3 text-[11px] font-mono text-cyan-200/60">{t.count}</p>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <section class="mt-6 premium-panel p-5 md:p-6">
+    <h3 class="text-lg font-semibold text-white">Formato de exportacion</h3>
+    <p class="mt-1 text-sm text-white/45">Elige el formato de salida para tus datos.</p>
+
+    <div class="mt-5 grid gap-4 sm:grid-cols-3">
+      {formats.map((f, i) => (
+        <button type="button" class={`format-btn rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/20 ${i === 0 ? "border-cyan-300/30 bg-cyan-300/[0.06]" : ""}`} data-format={f.id} data-reveal data-delay={i * 60}>
+          <div class="flex items-center gap-3">
+            <svg class="h-5 w-5 text-cyan-200/70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={f.icon}/></svg>
+            <div>
+              <span class="text-sm font-semibold text-white">{f.label}</span>
+              <p class="mt-0.5 text-xs text-white/40">{f.desc}</p>
+            </div>
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <button type="button" class="btn-primary px-5 py-2.5 text-sm" onclick="startExport()">
+        <svg class="mr-1.5 inline h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Exportar datos
+      </button>
+    </div>
+  </section>
+
+  <section class="mt-6 premium-panel p-5 md:p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h3 class="text-lg font-semibold text-white">Historial de exportaciones</h3>
+        <p class="mt-1 text-sm text-white/45">Ultimas exportaciones realizadas.</p>
+      </div>
+    </div>
+
+    <div class="mt-5 overflow-x-auto">
+      <table class="table-premium min-w-full">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Formato</th>
+            <th>Usuario</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {exportHistory.map((h, i) => (
+            <tr data-reveal data-delay={i * 30}>
+              <td class="font-mono text-xs text-white/50">{h.date}</td>
+              <td class="text-sm text-white/70">{h.type}</td>
+              <td>
+                <span class="rounded-full border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-white/50 uppercase">{h.format}</span>
+              </td>
+              <td class="text-sm text-white/60">{h.user}</td>
+              <td>
+                <span class={`status-pill ${h.status === "completado" ? "bg-emerald-400/10 text-emerald-200 ring-emerald-300/20" : "bg-red-400/10 text-red-200 ring-red-300/20"}`}>
+                  {h.status === "completado" ? "Completado" : "Error"}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</BusinessLayout>
+
+<script>
+  let selectedExport = "leads";
+  let selectedFormat = "csv";
+
+  document.querySelectorAll(".export-type-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".export-type-btn").forEach((b) => { b.style.borderColor = ""; });
+      selectedExport = btn.dataset.export || "leads";
+      (btn as HTMLElement).style.borderColor = "rgba(34,211,238,0.4)";
+    });
+  });
+
+  document.querySelectorAll(".format-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".format-btn").forEach((b) => { b.classList.remove("border-cyan-300/30", "bg-cyan-300/[0.06]"); });
+      selectedFormat = btn.dataset.format || "csv";
+      btn.classList.add("border-cyan-300/30", "bg-cyan-300/[0.06]");
+    });
+  });
+
+  function startExport() {
+    console.log("Exportando:", { type: selectedExport, format: selectedFormat });
+    alert(`Exportando ${selectedExport} en formato ${selectedFormat.toUpperCase()}`);
+  }
+</script>

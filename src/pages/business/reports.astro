@@ -1,0 +1,203 @@
+---
+import BusinessLayout from "../../layouts/BusinessLayout.astro";
+export const prerender = false;
+
+const reportTypes = [
+  {
+    id: "leads",
+    title: "Informe de leads",
+    desc: "Analisis completo del pipeline, conversion por etapa y rendimiento de captacion.",
+    icon: "M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z",
+    color: "cyan",
+  },
+  {
+    id: "documents",
+    title: "Informe de documentos",
+    desc: "Volumen, tipos y tendencias de documentos generados automaticamente.",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    color: "emerald",
+  },
+  {
+    id: "automations",
+    title: "Informe de automatizaciones",
+    desc: "Ejecuciones, tasas de exito, tiempo de respuesta y flujos mas activos.",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    color: "purple",
+  },
+  {
+    id: "activity",
+    title: "Informe de actividad",
+    desc: "Timeline completo de eventos, acciones de usuario y cambios en el sistema.",
+    icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+    color: "amber",
+  },
+];
+
+const previewSections = [
+  { title: "Resumen ejecutivo", items: ["150 leads capturados este periodo", "Tasa de conversion: 34.2% (+5.1%)", "Tiempo medio de respuesta: 2.4 min"] },
+  { title: "Pipeline", items: ["48 leads nuevos", "35 en fase de contacto", "28 calificados", "18 en negociacion", "21 cerrados"] },
+  { title: "Rendimiento", items: ["110 documentos generados", "412 automatizaciones ejecutadas", "98.7% tasa de exito en flujos"] },
+];
+---
+
+<BusinessLayout title="Informes">
+  <section class="rounded-2xl border border-white/[0.06] bg-[linear-gradient(135deg,rgba(34,211,238,0.06),rgba(255,255,255,0.02)_48%,rgba(16,185,129,0.05))] p-6 md:p-8">
+    <p class="text-xs uppercase tracking-[0.18em] text-cyan-100/70">Informes automaticos</p>
+    <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white md:text-5xl">Generacion de informes</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/50">Configura, genera y envia informes detallados sobre el rendimiento de tu negocio.</p>
+  </section>
+
+  <section class="mt-6">
+    <p class="text-sm font-medium text-white/60 mb-4">Selecciona el tipo de informe</p>
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {reportTypes.map((r, i) => (
+        <button type="button" class={`report-type-btn premium-panel p-5 text-left transition-all duration-300 hover:-translate-y-1 cursor-pointer w-full ${r.color === "cyan" ? "hover:border-cyan-300/30" : r.color === "emerald" ? "hover:border-emerald-300/30" : r.color === "purple" ? "hover:border-purple-300/30" : "hover:border-amber-300/30"}`} data-report={r.id} data-reveal data-delay={i * 60}>
+          <div class={`flex h-10 w-10 items-center justify-center rounded-xl border ${
+            r.color === "cyan" ? "border-cyan-300/20 bg-cyan-300/10" :
+            r.color === "emerald" ? "border-emerald-300/20 bg-emerald-300/10" :
+            r.color === "purple" ? "border-purple-300/20 bg-purple-300/10" :
+            "border-amber-300/20 bg-amber-300/10"
+          }`}>
+            <svg class={`h-5 w-5 ${
+              r.color === "cyan" ? "text-cyan-200" :
+              r.color === "emerald" ? "text-emerald-200" :
+              r.color === "purple" ? "text-purple-200" :
+              "text-amber-200"
+            }`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={r.icon}/></svg>
+          </div>
+          <h3 class="mt-4 text-sm font-semibold text-white">{r.title}</h3>
+          <p class="mt-1.5 text-xs leading-relaxed text-white/45">{r.desc}</p>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <section class="mt-6 premium-panel p-5 md:p-6">
+    <h3 class="text-lg font-semibold text-white">Configuracion del informe</h3>
+    <p class="mt-1 text-sm text-white/45">Personaliza los parametros antes de generar.</p>
+
+    <div class="mt-6 grid gap-5 md:grid-cols-3">
+      <div>
+        <label class="mb-1.5 block text-xs font-medium text-white/50" for="report-date-range">Rango de fechas</label>
+        <select id="report-date-range" class="input-premium w-full">
+          <option>Ultimos 7 dias</option>
+          <option selected>Ultimos 30 dias</option>
+          <option>Ultimos 90 dias</option>
+          <option>Este mes</option>
+          <option>Mes anterior</option>
+          <option>Este ano</option>
+          <option>Personalizado</option>
+        </select>
+      </div>
+      <div>
+        <label class="mb-1.5 block text-xs font-medium text-white/50" for="report-data-type">Tipo de datos</label>
+        <select id="report-data-type" class="input-premium w-full">
+          <option selected>Completo</option>
+          <option>Resumen</option>
+          <option>Detalle por lead</option>
+          <option>Agregado por etapa</option>
+          <option>Comparativo</option>
+        </select>
+      </div>
+      <div>
+        <label class="mb-1.5 block text-xs font-medium text-white/50" for="report-detail-level">Nivel de detalle</label>
+        <select id="report-detail-level" class="input-premium w-full">
+          <option>Basico</option>
+          <option selected>Estandar</option>
+          <option>Avanzado</option>
+          <option>Completo con graficos</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <button type="button" class="btn-primary px-5 py-2.5 text-sm" onclick="generateReport()">Generar informe</button>
+      <button type="button" class="btn-secondary px-5 py-2.5 text-sm" onclick="previewReport()">Vista previa</button>
+    </div>
+  </section>
+
+  <section id="report-preview" class="mt-6 premium-panel p-5 md:p-6 hidden">
+    <div class="flex items-center justify-between">
+      <div>
+        <h3 class="text-lg font-semibold text-white">Vista previa del informe</h3>
+        <p class="mt-1 text-sm text-white/45">Generado el <span id="report-date"></span></p>
+      </div>
+      <button type="button" class="btn-secondary px-4 py-2 text-xs" onclick="sendByEmail()">
+        <svg class="mr-1.5 inline h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Enviar por email
+      </button>
+    </div>
+
+    <div class="mt-6 grid gap-6 md:grid-cols-3">
+      {previewSections.map((s, i) => (
+        <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4" data-reveal data-delay={i * 80}>
+          <h4 class="text-sm font-semibold text-white">{s.title}</h4>
+          <ul class="mt-3 grid gap-2">
+            {s.items.map((item) => (
+              <li class="flex items-start gap-2 text-xs text-white/60">
+                <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-300/60"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-6 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+      <h4 class="text-sm font-semibold text-white">Metricas clave</h4>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { label: "Total leads", value: "150" },
+          { label: "Conversion", value: "34.2%" },
+          { label: "Documentos", value: "110" },
+          { label: "Automatizaciones", value: "412" },
+        ].map((m, i) => (
+          <div class="rounded-lg border border-white/[0.04] bg-white/[0.02] p-3 text-center" data-reveal data-delay={i * 40}>
+            <p class="text-2xl font-semibold text-white">{m.value}</p>
+            <p class="mt-1 text-xs text-white/40">{m.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BusinessLayout>
+
+<script>
+  let selectedReport = "leads";
+
+  document.querySelectorAll(".report-type-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".report-type-btn").forEach((b) => {
+        b.classList.remove("border-cyan-300/40", "border-emerald-300/40", "border-purple-300/40", "border-amber-300/40");
+        b.style.borderColor = "";
+      });
+      selectedReport = btn.dataset.report || "leads";
+      const reportId = btn.dataset.report;
+      const colorMap: Record<string, string> = { leads: "cyan-300/40", documents: "emerald-300/40", automations: "purple-300/40", activity: "amber-300/40" };
+      btn.style.borderColor = `rgba(34,211,238,0.4)`;
+    });
+  });
+
+  function generateReport() {
+    const preview = document.getElementById("report-preview");
+    if (preview) {
+      preview.classList.remove("hidden");
+      const dateSpan = document.getElementById("report-date");
+      if (dateSpan) {
+        const now = new Date();
+        dateSpan.textContent = now.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
+      }
+      preview.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function previewReport() {
+    generateReport();
+  }
+
+  function sendByEmail() {
+    const email = "contact@averionai.es";
+    alert(`Informe enviado a ${email}`);
+  }
+</script>

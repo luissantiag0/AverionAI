@@ -1,0 +1,277 @@
+---
+import BusinessLayout from "../../layouts/BusinessLayout.astro";
+export const prerender = false;
+
+const kpis = [
+  { label: "Tasa de conversion", value: "34.2%", trend: "+5.1%", up: true, icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
+  { label: "Tiempo medio respuesta", value: "2.4 min", trend: "-18s", up: true, icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
+  { label: "Documentos por lead", value: "1.8", trend: "+0.3", up: true, icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
+  { label: "Automatizaciones activas", value: "6", trend: "+2", up: true, icon: "M13 10V3L4 14h7v7l9-11h-7z" },
+];
+
+const stages = [
+  { name: "Nuevo", count: 48, pct: 32, color: "from-cyan-300 to-cyan-400" },
+  { name: "Contactado", count: 35, pct: 23, color: "from-blue-300 to-blue-400" },
+  { name: "Calificado", count: 28, pct: 19, color: "from-purple-300 to-purple-400" },
+  { name: "Negociacion", count: 18, pct: 12, color: "from-amber-300 to-amber-400" },
+  { name: "Cerrado", count: 21, pct: 14, color: "from-emerald-300 to-emerald-400" },
+];
+
+const monthlyConversion = [
+  { month: "Ene", rate: 22 },
+  { month: "Feb", rate: 25 },
+  { month: "Mar", rate: 28 },
+  { month: "Abr", rate: 31 },
+  { month: "May", rate: 29 },
+  { month: "Jun", rate: 34 },
+  { month: "Jul", rate: 36 },
+  { month: "Ago", rate: 33 },
+  { month: "Sep", rate: 38 },
+  { month: "Oct", rate: 35 },
+  { month: "Nov", rate: 40 },
+  { month: "Dic", rate: 42 },
+];
+
+const docsByMonth = [
+  { month: "Ene", count: 45 },
+  { month: "Feb", count: 52 },
+  { month: "Mar", count: 61 },
+  { month: "Abr", count: 58 },
+  { month: "May", count: 73 },
+  { month: "Jun", count: 82 },
+  { month: "Jul", count: 78 },
+  { month: "Ago", count: 91 },
+  { month: "Sep", count: 88 },
+  { month: "Oct", count: 95 },
+  { month: "Nov", count: 102 },
+  { month: "Dic", count: 110 },
+];
+
+const automationsByMonth = [
+  { month: "Ene", count: 120 },
+  { month: "Feb", count: 145 },
+  { month: "Mar", count: 178 },
+  { month: "Abr", count: 195 },
+  { month: "May", count: 210 },
+  { month: "Jun", count: 248 },
+  { month: "Jul", count: 267 },
+  { month: "Ago", count: 289 },
+  { month: "Sep", count: 312 },
+  { month: "Oct", count: 345 },
+  { month: "Nov", count: 378 },
+  { month: "Dic", count: 412 },
+];
+
+const integrations = [
+  { name: "WhatsApp", status: "active", events: 1248 },
+  { name: "Gmail", status: "active", events: 892 },
+  { name: "Zapier", status: "active", events: 456 },
+  { name: "Make", status: "inactive", events: 0 },
+  { name: "API Publica", status: "active", events: 2103 },
+];
+
+const channels = [
+  { name: "Web", count: 67, pct: 45 },
+  { name: "WhatsApp", count: 38, pct: 25 },
+  { name: "Email", count: 24, pct: 16 },
+  { name: "LinkedIn", count: 12, pct: 8 },
+  { name: "Referidos", count: 9, pct: 6 },
+];
+---
+
+<BusinessLayout title="Analytics">
+  <section class="rounded-2xl border border-white/[0.06] bg-[linear-gradient(135deg,rgba(34,211,238,0.06),rgba(255,255,255,0.02)_48%,rgba(16,185,129,0.05))] p-6 md:p-8">
+    <p class="text-xs uppercase tracking-[0.18em] text-cyan-100/70">Business Analytics</p>
+    <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white md:text-5xl">Analitica avanzada</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/50">Metricas de rendimiento, conversion y actividad del sistema en un solo lugar.</p>
+  </section>
+
+  <section class="mt-6 premium-panel p-4 md:p-5">
+    <div class="flex flex-col gap-4 lg:flex-row lg:items-end">
+      <div class="flex-1">
+        <label class="mb-1.5 block text-xs font-medium text-white/50" for="date-range">Rango de fechas</label>
+        <select id="date-range" class="input-premium w-full">
+          <option>Ultimos 30 dias</option>
+          <option>Ultimos 90 dias</option>
+          <option>Ultimos 6 meses</option>
+          <option>Este ano</option>
+          <option>Personalizado</option>
+        </select>
+      </div>
+      <div class="flex-1">
+        <label class="mb-1.5 block text-xs font-medium text-white/50" for="filter-user">Usuario</label>
+        <select id="filter-user" class="input-premium w-full">
+          <option>Todos los usuarios</option>
+          <option>Ana Garcia</option>
+          <option>Carlos Lopez</option>
+          <option>Maria Perez</option>
+        </select>
+      </div>
+      <div class="flex-1">
+        <label class="mb-1.5 block text-xs font-medium text-white/50" for="filter-event">Tipo de evento</label>
+        <select id="filter-event" class="input-premium w-full">
+          <option>Todos los eventos</option>
+          <option>Leads</option>
+          <option>Documentos</option>
+          <option>Automatizaciones</option>
+          <option>Integraciones</option>
+        </select>
+      </div>
+      <div class="flex-1">
+        <label class="mb-1.5 block text-xs font-medium text-white/50" for="filter-channel">Canal de captacion</label>
+        <select id="filter-channel" class="input-premium w-full">
+          <option>Todos los canales</option>
+          <option>Web</option>
+          <option>WhatsApp</option>
+          <option>Email</option>
+          <option>LinkedIn</option>
+          <option>Referidos</option>
+        </select>
+      </div>
+      <button type="button" class="btn-primary whitespace-nowrap px-5 py-2.5 text-sm" onclick="applyFilters()">Aplicar filtros</button>
+    </div>
+  </section>
+
+  <section class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    {kpis.map((k, i) => (
+      <div class="premium-panel p-5 transition-all duration-300 hover:-translate-y-0.5" data-reveal data-delay={i * 60}>
+        <div class="flex items-center justify-between">
+          <p class="text-sm text-white/45">{k.label}</p>
+          <svg class="h-5 w-5 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={k.icon}/></svg>
+        </div>
+        <p class="mt-3 text-3xl font-semibold text-white">{k.value}</p>
+        <p class={`mt-1 text-xs font-medium ${k.up ? "text-emerald-300" : "text-red-300"}`}>{k.trend} vs mes anterior</p>
+      </div>
+    ))}
+  </section>
+
+  <section class="mt-6 grid gap-6 xl:grid-cols-2">
+    <div class="premium-panel p-5 md:p-6">
+      <h3 class="text-lg font-semibold text-white">Leads por etapa</h3>
+      <p class="mt-1 text-sm text-white/45">Distribucion actual del pipeline.</p>
+      <div class="mt-6 grid gap-4">
+        {stages.map((s, i) => (
+          <div data-reveal data-delay={i * 60}>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-white/70">{s.name}</span>
+              <span class="font-mono text-white">{s.count} <span class="text-white/35">({s.pct}%)</span></span>
+            </div>
+            <div class="mt-2 h-2.5 overflow-hidden rounded-full bg-white/[0.06]">
+              <div class={`h-full rounded-full bg-gradient-to-r ${s.color} transition-all duration-700`} style={`width: ${s.pct}%`}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="premium-panel p-5 md:p-6">
+      <h3 class="text-lg font-semibold text-white">Conversion mensual</h3>
+      <p class="mt-1 text-sm text-white/45">Tasa de conversion a lo largo del ano.</p>
+      <div class="mt-6 flex items-end gap-1.5" style="height: 200px">
+        {monthlyConversion.map((m, i) => (
+          <div class="group flex flex-1 flex-col items-center gap-2" data-reveal data-delay={i * 30}>
+            <span class="text-[10px] font-mono text-white/60 opacity-0 transition-opacity group-hover:opacity-100">{m.rate}%</span>
+            <div class="w-full overflow-hidden rounded-t bg-white/[0.06]">
+              <div class="w-full rounded-t bg-gradient-to-t from-cyan-300/80 to-emerald-300/80 transition-all duration-500 group-hover:from-cyan-300 group-hover:to-emerald-300" style={`height: ${m.rate * 2}px`}></div>
+            </div>
+            <span class="text-[10px] text-white/30">{m.month}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-6 grid gap-6 xl:grid-cols-2">
+    <div class="premium-panel p-5 md:p-6">
+      <h3 class="text-lg font-semibold text-white">Documentos generados por mes</h3>
+      <p class="mt-1 text-sm text-white/45">Volumen de documentos creados automaticamente.</p>
+      <div class="mt-6 flex items-end gap-1.5" style="height: 200px">
+        {docsByMonth.map((m, i) => {
+          const maxCount = Math.max(...docsByMonth.map(d => d.count));
+          const heightPct = (m.count / maxCount) * 100;
+          return (
+            <div class="group flex flex-1 flex-col items-center gap-2" data-reveal data-delay={i * 30}>
+              <span class="text-[10px] font-mono text-white/60 opacity-0 transition-opacity group-hover:opacity-100">{m.count}</span>
+              <div class="w-full overflow-hidden rounded-t bg-white/[0.06]">
+                <div class="w-full rounded-t bg-gradient-to-t from-purple-300/70 to-cyan-300/70 transition-all duration-500 group-hover:from-purple-300 group-hover:to-cyan-300" style={`height: ${heightPct}%`}></div>
+              </div>
+              <span class="text-[10px] text-white/30">{m.month}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <div class="premium-panel p-5 md:p-6">
+      <h3 class="text-lg font-semibold text-white">Automatizaciones ejecutadas</h3>
+      <p class="mt-1 text-sm text-white/45">Ejecuciones mensuales de flujos automaticos.</p>
+      <div class="mt-6 flex items-end gap-1.5" style="height: 200px">
+        {automationsByMonth.map((m, i) => {
+          const maxCount = Math.max(...automationsByMonth.map(d => d.count));
+          const heightPct = (m.count / maxCount) * 100;
+          return (
+            <div class="group flex flex-1 flex-col items-center gap-2" data-reveal data-delay={i * 30}>
+              <span class="text-[10px] font-mono text-white/60 opacity-0 transition-opacity group-hover:opacity-100">{m.count}</span>
+              <div class="w-full overflow-hidden rounded-t bg-white/[0.06]">
+                <div class="w-full rounded-t bg-gradient-to-t from-emerald-300/70 to-amber-300/70 transition-all duration-500 group-hover:from-emerald-300 group-hover:to-amber-300" style={`height: ${heightPct}%`}></div>
+              </div>
+              <span class="text-[10px] text-white/30">{m.month}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-6 grid gap-6 xl:grid-cols-2">
+    <div class="premium-panel p-5 md:p-6">
+      <h3 class="text-lg font-semibold text-white">Integraciones activas</h3>
+      <p class="mt-1 text-sm text-white/45">Estado y volumen de eventos por integracion.</p>
+      <div class="mt-5 grid gap-3">
+        {integrations.map((int, i) => (
+          <div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 transition-all duration-200 hover:border-white/10" data-reveal data-delay={i * 40}>
+            <div class="flex items-center gap-3">
+              <span class={`h-2.5 w-2.5 rounded-full ${int.status === "active" ? "bg-emerald-400 pulse-live" : "bg-white/20"}`}></span>
+              <span class="text-sm text-white/70">{int.name}</span>
+            </div>
+            <div class="flex items-center gap-3">
+              {int.status === "active" ? (
+                <span class="font-mono text-xs text-white/50">{int.events.toLocaleString()} eventos</span>
+              ) : (
+                <span class="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-0.5 text-[11px] text-white/40">Inactiva</span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="premium-panel p-5 md:p-6">
+      <h3 class="text-lg font-semibold text-white">Canal de captacion</h3>
+      <p class="mt-1 text-sm text-white/45">Distribucion de leads por origen.</p>
+      <div class="mt-6 grid gap-4">
+        {channels.map((c, i) => (
+          <div data-reveal data-delay={i * 60}>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-white/70">{c.name}</span>
+              <span class="font-mono text-white">{c.count} <span class="text-white/35">({c.pct}%)</span></span>
+            </div>
+            <div class="mt-2 h-2.5 overflow-hidden rounded-full bg-white/[0.06]">
+              <div class="h-full rounded-full bg-gradient-to-r from-cyan-300/60 to-emerald-300/60 transition-all duration-700" style={`width: ${c.pct}%`}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BusinessLayout>
+
+<script>
+  function applyFilters() {
+    const dateRange = (document.getElementById("date-range") as HTMLSelectElement)?.value;
+    const user = (document.getElementById("filter-user") as HTMLSelectElement)?.value;
+    const event = (document.getElementById("filter-event") as HTMLSelectElement)?.value;
+    const channel = (document.getElementById("filter-channel") as HTMLSelectElement)?.value;
+    console.log("Filtros aplicados:", { dateRange, user, event, channel });
+  }
+</script>

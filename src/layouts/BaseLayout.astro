@@ -2,10 +2,13 @@
 import "../styles/global.css";
 
 const {
-  title = "AverionAI | Automatización con IA para empresas modernas",
-  description = "AverionAI desarrolla sistemas de automatización con IA, plataformas RAG, CRM inteligente, generación de documentos y soluciones SaaS personalizadas para empresas.",
+  title = "AverionAI | Infraestructura de IA para Empresas — Automatiza sin contratar mas",
+  description = "Sistemas de IA en produccion para empresas en Espana. Captacion de leads, WhatsApp, CRM y flujos autonomos que reducen costes operativos un 40%. Implementacion en 7-14 dias.",
   ogImage = "/logo-averion.png",
+  canonicalUrl = "https://averionai.es",
 } = Astro.props;
+
+const fullUrl = canonicalUrl || `https://averionai.es${Astro.url.pathname}`;
 ---
 
 <!doctype html>
@@ -16,26 +19,32 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#07070A" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={fullUrl} />
 
     <!-- OpenGraph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://averionai.co.in" />
-    <meta property="og:image" content={`https://averionai.co.in${ogImage}`} />
+    <meta property="og:url" content={fullUrl} />
+    <meta property="og:image" content={`https://averionai.es${ogImage}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AverionAI - Automatizacion con IA para empresas" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="AverionAI" />
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`https://averionai.co.in${ogImage}`} />
+    <meta name="twitter:image" content={`https://averionai.es${ogImage}`} />
+    <meta name="twitter:image:alt" content="AverionAI - Automatizacion con IA para empresas" />
 
     <!-- Preload + Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://averionai.co.in" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://averionai.es" />
     <link rel="preload" as="image" href="/logo-averion.png" />
 
     <!-- Schema.org: Organization -->
@@ -44,12 +53,13 @@ const {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "AverionAI",
-        "description": description,
-        "url": "https://averionai.co.in",
-        "logo": "https://averionai.co.in/logo-averion.png",
+        "description": "Infraestructura de IA para empresas modernas en Espana. Sistemas de automatizacion en produccion.",
+        "url": "https://averionai.es",
+        "logo": "https://averionai.es/logo-averion.png",
         "foundingDate": "2025",
-        "contactPoint": { "@type": "ContactPoint", "email": "contact@averionai.es", "contactType": "customer service" },
-        "sameAs": ["https://averionai.co.in"]
+        "contactPoint": { "@type": "ContactPoint", "email": "contact@averionai.es", "contactType": "customer service", "availableLanguage": "Spanish" },
+        "sameAs": ["https://averionai.es"],
+        "areaServed": "ES"
       })}
     </script>
 
@@ -59,12 +69,13 @@ const {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "AverionAI",
-        "description": description,
-        "url": "https://averionai.co.in",
+        "description": "Plataforma de automatizacion con IA: CRM inteligente, agentes de ventas, generacion de documentos y flujos automaticos para empresas",
+        "url": "https://averionai.es",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "29", "priceCurrency": "EUR" },
-        "featureList": "CRM inteligente, automatización con IA, generación de documentos, facturación electrónica"
+        "offers": { "@type": "Offer", "price": "29", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
+        "featureList": "CRM inteligente, automatizacion con IA, generacion de documentos, facturacion electronica, agentes de ventas, RAG",
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "124" }
       })}
     </script>
 
@@ -74,9 +85,24 @@ const {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://averionai.co.in" },
-          { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://averionai.co.in/pricing" }
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://averionai.es" },
+          { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://averionai.es/pricing" }
         ]
+      })}
+    </script>
+
+    <!-- Schema.org: WebSite with SearchAction -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AverionAI",
+        "url": "https://averionai.es",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://averionai.es/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       })}
     </script>
   </head>

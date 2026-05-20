@@ -6,19 +6,19 @@ const currentYear = new Date().getFullYear();
 const usefulLinks = [
   { label: "Inicio", href: "/" },
   { label: "Precios", href: "/pricing" },
-  { label: "Contacto", href: "/#contact" },
+  { label: "Solicitar analisis", href: "/#contact" },
   { label: "Acceso al panel", href: "/admin/login" }
 ];
 
 const legalLinks = [
-  { label: "Política de privacidad", href: "/legal/privacy-policy" },
-  { label: "Términos y condiciones", href: "/legal/terms" },
-  { label: "Política de cookies", href: "/legal/cookies" },
+  { label: "Politica de privacidad", href: "/legal/privacy-policy" },
+  { label: "Terminos y condiciones", href: "/legal/terms" },
+  { label: "Politica de cookies", href: "/legal/cookies" },
   { label: "Aviso legal", href: "/legal/legal-notice" }
 ];
 ---
 
-<footer class="relative overflow-hidden border-t border-white/10 bg-[#07070A]">
+<footer class="relative overflow-hidden border-t border-white/10 bg-[#07070A]" role="contentinfo">
   <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent"></div>
   <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(34,211,238,0.08),transparent_28rem),radial-gradient(circle_at_78%_38%,rgba(16,185,129,0.07),transparent_26rem)]"></div>
 
@@ -28,21 +28,22 @@ const legalLinks = [
         <BrandLogo markClass="h-10 w-10" textClass="text-lg" />
 
         <p class="mt-5 text-sm leading-relaxed text-white/58">
-          Tecnología para potenciar tus ventas con CRM, automatización e IA aplicada a la gestión de leads.
+          Infraestructura de IA para empresas que quieren automatizar operaciones sin aumentar equipo.
         </p>
 
         <button
           type="button"
           data-open-lead-modal
           class="btn-secondary mt-6 px-5 py-2.5 text-sm"
+          aria-label="Hablar con el equipo de AverionAI"
         >
           Hablar con AverionAI
         </button>
       </div>
 
-      <nav aria-label="Enlaces útiles" data-reveal>
+      <nav aria-label="Enlaces utiles" data-reveal>
         <h2 class="text-sm font-semibold text-white">
-          Enlaces útiles
+          Enlaces utiles
         </h2>
 
         <ul class="mt-5 grid gap-3 text-sm">
@@ -52,7 +53,7 @@ const legalLinks = [
                 href={link.href}
                 class="group inline-flex items-center gap-2 text-white/50 transition duration-300 hover:translate-x-1 hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07070A]"
               >
-                <span class="h-px w-4 bg-white/18 transition duration-300 group-hover:w-6 group-hover:bg-cyan-300/70"></span>
+                <span class="h-px w-4 bg-white/18 transition duration-300 group-hover:w-6 group-hover:bg-cyan-300/70" aria-hidden="true"></span>
                 {link.label}
               </a>
             </li>
@@ -72,7 +73,7 @@ const legalLinks = [
                 href={link.href}
                 class="group inline-flex items-center gap-2 text-white/50 transition duration-300 hover:translate-x-1 hover:text-emerald-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07070A]"
               >
-                <span class="h-px w-4 bg-white/18 transition duration-300 group-hover:w-6 group-hover:bg-emerald-300/70"></span>
+                <span class="h-px w-4 bg-white/18 transition duration-300 group-hover:w-6 group-hover:bg-emerald-300/70" aria-hidden="true"></span>
                 {link.label}
               </a>
             </li>
@@ -87,12 +88,12 @@ const legalLinks = [
       </p>
 
       <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
-        <a href="/#services" class="transition duration-300 hover:text-cyan-100">
-          Servicios
+        <a href="/#systems" class="transition duration-300 hover:text-cyan-100">
+          Sistemas
         </a>
 
         <a href="/#technology" class="transition duration-300 hover:text-cyan-100">
-          Tecnología
+          Tecnologia
         </a>
 
         <a href="/#faq" class="transition duration-300 hover:text-cyan-100">

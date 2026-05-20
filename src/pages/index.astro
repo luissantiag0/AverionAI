@@ -15,8 +15,8 @@ console.log("[ssr] Homepage imports OK");
 ---
 
 <BaseLayout
-  title="AverionAI | Sistemas de automatizacion con IA para empresas modernas"
-  description="AverionAI desarrolla sistemas de automatizacion con IA, plataformas RAG, aplicaciones de facturacion con IA, generacion de ebooks y soluciones SaaS personalizadas."
+  title="AverionAI | Infraestructura de IA para Empresas — Automatiza sin contratar mas"
+  description="Sistemas de IA en produccion para empresas. Captacion de leads, WhatsApp, CRM y flujos autonomos que reducen costes operativos un 40%. Implementacion en 7-14 dias."
 >
   <Navbar />
   <main>
@@ -24,49 +24,37 @@ console.log("[ssr] Homepage imports OK");
     <Services />
     <Features />
 
-    <section class="border-t border-white/[0.06] py-24 md:py-28">
+    <section class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="gap-heading">
       <div class="container">
         <div class="mx-auto max-w-3xl text-center" data-reveal>
-          <span class="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-cyan-200/80 uppercase">Por que elegirnos</span>
-          <h2 class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">IA que transforma, no solo tecnologia</h2>
-          <p class="mt-4 text-base text-white/50">No todos los sistemas de IA son iguales. Comparamos para que decidas con claridad.</p>
+          <span class="inline-flex items-center rounded-full border border-amber-300/20 bg-amber-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-amber-200/80 uppercase">Realidad operativa</span>
+          <h2 id="gap-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">La brecha operativa que tu competencia ya esta cerrando</h2>
+          <p class="mt-4 text-base text-white/50">Tu equipo recibe consultas por web, WhatsApp, email y telefono. Cada canal sin automatizar es un lead que se enfria y horas de trabajo manual que no escalan.</p>
         </div>
 
-        <div class="mx-auto mt-16 grid max-w-5xl gap-8 md:grid-cols-2">
-          <div class="rounded-2xl border border-cyan-300/30 bg-[linear-gradient(135deg,rgba(34,211,238,0.1),rgba(255,255,255,0.03)_48%,rgba(16,185,129,0.08))] p-8 shadow-[0_24px_80px_-48px_rgba(34,211,238,0.3)]" data-reveal data-delay="0">
-            <div class="flex items-center gap-4 mb-6">
-              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/20 text-base font-bold text-cyan-200">A</span>
-              <div>
-                <span class="text-lg font-semibold text-white">AverionAI</span>
-                <p class="text-xs text-white/40">Sistemas inteligentes que hacen crecer tu negocio</p>
-              </div>
+        <div class="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-3">
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/10" data-reveal data-delay="0">
+            <div class="flex items-center gap-3 mb-5">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-red-300/20 bg-red-300/10 text-xs font-bold text-red-200" aria-hidden="true">01</span>
+              <h3 class="text-base font-semibold text-white">Respuesta tardia</h3>
             </div>
-            <ul class="grid gap-4">
-              {[["Automatizaciones que generan clientes", "IA aplicada con enfoque empresarial", "Procesos que escalan", "Decisiones basadas en datos", "Optimizacion operativa real", "Implementacion rapida"]].flat().map((item) => (
-                <li class="flex items-start gap-3 text-sm text-white/80">
-                  <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-400/20 text-emerald-300 text-sm font-bold">✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <p class="text-sm leading-relaxed text-white/55">Un lead que no recibe respuesta en 5 minutos tiene un 80% menos de probabilidad de convertirse. La media de respuesta en España: 4 horas.</p>
           </div>
 
-          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 opacity-50" data-reveal data-delay="100">
-            <div class="flex items-center gap-4 mb-6">
-              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-base font-bold text-white/40">T</span>
-              <div>
-                <span class="text-lg font-semibold text-white/40">Agencias tradicionales</span>
-                <p class="text-xs text-white/30">Lo de siempre, sin impacto real</p>
-              </div>
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/10" data-reveal data-delay="80">
+            <div class="flex items-center gap-3 mb-5">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/20 bg-amber-300/10 text-xs font-bold text-amber-200" aria-hidden="true">02</span>
+              <h3 class="text-base font-semibold text-white">Oportunidades perdidas</h3>
             </div>
-            <ul class="grid gap-4">
-              {[["Acciones sueltas sin estrategia", "IA superficial sin resultados", "Procesos manuales que no escalan", "Decisiones sin datos", "Implementacion lenta", "Informes sin retorno"]].flat().map((item) => (
-                <li class="flex items-start gap-3 text-sm text-white/40">
-                  <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-white/30 text-sm">✕</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <p class="text-sm leading-relaxed text-white/55">Si recibes 20 consultas semanales y solo respondes 12 a tiempo, estas perdiendo 8 oportunidades — y asignandoselas a tu competencia.</p>
+          </div>
+
+          <div class="rounded-2xl border border-cyan-300/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.06),rgba(255,255,255,0.02)_48%,rgba(16,185,129,0.05))] p-7 shadow-[0_24px_80px_-48px_rgba(34,211,238,0.2)] transition-all duration-300 hover:shadow-[0_28px_90px_-44px_rgba(34,211,238,0.25)]" data-reveal data-delay="160">
+            <div class="flex items-center gap-3 mb-5">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-300/20 bg-emerald-300/10 text-xs font-bold text-emerald-200" aria-hidden="true">03</span>
+              <h3 class="text-base font-semibold text-white">Automatizacion total</h3>
+            </div>
+            <p class="text-sm leading-relaxed text-white/55">AverionAI responde en menos de 2 minutos, cualifica automaticamente y agenda la siguiente accion. Sin que nadie tenga que estar pendiente.</p>
           </div>
         </div>
       </div>

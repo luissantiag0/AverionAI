@@ -1,12 +1,12 @@
 ---
 const signals = [
-  { label: "Ahorro operativo", value: "-40%" },
-  { label: "Lead response", value: "2 min" },
-  { label: "Flujos activos", value: "24/7" },
+  { label: "Ahorro operativo", value: "-40%", context: "en clientes del sector servicios" },
+  { label: "Respuesta media", value: "2 min", context: "frente a 4 horas del mercado" },
+  { label: "Flujos activos", value: "24/7", context: "sin interrupcion ni supervision" },
 ];
 ---
 
-<section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-24 md:pt-24">
+<section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-28" aria-labelledby="hero-heading">
   <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent"></div>
   <div class="absolute inset-0 -z-10 bg-[linear-gradient(140deg,rgba(34,211,238,0.08),transparent_34%),linear-gradient(40deg,transparent_35%,rgba(16,185,129,0.07),transparent_62%)]"></div>
 
@@ -14,49 +14,48 @@ const signals = [
     <div class="grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
       <div data-reveal>
         <span class="badge bg-cyan-300/10 text-cyan-100">
-          Agencia de Automatización con IA
+          Sistemas de IA en produccion
         </span>
 
-        <h1 class="mt-6 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
-          Reduce costes operativos y escala tu negocio con sistemas de IA listos para producción
+        <h1 id="hero-heading" class="mt-6 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
+          Convierte procesos manuales en sistemas de IA que operan sin intervencion humana
         </h1>
 
         <p class="mt-6 max-w-2xl text-base leading-relaxed text-white/62 md:text-lg">
-          Creamos automatizaciones con IA, RAG y flujos internos que convierten procesos lentos en ejecución medible sin aumentar equipo.
+          Diseñamos, implementamos y controlamos flujos de automatizacion que capturan leads, gestionan consultas por WhatsApp, ejecutan seguimientos en CRM y despliegan procesos comerciales — 24 horas, sin aumentar equipo.
         </p>
 
         <div class="mt-9 flex flex-wrap gap-4">
-          <a
-            href="/register"
-            class="btn-primary"
-          >
-            Probar gratis
-          </a>
-
           <button
             type="button"
             data-open-lead-modal
-            class="btn-secondary"
+            class="btn-primary"
+            aria-label="Solicitar analisis de operaciones gratuito"
           >
-            Solicitar análisis gratuito
+            Solicitar analisis de operaciones
           </button>
 
-          <a href="/#services" class="btn-secondary">
-            Ver implementaciones
+          <a href="/#systems" class="btn-secondary">
+            Ver el sistema en accion
           </a>
         </div>
+
+        <p class="mt-5 text-xs text-white/30">
+          Implementacion en 7-14 dias · WhatsApp, CRM, email, calendarios · RGPD compliant
+        </p>
 
         <div class="mt-8 grid max-w-xl grid-cols-3 gap-3">
           {signals.map((signal, i) => (
             <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4 transition-all duration-500 hover:-translate-y-1.5 hover:border-emerald-300/30 hover:bg-white/[0.06] hover:shadow-[0_12px_40px_-16px_rgba(16,185,129,0.5)] scale-on-hover" class:list={[`reveal-delay-${i + 1}`]}>
-              <p class="text-2xl font-semibold text-white">{signal.value}</p>
+              <p class="counter-digit text-2xl font-semibold text-white">{signal.value}</p>
               <p class="mt-1 text-xs leading-relaxed text-white/45">{signal.label}</p>
+              <p class="mt-0.5 text-[10px] leading-relaxed text-white/25">{signal.context}</p>
             </div>
           ))}
         </div>
       </div>
 
-      <div class="relative" data-reveal>
+      <div class="relative" data-reveal role="region" aria-label="Demostracion de automatizaciones en vivo">
         <div class="premium-panel animated-border p-5 md:p-6 motion-soft">
           <div class="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
@@ -64,7 +63,7 @@ const signals = [
                 Averion Control Layer
               </p>
               <h2 class="mt-2 text-xl font-semibold text-white">
-                Automatizaciones en producción
+                Automatizaciones en produccion
               </h2>
             </div>
 
@@ -83,9 +82,9 @@ const signals = [
               </div>
               <div class="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-3 text-xs text-white/55">
                 <span class="rounded-xl bg-white/[0.04] px-3 py-2">Formulario</span>
-                <span class="text-cyan-200">→</span>
+                <span class="text-cyan-200" aria-hidden="true">&rarr;</span>
                 <span class="rounded-xl bg-white/[0.04] px-3 py-2">CRM</span>
-                <span class="text-cyan-200">→</span>
+                <span class="text-cyan-200" aria-hidden="true">&rarr;</span>
                 <span class="rounded-xl bg-white/[0.04] px-3 py-2">Email</span>
               </div>
             </div>
@@ -93,24 +92,24 @@ const signals = [
             <div class="grid gap-4 sm:grid-cols-2">
               <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4 transition hover:border-cyan-300/30">
                 <p class="text-xs text-white/45">Tiempo recuperado</p>
-                <p class="mt-2 text-3xl font-semibold text-white">18h</p>
+                <p class="counter-digit mt-2 text-3xl font-semibold text-white">18h</p>
                 <p class="mt-2 text-xs text-emerald-200">por semana</p>
               </div>
 
               <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4 transition hover:border-purple-300/30">
                 <p class="text-xs text-white/45">Tareas automatizadas</p>
-                <p class="mt-2 text-3xl font-semibold text-white">1.248</p>
-                <p class="mt-2 text-xs text-cyan-200">últimos 30 días</p>
+                <p class="counter-digit mt-2 text-3xl font-semibold text-white">1.248</p>
+                <p class="mt-2 text-xs text-cyan-200">ultimos 30 dias</p>
               </div>
             </div>
 
             <div class="rounded-2xl border border-white/10 bg-black/25 p-4">
               <div class="flex items-center justify-between text-sm">
-                <span class="text-white/70">Siguiente acción sugerida</span>
+                <span class="text-white/70">Siguiente accion sugerida</span>
                 <span class="text-emerald-200">Alta confianza</span>
               </div>
               <p class="mt-3 text-sm leading-relaxed text-white/80">
-                Priorizar leads con intención alta y enviar propuesta personalizada en menos de 24 horas.
+                Priorizar leads con intencion alta y enviar propuesta personalizada en menos de 24 horas.
               </p>
             </div>
           </div>

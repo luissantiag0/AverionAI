@@ -1,36 +1,36 @@
 ---
-const servicios = [
+const systems = [
   {
     icon: "01",
-    title: "Agentes de IA para ventas y atencion",
-    desc: "Automatizacion de conversaciones, captacion y calificacion de leads con integracion directa a WhatsApp, web o CRM.",
-    metrics: ["24/7", "Calificacion automatica", "Integracion inmediata"],
+    title: "Sistema de Captacion Inteligente",
+    desc: "Detecta, responde y cualifica cada consulta entrante de forma autonoma. Reemplaza la espera manual con ejecucion inmediata.",
+    metrics: ["Respuesta en 2 min", "Cualificacion automatica", "Agenda integrada"],
   },
   {
     icon: "02",
-    title: "Dashboards internos y automatizacion",
-    desc: "Paneles internos, informes automaticos y optimizacion de procesos que reducen el tiempo operativo de tu equipo.",
-    metrics: ["-68% tiempo operativo", "Procesos optimizados", "Integracion con herramientas actuales"],
+    title: "Motor de Flujos Autonomos",
+    desc: "Procesos comerciales que se ejecutan solos: clasificacion, documentacion, seguimiento y alertas proactivas.",
+    metrics: ["Ejecucion 24/7", "Documentos automaticos", "Alertas inteligentes"],
   },
   {
     icon: "03",
-    title: "Webs y sistemas inteligentes",
-    desc: "Landing optimizada, reservas inteligentes y campanas automatizadas para maximizar la conversion de tu negocio.",
-    metrics: ["+54% conversion", "Carga rapida", "Automatizacion completa"],
+    title: "Panel de Control Operativo",
+    desc: "Monitoriza, mide y optimiza todas tus automatizaciones desde un unico punto de control con visibilidad total.",
+    metrics: ["Metricas en vivo", "Control centralizado", "Optimizacion continua"],
   },
 ];
 ---
 
-<section id="services-section" class="border-t border-white/[0.06] py-24 md:py-28">
+<section id="systems-section" class="border-t border-white/[0.06] py-24 md:py-28">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center" data-reveal>
-      <span class="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-cyan-200/80 uppercase">Servicios</span>
-      <h2 class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Servicios que ofrecemos</h2>
-      <p class="mt-4 text-base text-white/50">Soluciones de IA diseñadas para optimizar la operacion de tu negocio en cada punto de contacto.</p>
+      <span class="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-cyan-200/80 uppercase">Arquitectura</span>
+      <h2 class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Sistemas que operan sin intervencion</h2>
+      <p class="mt-4 text-base text-white/50">Tres modulos que automatizan areas criticas de tu negocio — desde la captacion hasta el control total.</p>
     </div>
 
     <div class="mt-16 grid gap-6 md:grid-cols-3">
-      {servicios.map((s, i) => (
+      {systems.map((s, i) => (
         <div class="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/20 hover:shadow-[0_20px_60px_-30px_rgba(34,211,238,0.25)] md:p-8" data-reveal data-delay={i * 100}>
           <span class="text-4xl font-bold tracking-tighter text-white/[0.06]">{s.icon}</span>
           <h3 class="mt-4 text-xl font-semibold text-white">{s.title}</h3>

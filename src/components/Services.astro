@@ -1,60 +1,142 @@
 ---
-const servicios = [
+const systems = [
   {
-    num: "01", title: "Agentes de IA para ventas y atencion",
-    desc: "Automatizacion de conversaciones, captacion y calificacion de leads con integracion directa a WhatsApp, web o CRM.",
-    metrics: ["24/7", "Calificacion automatica", "Integracion inmediata"],
+    name: "Sistema de Captacion Inteligente",
+    description: "Detecta, responde y cualifica cada consulta entrante de forma autonoma. Reemplaza la espera manual con ejecucion inmediata.",
+    capabilities: [
+      "Respuesta a leads en menos de 2 minutos",
+      "Cualificacion automatica por intencion y perfil",
+      "Agenda de visitas o llamadas sin intervencion",
+    ],
+    impact: "Reduce tiempo de respuesta de horas a segundos — cada lead atendido, ninguno perdido.",
+    icon: "M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z",
+    accent: "cyan",
   },
   {
-    num: "02", title: "Dashboards internos y automatizacion",
-    desc: "Paneles internos, informes automaticos y optimizacion de procesos que reducen el tiempo operativo de tu equipo.",
-    metrics: ["-68% tiempo operativo", "Procesos optimizados", "Integracion con herramientas actuales"],
+    name: "Sistema de Operaciones por WhatsApp",
+    description: "Atencion al cliente automatizada por WhatsApp con respuestas inteligentes, seguimiento contextual y escalado controlado a tu equipo.",
+    capabilities: [
+      "Respuestas contextuales con IA conversacional",
+      "Seguimiento automatico de conversaciones abiertas",
+      "Escalado a humano solo cuando es necesario",
+    ],
+    impact: "Canal de atencion activo 24/7 sin aumentar plantilla ni saturar a tu equipo.",
+    icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z",
+    accent: "emerald",
   },
   {
-    num: "03", title: "Webs y sistemas inteligentes",
-    desc: "Landing optimizada, reservas inteligentes y campanas automatizadas para maximizar la conversion de tu negocio.",
-    metrics: ["+54% conversion", "Carga rapida", "Automatizacion completa"],
+    name: "Motor de Flujos Autonomos",
+    description: "Procesos comerciales que se ejecutan solos: clasificacion de consultas, generacion de documentos, seguimiento de oportunidades y alertas proactivas.",
+    capabilities: [
+      "Ejecucion continua sin supervision ni disparadores manuales",
+      "Generacion automatica de documentos y propuestas",
+      "Alertas inteligentes ante anomalias o cuellos de botella",
+    ],
+    impact: "Elimina tareas repetitivas del equipo — los flujos corren, tu equipo decide.",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    accent: "purple",
   },
   {
-    num: "04", title: "Entrenamiento de modelos personalizados",
-    desc: "Modelos de IA entrenados con tus datos para tomar decisiones especificas de tu industria y negocio.",
-    metrics: ["Modelos a medida", "Datos propios", "Mejora continua"],
+    name: "Panel de Control Operativo",
+    description: "Monitoriza, mide y optimiza todas tus automatizaciones desde un unico punto de control. Visibilidad total en tiempo real.",
+    capabilities: [
+      "Metricas de rendimiento y conversion en vivo",
+      "Control centralizado de todos los flujos activos",
+      "Optimizacion continua con datos reales de operacion",
+    ],
+    impact: "Control total de tu infraestructura de IA — sin depender de nadie para medir o ajustar.",
+    icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
+    accent: "amber",
   },
   {
-    num: "05", title: "Automatizacion de procesos internos con IA",
-    desc: "Identificacion y automatizacion de procesos repetitivos usando inteligencia artificial sin intervencion manual.",
-    metrics: ["-80% tareas manuales", "Flujos inteligentes", "Sin codigo"],
-  },
-  {
-    num: "06", title: "Agentes inteligentes en WhatsApp y Web",
-    desc: "Asistentes virtuales con IA integrados en tus canales de comunicacion para atencion al cliente automatizada.",
-    metrics: ["WhatsApp + Web", "Atencion 24/7", "Respuestas inteligentes"],
+    name: "Capa de Integracion y Arquitectura",
+    description: "Conectamos IA con las herramientas que ya operan en tu negocio. Sin reemplazar sistemas, sin migraciones forzadas, sin friccion.",
+    capabilities: [
+      "Integracion nativa con CRM, email, calendarios y pasarelas de pago",
+      "API abierta para conectar con cualquier sistema existente",
+      "Arquitectura modular que escala con tu operacion",
+    ],
+    impact: "Tu stack actual, potenciado con IA — sin cambiar lo que ya funciona.",
+    icon: "M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1",
+    accent: "cyan",
   },
 ];
 ---
 
-<section id="services" class="border-t border-white/[0.06] py-24 md:py-28">
+<section id="systems" class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="systems-heading">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center" data-reveal>
-      <span class="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-cyan-200/80 uppercase">Servicios</span>
-      <h2 class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Servicios que ofrecemos</h2>
-      <p class="mt-4 text-base text-white/50">Seis soluciones de IA para transformar cada area de tu negocio.</p>
+      <span class="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-cyan-200/80 uppercase">Arquitectura</span>
+      <h2 id="systems-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Capacidades del sistema</h2>
+      <p class="mt-4 text-base text-white/50">Cinco modulos que operan como una unica infraestructura. Cada uno automatiza un area critica de tu negocio.</p>
     </div>
 
-    <div class="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {servicios.map((s, i) => (
-        <div class="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-300/20 hover:shadow-[0_24px_70px_-35px_rgba(34,211,238,0.2)] md:p-8" data-reveal data-delay={i * 80}>
-          <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-cyan-300/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+    <div class="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {systems.slice(0, 3).map((s, i) => (
+        <div class="system-module group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-300/20 hover:shadow-[0_24px_70px_-35px_rgba(34,211,238,0.2)] md:p-8" data-reveal data-delay={i * 80} style="transform-style: preserve-3d; perspective: 1000px;">
+          <div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={`background: radial-gradient(600px circle at var(--card-x, 50%) var(--card-y, 50%), ${s.accent === "cyan" ? "rgba(34,211,238,0.06)" : s.accent === "emerald" ? "rgba(16,185,129,0.06)" : s.accent === "purple" ? "rgba(168,85,247,0.06)" : "rgba(245,158,11,0.06)"}, transparent 40%);`}></div>
           <div class="relative">
-            <span class="text-6xl font-bold tracking-tighter text-white/[0.05]">{s.num}</span>
-            <div class="-mt-3">
-              <h3 class="text-xl font-semibold text-white">{s.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-white/50">{s.desc}</p>
-              <div class="mt-6 flex flex-wrap gap-2">
-                {s.metrics.map((m) => (
-                  <span class="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/40 transition-all duration-300 group-hover:border-cyan-300/20 group-hover:bg-cyan-300/[0.04] group-hover:text-cyan-200/70">{m}</span>
-                ))}
-              </div>
+            <div class={`flex h-11 w-11 items-center justify-center rounded-xl border ${
+              s.accent === "cyan" ? "border-cyan-300/20 bg-cyan-300/10" :
+              s.accent === "emerald" ? "border-emerald-300/20 bg-emerald-300/10" :
+              s.accent === "purple" ? "border-purple-300/20 bg-purple-300/10" :
+              "border-amber-300/20 bg-amber-300/10"
+            }`}>
+              <svg class={`h-5 w-5 ${
+                s.accent === "cyan" ? "text-cyan-200" :
+                s.accent === "emerald" ? "text-emerald-200" :
+                s.accent === "purple" ? "text-purple-200" :
+                "text-amber-200"
+              }`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={s.icon}/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-white transition-colors duration-300 group-hover:text-cyan-50">{s.name}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-white/50 group-hover:text-white/60">{s.description}</p>
+            <ul class="mt-5 grid gap-2.5" role="list">
+              {s.capabilities.map((c) => (
+                <li class="flex items-start gap-2.5 text-xs text-white/45">
+                  <span class="mt-1 h-1 w-1 shrink-0 rounded-full bg-cyan-300/50"></span>
+                  {c}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-5 pt-4 border-t border-white/[0.06]">
+              <p class="text-xs font-medium text-white/60">{s.impact}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-[1fr_1fr]">
+      {systems.slice(3).map((s, i) => (
+        <div class="system-module group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-300/20 hover:shadow-[0_24px_70px_-35px_rgba(34,211,238,0.2)] md:p-8" data-reveal data-delay={i * 80 + 240} style="transform-style: preserve-3d; perspective: 1000px;">
+          <div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={`background: radial-gradient(600px circle at var(--card-x, 50%) var(--card-y, 50%), ${s.accent === "cyan" ? "rgba(34,211,238,0.06)" : s.accent === "emerald" ? "rgba(16,185,129,0.06)" : s.accent === "purple" ? "rgba(168,85,247,0.06)" : "rgba(245,158,11,0.06)"}, transparent 40%);`}></div>
+          <div class="relative">
+            <div class={`flex h-11 w-11 items-center justify-center rounded-xl border ${
+              s.accent === "cyan" ? "border-cyan-300/20 bg-cyan-300/10" :
+              s.accent === "emerald" ? "border-emerald-300/20 bg-emerald-300/10" :
+              s.accent === "purple" ? "border-purple-300/20 bg-purple-300/10" :
+              "border-amber-300/20 bg-amber-300/10"
+            }`}>
+              <svg class={`h-5 w-5 ${
+                s.accent === "cyan" ? "text-cyan-200" :
+                s.accent === "emerald" ? "text-emerald-200" :
+                s.accent === "purple" ? "text-purple-200" :
+                "text-amber-200"
+              }`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={s.icon}/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-white transition-colors duration-300 group-hover:text-cyan-50">{s.name}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-white/50 group-hover:text-white/60">{s.description}</p>
+            <ul class="mt-5 grid gap-2.5" role="list">
+              {s.capabilities.map((c) => (
+                <li class="flex items-start gap-2.5 text-xs text-white/45">
+                  <span class="mt-1 h-1 w-1 shrink-0 rounded-full bg-cyan-300/50"></span>
+                  {c}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-5 pt-4 border-t border-white/[0.06]">
+              <p class="text-xs font-medium text-white/60">{s.impact}</p>
             </div>
           </div>
         </div>
@@ -62,3 +144,21 @@ const servicios = [
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll(".system-module").forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--card-x", `${x}%`);
+      card.style.setProperty("--card-y", `${y}%`);
+      const rotateX = ((y - 50) / 50) * -3;
+      const rotateY = ((x - 50) / 50) * 3;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+    });
+  });
+</script>
