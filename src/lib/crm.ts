@@ -162,6 +162,8 @@ export async function createUserLead(
   });
 
   onLeadCreated(lead.id, userId).catch(() => {});
+  const { fireAutomationTriggers } = await import("./automations");
+  fireAutomationTriggers(userId, "lead.created", {}, lead.id).catch(() => {});
   return lead;
 }
 
@@ -196,6 +198,13 @@ export async function updateUserLead(
 
   if (input.status && existing.status !== input.status) {
     onLeadStatusChanged(leadId, userId, existing.status, input.status).catch(() => {});
+    const { fireAutomationTriggers } = await import("./automations");
+    fireAutomationTriggers(
+      userId,
+      "lead.status_changed",
+      { oldStatus: existing.status, newStatus: input.status },
+      leadId
+    ).catch(() => {});
   } else if (Object.keys(data).length > 0) {
     onLeadEdited(leadId, userId).catch(() => {});
   }

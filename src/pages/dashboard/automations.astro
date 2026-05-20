@@ -110,36 +110,63 @@ const logs = [
 
 <script>
   (() => {
-    const STORAGE_KEY = "averionai_autos";
-
-    function getAutos() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { return []; } }
-    function saveAutos(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
-
     let selectedActions = [];
+    let automations = [];
+
+    async function fetchAutos() {
+      try {
+        const res = await fetch("/api/automations");
+        if (!res.ok) return;
+        automations = await res.json();
+        renderAutos();
+      } catch { automations = []; renderAutos(); }
+    }
 
     function renderAutos() {
       const list = document.getElementById("auto-list");
       if (!list) return;
-      const autos = getAutos();
-      if (autos.length === 0) { list.innerHTML = '<p class="text-sm text-white/40">Sin automatizaciones creadas.</p>'; return; }
-      list.innerHTML = autos.map((a, i) => `<div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 transition hover:border-white/10"><div><p class="text-sm text-white/80">${a.trigger} <span class="text-white/30">→</span> ${a.actions.join(", ")}</p><p class="text-xs text-white/40 mt-0.5">${a.active ? "Activa" : "Inactiva"}</p></div><div class="flex gap-2"><button class="toggle-auto text-xs text-cyan-200 hover:text-white transition" data-idx="${i}">${a.active ? "Desactivar" : "Activar"}</button><button class="dup-auto text-xs text-white/40 hover:text-white transition" data-idx="${i}">Duplicar</button><button class="del-auto text-xs text-red-300 hover:text-red-100 transition" data-idx="${i}">Eliminar</button></div></div>`).join("");
+      if (automations.length === 0) { list.innerHTML = '<p class="text-sm text-white/40">Sin automatizaciones creadas.</p>'; return; }
+      list.innerHTML = automations.map((a, i) => {
+        const triggerLabel = document.getElementById("modal-trigger")?.querySelector(`option[value="${a.triggerType}"]`)?.textContent || a.triggerType;
+        const actionLabels = a.actions?.map((act) => {
+          const opt = document.getElementById("modal-action")?.querySelector(`option[value="${act.actionType}"]`);
+          return opt ? opt.textContent : act.actionType;
+        }).join(", ") || "";
+        return `<div class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 transition hover:border-white/10"><div><p class="text-sm text-white/80">${triggerLabel} <span class="text-white/30">→</span> ${actionLabels}</p><p class="text-xs text-white/40 mt-0.5">${a.active ? "Activa" : "Inactiva"}</p></div><div class="flex gap-2"><button class="toggle-auto text-xs text-cyan-200 hover:text-white transition" data-id="${a.id}">${a.active ? "Desactivar" : "Activar"}</button><button class="del-auto text-xs text-red-300 hover:text-red-100 transition" data-id="${a.id}">Eliminar</button></div></div>`;
+      }).join("");
 
-      document.querySelectorAll(".toggle-auto").forEach((b) => b.addEventListener("click", () => { const items = getAutos(); items[parseInt(b.dataset.idx)].active = !items[parseInt(b.dataset.idx)].active; saveAutos(items); renderAutos(); }));
-      document.querySelectorAll(".dup-auto").forEach((b) => b.addEventListener("click", () => { const items = getAutos(); const orig = items[parseInt(b.dataset.idx)]; items.push({...orig, active: false}); saveAutos(items); renderAutos(); }));
-      document.querySelectorAll(".del-auto").forEach((b) => b.addEventListener("click", () => { const items = getAutos(); items.splice(parseInt(b.dataset.idx), 1); saveAutos(items); renderAutos(); }));
+      document.querySelectorAll(".toggle-auto").forEach((b) => b.addEventListener("click", async () => {
+        await fetch(`/api/automations/${b.dataset.id}`, { method: "PATCH" });
+        await fetchAutos();
+      }));
+      document.querySelectorAll(".del-auto").forEach((b) => b.addEventListener("click", async () => {
+        await fetch(`/api/automations/${b.dataset.id}`, { method: "DELETE" });
+        await fetchAutos();
+      }));
     }
 
-    // Templates
     document.querySelectorAll(".use-template").forEach((btn) => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", async () => {
         const spans = btn.querySelectorAll("span");
-        if (spans.length >= 2) {
-          const trigger = spans[0].textContent?.trim() || "";
-          const action = spans[1].textContent?.trim() || "";
-          const items = getAutos();
-          items.push({ trigger, actions: [action], active: true, createdAt: new Date().toISOString() });
-          saveAutos(items); renderAutos();
-        }
+        if (spans.length < 2) return;
+        const triggerText = spans[0].textContent?.trim() || "";
+        const actionText = spans[1].textContent?.trim() || "";
+        const triggerSel = document.getElementById("modal-trigger");
+        const actionSel = document.getElementById("modal-action");
+        if (!triggerSel || !actionSel) return;
+        let triggerId = "";
+        let actionId = "";
+        for (const opt of triggerSel.options) { if (opt.textContent?.includes(triggerText)) { triggerId = opt.value; break; } }
+        for (const opt of actionSel.options) { if (opt.textContent?.includes(actionText)) { actionId = opt.value; break; } }
+        if (!triggerId || !actionId) return;
+        try {
+          await fetch("/api/automations", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: triggerText, triggerType: triggerId, actions: [{ actionType: actionId, order: 0 }] }),
+          });
+          await fetchAutos();
+        } catch {}
       });
     });
 
@@ -160,18 +187,34 @@ const logs = [
       if (list) list.innerHTML = selectedActions.map((a) => `<span class="inline-flex items-center gap-1 rounded-lg border border-emerald-300/20 bg-emerald-300/[0.06] px-2.5 py-1 text-[11px] text-emerald-200/80">${a}</span>`).join(" ");
     });
 
-    document.getElementById("save-auto")?.addEventListener("click", () => {
+    document.getElementById("save-auto")?.addEventListener("click", async () => {
       const triggerSel = document.getElementById("modal-trigger");
-      const trigger = triggerSel?.options[triggerSel.selectedIndex]?.text || "";
-      if (!trigger) return;
-      const items = getAutos();
-      items.push({ trigger, actions: selectedActions.length ? [...selectedActions] : ["Sin accion"], active: true, createdAt: new Date().toISOString() });
-      saveAutos(items); renderAutos();
-      document.getElementById("auto-modal")?.classList.add("hidden");
+      const actionSel = document.getElementById("modal-action");
+      if (!triggerSel || !actionSel) return;
+      const triggerVal = triggerSel.value;
+      const actionVal = actionSel.value;
+      if (!triggerVal) return;
+      try {
+        await fetch("/api/automations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: triggerSel.options[triggerSel.selectedIndex]?.text || triggerVal,
+            triggerType: triggerVal,
+            actions: selectedActions.length ? selectedActions.map((a, i) => {
+              let foundVal = actionVal;
+              for (const opt of actionSel.options) { if (opt.textContent === a) { foundVal = opt.value; break; } }
+              return { actionType: foundVal, order: i };
+            }) : [{ actionType: actionVal, order: 0 }],
+          }),
+        });
+        await fetchAutos();
+        document.getElementById("auto-modal")?.classList.add("hidden");
+      } catch {}
       selectedActions = [];
       document.getElementById("actions-list").innerHTML = "";
     });
 
-    renderAutos();
+    fetchAutos();
   })();
 </script>

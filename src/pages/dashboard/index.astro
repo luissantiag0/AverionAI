@@ -2,6 +2,7 @@
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import { getTrialRemainingMs } from "../../lib/auth";
 import { getUserLeadCounts, getUserRecentActivity } from "../../lib/crm";
+import { getUserAutomationStats } from "../../lib/automations";
 import OnboardingTour from "../../components/OnboardingTour.astro";
 import ActivationChecklist from "../../components/ActivationChecklist.astro";
 
@@ -21,7 +22,8 @@ const FREE_LEAD_LIMIT = 5;
 const recentActivity = user ? await getUserRecentActivity(user.id, 5) : [];
 const hasRecentChanges = recentActivity.length > 0;
 const justCreatedFirstLead = totalLeads === 1;
-const hasAutomations = false;
+const autoStats = user ? await getUserAutomationStats(user.id) : null;
+const hasAutomations = (autoStats?.total ?? 0) > 0;
 ---
 
 <DashboardLayout title="Dashboard">
@@ -147,17 +149,52 @@ const hasAutomations = false;
     </div>
   </section>
 
-  {hasRecentChanges && (
+  {autoStats && autoStats.total > 0 && (
+    <section class="mt-4 grid gap-4 sm:grid-cols-4">
+      <div class="premium-panel p-5">
+        <p class="text-xs text-white/45 uppercase tracking-wider">🤖 Automatizaciones</p>
+        <p class="mt-2 text-2xl font-semibold text-cyan-100">{autoStats.active}/{autoStats.total}</p>
+        <p class="text-xs text-white/40">activas</p>
+      </div>
+      <div class="premium-panel p-5">
+        <p class="text-xs text-white/45 uppercase tracking-wider">⚙️ Ejecuciones hoy</p>
+        <p class="mt-2 text-2xl font-semibold text-emerald-100">{autoStats.executionsToday}</p>
+        <p class="text-xs text-white/40">{autoStats.successToday} exitosas</p>
+      </div>
+      <div class="premium-panel p-5">
+        <p class="text-xs text-white/45 uppercase tracking-wider">📊 Tasa de exito</p>
+        <p class="mt-2 text-2xl font-semibold text-purple-100">{autoStats.executionsToday > 0 ? Math.round((autoStats.successToday / autoStats.executionsToday) * 100) : 0}%</p>
+      </div>
+      <div class="premium-panel p-5 border-cyan-300/10">
+        <p class="text-xs text-white/45 uppercase tracking-wider">🔧 Lo que el sistema hizo</p>
+        <p class="mt-2 text-sm text-white/70">{autoStats.active > 0 ? `${autoStats.active} automatizaciones procesando leads en segundo plano` : "Crea automatizaciones para que el sistema trabaje solo"}</p>
+        <a href="/dashboard/automations" class="mt-2 inline-block text-xs text-cyan-200 hover:text-white transition">Gestionar automatizaciones →</a>
+      </div>
+    </section>
+  )}
+
+  {(hasRecentChanges || (autoStats?.recentExecutions?.length ?? 0) > 0) && (
     <section class="mt-6">
       <div class="premium-panel p-5 md:p-6">
         <div class="flex items-center gap-3">
           <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-300/20 bg-cyan-300/10 text-sm">📋</span>
           <div>
             <h2 class="text-base font-semibold text-white">Actividad reciente</h2>
-            <p class="text-xs text-white/45">Ultimos leads actualizados en tu cuenta</p>
+            <p class="text-xs text-white/45">Lo que ha pasado en tu cuenta</p>
           </div>
         </div>
         <div class="mt-4 grid gap-2">
+          {autoStats && autoStats.executionsToday > 0 && (
+            <div class="rounded-xl border border-emerald-300/10 bg-emerald-300/[0.03] px-4 py-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm text-emerald-200/90">⚙️ Sistema — {autoStats.executionsToday} automatizaciones ejecutadas hoy</p>
+                  <p class="text-xs text-white/40 mt-0.5">{autoStats.successToday} exitosas · {autoStats.executionsToday - autoStats.successToday} fallos</p>
+                </div>
+                <span class="text-xs text-emerald-200/60">{Math.round((autoStats.successToday / Math.max(autoStats.executionsToday, 1)) * 100)}% exito</span>
+              </div>
+            </div>
+          )}
           {recentActivity.map((lead) => (
             <a href={`/dashboard/leads/${lead.id}`} class="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 transition hover:border-cyan-300/20 hover:bg-white/[0.04]">
               <div class="min-w-0">

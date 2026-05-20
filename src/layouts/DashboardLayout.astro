@@ -72,6 +72,9 @@ const isActive = (href: string) =>
           <p class="mt-2 truncate text-sm text-white/72">
             {user?.email ?? ""}
           </p>
+          <p class="mt-2 text-[10px] text-white/30">
+            Invita: <span class="font-mono text-cyan-200/50">{user?.id?.slice(0, 8).toUpperCase()}</span>
+          </p>
         </div>
       </aside>
 

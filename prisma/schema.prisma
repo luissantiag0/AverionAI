@@ -33,12 +33,17 @@ model User {
 
   role String @default("client")
 
+  referralCode     String? @unique
+  referredBy       String?
+  referralDiscount Int     @default(0)
+
   createdAt DateTime @default(now())
 
-  leads     Lead[]
-  invoices  Invoice[]
-  pitchDecks PitchDeck[]
-  ebooks    Ebook[]
+  leads       Lead[]
+  invoices    Invoice[]
+  pitchDecks  PitchDeck[]
+  ebooks      Ebook[]
+  automations Automation[]
 }
 
 model Lead {
@@ -128,4 +133,59 @@ model Ebook {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Automation {
+  id        String   @id @default(cuid())
+  name      String
+  description String?
+  active    Boolean  @default(true)
+  triggerType  String
+  triggerConfig String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  actions    AutomationAction[]
+  executions AutomationExecution[]
+}
+
+model AutomationAction {
+  id         String @id @default(cuid())
+  actionType String
+  config     String?
+  order      Int    @default(0)
+
+  automationId String
+  automation   Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+}
+
+model AutomationExecution {
+  id              String   @id @default(cuid())
+  status          String
+  triggeredBy     String?
+  triggerEntityId String?
+  result          String?
+  startedAt       DateTime @default(now())
+  completedAt     DateTime?
+
+  automationId String
+  automation   Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+
+  actions AutomationActionExecution[]
+}
+
+model AutomationActionExecution {
+  id         String   @id @default(cuid())
+  actionType String
+  status     String
+  result     String?
+  startedAt  DateTime @default(now())
+  completedAt DateTime?
+
+  executionId String
+  execution   AutomationExecution @relation(fields: [executionId], references: [id], onDelete: Cascade)
 }

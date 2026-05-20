@@ -49,9 +49,11 @@ if (Astro.request.method === "POST") {
     errors.push("Las contraseñas no coinciden.");
   }
 
-  if (errors.length === 0) {
+const refCode = Astro.url.searchParams.get("ref") || undefined;
+
+if (errors.length === 0) {
     try {
-      const result = await registerUser(name, email, password);
+      const result = await registerUser(name, email, password, refCode);
 
       Astro.cookies.set(
         SESSION_COOKIE,
@@ -70,11 +72,12 @@ if (Astro.request.method === "POST") {
     }
   }
 }
+
 ---
 
 <BaseLayout
   title="Crear cuenta | AverionAI — Automatizacion IA para empresas"
-  description="Crea tu cuenta gratis. Empieza a automatizar procesos de tu negocio con sistemas de IA en produccion. Sin tarjeta."
+  description="Registrate gratis. Automatiza procesos de ventas y leads con sistemas de IA operativa en empresas espanolas. Sin tarjeta."
 >
   <main class="grid min-h-screen place-items-center bg-[#07070A] px-6 py-16">
     <section class="w-full max-w-md">

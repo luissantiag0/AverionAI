@@ -560,7 +560,8 @@ export interface RegisterResult {
 export const registerUser = async (
   name: string,
   email: string,
-  password: string
+  password: string,
+  referralCode?: string
 ): Promise<RegisterResult> => {
   const existing = await prisma.user.findUnique({
     where: { email },
@@ -587,6 +588,11 @@ export const registerUser = async (
     },
     select: await buildUserSelect(),
   });
+
+  if (referralCode) {
+    const { applyReferral } = await import("./automations");
+    applyReferral(referralCode, user.id).catch(() => {});
+  }
 
   const { token, startedAt } = await createSession(user);
 
