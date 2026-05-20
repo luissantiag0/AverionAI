@@ -1,0 +1,59 @@
+---
+// Cookie consent banner - EU GDPR/ePrivacy compliant
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-[#0A0A0F]/95 backdrop-blur-sm p-4 md:p-5"
+  role="dialog"
+  aria-label="Consentimiento de cookies"
+>
+  <div class="container flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex-1">
+      <p class="text-sm text-white/70">
+        Usamos cookies para mejorar tu experiencia, analizar trafico y personalizar contenido.
+        <a href="/legal/cookies" class="text-cyan-200 underline">Politica de cookies</a>.
+      </p>
+    </div>
+    <div class="flex gap-2 shrink-0">
+      <button type="button" id="cookie-reject" class="btn-secondary px-4 py-2 text-xs">
+        Solo necesarias
+      </button>
+      <button type="button" id="cookie-accept" class="btn-primary px-4 py-2 text-xs">
+        Aceptar todas
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const banner = document.getElementById("cookie-banner");
+    const acceptBtn = document.getElementById("cookie-accept");
+    const rejectBtn = document.getElementById("cookie-reject");
+
+    if (!banner) return;
+
+    const consent = localStorage.getItem("averion-cookie-consent");
+    if (consent) {
+      banner.remove();
+      return;
+    }
+
+    acceptBtn?.addEventListener("click", () => {
+      localStorage.setItem("averion-cookie-consent", "accepted");
+      banner.style.opacity = "0";
+      banner.style.transform = "translateY(100%)";
+      banner.style.transition = "opacity 0.3s, transform 0.3s";
+      setTimeout(() => banner.remove(), 300);
+    });
+
+    rejectBtn?.addEventListener("click", () => {
+      localStorage.setItem("averion-cookie-consent", "necessary");
+      banner.style.opacity = "0";
+      banner.style.transform = "translateY(100%)";
+      banner.style.transition = "opacity 0.3s, transform 0.3s";
+      setTimeout(() => banner.remove(), 300);
+    });
+  })();
+</script>

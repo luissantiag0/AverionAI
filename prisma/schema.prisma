@@ -37,6 +37,9 @@ model User {
   referredBy       String?
   referralDiscount Int     @default(0)
 
+  resetToken           String?
+  resetTokenExpiresAt  DateTime?
+
   createdAt DateTime @default(now())
 
   leads       Lead[]

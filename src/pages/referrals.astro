@@ -45,11 +45,12 @@ const isLoggedIn = !!user;
       <div class="mx-auto mt-12 max-w-lg text-center">
         {isLoggedIn ? (
           <div class="rounded-2xl border border-cyan-300/20 bg-cyan-300/5 p-6" data-reveal>
-            <p class="text-sm text-cyan-200">Tu código de invitación</p>
-            <p class="mt-2 text-3xl font-bold tracking-widest text-white">{user?.id?.slice(0, 8).toUpperCase()}</p>
-            <button type="button" onclick="navigator.clipboard.writeText(window.location.origin + '/register?ref=' + '{$user?.id?.slice(0, 8)}')" class="btn-secondary mt-4 px-5 py-2.5 text-sm">
+            <p class="text-sm text-cyan-200">Tu codigo de invitacion</p>
+            <p class="mt-2 text-3xl font-bold tracking-widest text-white" id="referral-code">{user?.referralCode || user?.id?.slice(0, 8).toUpperCase()}</p>
+            <button type="button" id="copy-referral-btn" class="btn-secondary mt-4 px-5 py-2.5 text-sm">
               Copiar enlace
             </button>
+            <p id="copy-feedback" class="mt-2 text-xs text-emerald-300 opacity-0 transition">¡Copiado!</p>
           </div>
         ) : (
           <a href="/register" class="btn-primary px-8 py-3 text-sm">
@@ -61,3 +62,31 @@ const isLoggedIn = !!user;
   </main>
   <Footer />
 </BaseLayout>
+
+<script>
+  const referralCode = document.getElementById("referral-code")?.textContent?.trim() || "";
+  const copyBtn = document.getElementById("copy-referral-btn");
+  const feedback = document.getElementById("copy-feedback");
+
+  copyBtn?.addEventListener("click", async () => {
+    const url = `${window.location.origin}/register?ref=${referralCode}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      if (feedback) {
+        feedback.style.opacity = "1";
+        setTimeout(() => { feedback.style.opacity = "0"; }, 2000);
+      }
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = url;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (feedback) {
+        feedback.style.opacity = "1";
+        setTimeout(() => { feedback.style.opacity = "0"; }, 2000);
+      }
+    }
+  });
+</script>

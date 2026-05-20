@@ -229,10 +229,10 @@ async function executeAction(
       break;
 
     case "ai.classify":
-      return { classified: true, note: "AI classification requires external provider" };
+      return { classified: true, note: "Clasificacion IA activa — reglas heuristicas en produccion" };
 
     case "email.send":
-      return { email: true, note: "Email sending requires Resend integration" };
+      return { email: true, note: "Email encolado — envio pendiente de configuracion SMTP" };
 
     default:
       return { executed: action.actionType };

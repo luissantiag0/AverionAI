@@ -32,21 +32,21 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
         <!-- Free -->
         <div class="premium-panel p-6 md:p-8">
           <h2 class="text-2xl font-semibold text-white">Free</h2>
-          <p class="mt-2 text-sm text-white/50">Para empezar a explorar</p>
+          <p class="mt-2 text-sm text-white/50">Para explorar la plataforma</p>
           <p class="mt-6"><span class="text-5xl font-bold text-white">0</span><span class="text-sm text-white/40"> €/mes</span></p>
           <ul class="mt-8 grid gap-3 text-sm" role="list">
-            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Leads básicos</li>
-            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Panel CRM</li>
+            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> CRM con hasta 5 leads</li>
+            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Panel de control basico</li>
+            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> 1 automatizacion activa</li>
             <li class="flex items-start gap-3 text-white/40"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-white/10 text-[10px] text-white/40">—</span> Ebooks IA</li>
-            <li class="flex items-start gap-3 text-white/40"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-white/10 text-[10px] text-white/40">—</span> Pitch decks automáticos</li>
-            <li class="flex items-start gap-3 text-white/40"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-white/10 text-[10px] text-white/40">—</span> Informes avanzados</li>
+            <li class="flex items-start gap-3 text-white/40"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-white/10 text-[10px] text-white/40">—</span> Pitch decks</li>
             <li class="flex items-start gap-3 text-white/40"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-white/10 text-[10px] text-white/40">—</span> SEO Swarm</li>
           </ul>
           <div class="mt-8">
             {isLoggedIn ? (
               <a href={isPremium ? "/premium/dashboard" : "/dashboard"} class="btn-secondary w-full justify-center text-center">{isPremium ? "Ir al panel" : "Acceder gratis"}</a>
             ) : (
-              <a href="/register" data-track="cta_click" data-track-label="pricing_free_empezar" class="btn-secondary w-full justify-center text-center">Empezar ahora</a>
+              <a href="/register" data-track="cta_click" data-track-label="pricing_free_empezar" class="btn-secondary w-full justify-center text-center">Empezar gratis</a>
             )}
           </div>
         </div>
@@ -56,12 +56,18 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
           <div class="absolute right-4 top-4 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-medium tracking-[0.12em] text-cyan-200">Recomendado</div>
           <h2 class="text-2xl font-semibold text-white">Premium</h2>
           <p class="mt-2 text-sm text-white/50">Automatizacion en produccion</p>
-          <p class="mt-6"><span class="text-5xl font-bold text-white">29</span><span class="text-sm text-white/40"> €/mes</span></p>
+          <div class="mt-4 flex items-center gap-2">
+            <p class="text-5xl font-bold text-white">29</p>
+            <div class="text-sm text-white/40">
+              <p>€/mes</p>
+              <p class="text-xs text-emerald-300/70">249€/año (ahorra 99€)</p>
+            </div>
+          </div>
           <ul class="mt-8 grid gap-3 text-sm" role="list">
-            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Todo lo de Free</li>
+            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Leads ilimitados</li>
+            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Automatizaciones ilimitadas</li>
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Ebooks IA ilimitados</li>
-            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Pitch decks automáticos</li>
-            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Informes avanzados</li>
+            <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Pitch decks automaticos</li>
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> SEO Swarm</li>
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Soporte prioritario 24/7</li>
           </ul>
@@ -81,7 +87,13 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
           <div class="absolute right-4 top-4 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-medium tracking-[0.12em] text-emerald-200">Mejor opcion</div>
           <h2 class="text-2xl font-semibold text-white">Business</h2>
           <p class="mt-2 text-sm text-white/50">Para equipos y empresas en crecimiento</p>
-          <p class="mt-6"><span class="text-5xl font-bold text-white">79</span><span class="text-sm text-white/40"> €/mes</span></p>
+          <div class="mt-4 flex items-center gap-2">
+            <p class="text-5xl font-bold text-white">79</p>
+            <div class="text-sm text-white/40">
+              <p>€/mes</p>
+              <p class="text-xs text-emerald-300/70">699€/año (ahorra 249€)</p>
+            </div>
+          </div>
           <ul class="mt-8 grid gap-3 text-sm" role="list">
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Todo lo de Premium</li>
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-[10px] text-emerald-300">✓</span> Usuarios multiples</li>
@@ -102,8 +114,32 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
         </div>
       </div>
 
+      <div class="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
+        <div class="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+          <span class="text-lg">🔒</span>
+          <div>
+            <p class="text-sm font-medium text-white">Garantia 14 dias</p>
+            <p class="text-xs text-white/40">Devolucion sin preguntas</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+          <span class="text-lg">⚡</span>
+          <div>
+            <p class="text-sm font-medium text-white">Setup en 2 min</p>
+            <p class="text-xs text-white/40">Sin instalacion tecnica</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+          <span class="text-lg">📊</span>
+          <div>
+            <p class="text-sm font-medium text-white">ROI desde el mes 1</p>
+            <p class="text-xs text-white/40">Ahorra 25h/mes por cada 100 leads</p>
+          </div>
+        </div>
+      </div>
+
       <p class="mx-auto mt-12 max-w-xl text-center text-xs leading-relaxed text-white/38">
-        Cancelación en cualquier momento. Pago seguro procesado por Stripe. Datos cifrados en reposo y tránsito bajo estándares bancarios.
+        Cancelacion en cualquier momento. Pago seguro procesado por Stripe. Datos cifrados en reposito y transito bajo estandares bancarios.
       </p>
     </section>
   </main>

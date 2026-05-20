@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Analytics from "../components/Analytics.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 
 const {
   title = "AverionAI | Automatizacion IA para empresas — Sistemas de IA en produccion",
@@ -76,8 +77,7 @@ const fullUrl = canonicalUrl || `https://averionai.es${Astro.url.pathname}`;
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
         "offers": { "@type": "Offer", "price": "29", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
-        "featureList": "CRM inteligente, automatizacion con IA, generacion de documentos, facturacion electronica, agentes de ventas, RAG",
-        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "124" }
+        "featureList": "CRM inteligente, automatizacion con IA, generacion de documentos, facturacion electronica, agentes de ventas, RAG"
       })}
     </script>
 
@@ -86,12 +86,39 @@ const fullUrl = canonicalUrl || `https://averionai.es${Astro.url.pathname}`;
       {JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://averionai.es" },
-          { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://averionai.es/pricing" }
-        ]
+        "itemListElement": (() => {
+          const path = Astro.url.pathname.split("/").filter(Boolean);
+          const breadcrumbs = [{ position: 1, name: "Inicio", item: "https://averionai.es" }];
+          const labels: Record<string, string> = {
+            pricing: "Precios",
+            login: "Iniciar sesion",
+            register: "Registro",
+            blog: "Blog",
+            referrals: "Referidos",
+            forgot: "Recuperar contraseña",
+            "reset-password": "Restablecer contraseña",
+            aprende: "Aprende",
+            "landing": "Landing",
+            "legal": "Legal",
+            dashboard: "Panel",
+          };
+          let url = "https://averionai.es";
+          path.forEach((segment, i) => {
+            url += `/${segment}`;
+            breadcrumbs.push({
+              position: i + 2,
+              name: labels[segment] || segment.charAt(0).toUpperCase() + segment.slice(1),
+              item: url,
+            });
+          });
+          return breadcrumbs;
+        })()
       })}
     </script>
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="es" href={fullUrl} />
+    <link rel="alternate" hreflang="x-default" href={fullUrl} />
 
     <!-- Schema.org: WebSite with SearchAction -->
     <script type="application/ld+json">
@@ -112,6 +139,7 @@ const fullUrl = canonicalUrl || `https://averionai.es${Astro.url.pathname}`;
 
   <body class="min-h-screen bg-[#07070A] text-white antialiased selection:bg-cyan-300/20 selection:text-cyan-100">
     <slot />
+    <CookieConsent />
 
     <script is:inline>
       (() => {

@@ -27,6 +27,15 @@ if (
 }
 
 if (Astro.request.method === "POST") {
+  const ip = Astro.request.headers.get("x-forwarded-for") || "unknown";
+  const rateKey = `register:${ip}`;
+  const rateLimit = 3;
+  const rateWindow = 15 * 60 * 1000;
+
+  const { detectRateLimit } = await import("../lib/security");
+  if (detectRateLimit(rateKey, rateLimit, rateWindow)) {
+    errors.push("Demasiados intentos de registro. Espera 15 minutos.");
+  } else {
   const formData = await Astro.request.formData();
   const name = String(formData.get("name") || "").trim();
   const email = String(formData.get("email") || "").trim().toLowerCase();
@@ -41,8 +50,8 @@ if (Astro.request.method === "POST") {
     errors.push("Email inválido.");
   }
 
-  if (!password || password.length < 6) {
-    errors.push("La contraseña debe tener al menos 6 caracteres.");
+  if (!password || password.length < 8) {
+    errors.push("La contraseña debe tener al menos 8 caracteres.");
   }
 
   if (password !== confirmPassword) {
@@ -70,6 +79,7 @@ if (errors.length === 0) {
         errors.push("Error al crear la cuenta. Intenta de nuevo.");
       }
     }
+  }
   }
 }
 
@@ -139,8 +149,8 @@ if (errors.length === 0) {
               name="password"
               autocomplete="new-password"
               required
-              minlength="6"
-              placeholder="Mínimo 6 caracteres"
+              minlength="8"
+              placeholder="Mínimo 8 caracteres"
               class="input-premium w-full"
             />
           </label>
@@ -152,7 +162,7 @@ if (errors.length === 0) {
               name="confirmPassword"
               autocomplete="new-password"
               required
-              minlength="6"
+              minlength="8"
               placeholder="Repite la contraseña"
               class="input-premium w-full"
             />

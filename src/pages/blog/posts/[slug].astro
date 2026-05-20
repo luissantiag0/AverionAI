@@ -89,22 +89,30 @@ if (!post) {
 }
 ---
 
-<BaseLayout title={`${post.title} | AverionAI`} description={post.content.substring(0, 160)}>
+<BaseLayout title={`${post.title} | AverionAI`} description={post.content.substring(0, 160)} canonicalUrl={`https://averionai.es/blog/posts/${slug}`}>
   <Navbar />
   <main class="min-h-screen bg-[#07070A]">
-    <article class="container py-20 md:py-28">
+    <article class="container py-20 md:py-28" itemscope itemtype="https://schema.org/Article">
       <div class="mx-auto max-w-3xl">
         <a href="/blog" class="text-sm text-white/45 transition hover:text-cyan-100">← Volver al blog</a>
 
         <div class="mt-8" data-reveal>
           <div class="flex flex-wrap items-center gap-3 text-sm">
             <span class="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs text-cyan-200">{post.category}</span>
-            <span class="text-white/40">{post.date}</span>
+            <span class="text-white/40" itemprop="datePublished">{post.date}</span>
+            <span class="text-white/40">· 5 min lectura</span>
           </div>
-          <h1 class="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">{post.title}</h1>
+          <h1 class="mt-4 text-3xl font-semibold tracking-tight text-white md:text-5xl" itemprop="headline">{post.title}</h1>
+          <div class="mt-4 flex items-center gap-3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-300/10 text-xs font-medium text-cyan-200">A</div>
+            <div>
+              <p class="text-sm text-white/70" itemprop="author">Equipo AverionAI</p>
+              <p class="text-xs text-white/40">Automatizacion IA para empresas</p>
+            </div>
+          </div>
         </div>
 
-        <div class="mt-12 prose prose-invert max-w-none text-white/75 leading-relaxed" data-reveal>
+        <div class="mt-12 prose prose-invert max-w-none text-white/75 leading-relaxed" data-reveal itemprop="articleBody">
           {post.content.split("\n").filter(Boolean).map((line) => {
             if (line.startsWith("## ")) return <h2 class="mt-10 mb-4 text-2xl font-semibold text-white">{line.replace("## ", "")}</h2>;
             if (line.startsWith("- ")) return <li class="ml-5 text-white/70">{line.replace("- ", "")}</li>;
@@ -112,8 +120,47 @@ if (!post) {
             return <p class="mb-5">{line}</p>;
           })}
         </div>
+
+        <div class="mt-16 rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6 text-center" data-reveal>
+          <h2 class="text-xl font-semibold text-white">¿Quieres automatizar tu empresa?</h2>
+          <p class="mt-2 text-sm text-white/60">Prueba AverionAI gratis durante 24 horas. Sin tarjeta.</p>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <a href="/register" class="btn-primary px-6 py-2.5 text-sm">Empezar gratis</a>
+            <a href="/pricing" class="btn-secondary px-6 py-2.5 text-sm">Ver precios</a>
+          </div>
+        </div>
+
+        <div class="mt-12 border-t border-white/10 pt-8" data-reveal>
+          <h3 class="text-lg font-semibold text-white">Articulos relacionados</h3>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            {Object.entries(posts)
+              .filter(([s]) => s !== slug)
+              .slice(0, 2)
+              .map(([s, p]) => (
+                <a href={`/blog/posts/${s}`} class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition hover:border-cyan-300/20">
+                  <p class="text-sm font-medium text-white">{p.title}</p>
+                  <p class="mt-1 text-xs text-white/40">{p.date} · {p.category}</p>
+                </a>
+              ))}
+          </div>
+        </div>
       </div>
     </article>
   </main>
   <Footer />
 </BaseLayout>
+
+<script type="application/ld+json" is:inline>
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.content.substring(0, 160),
+    "author": { "@type": "Organization", "name": "AverionAI", "url": "https://averionai.es" },
+    "publisher": { "@type": "Organization", "name": "AverionAI", "url": "https://averionai.es", "logo": { "@type": "ImageObject", "url": "https://averionai.es/logo-averion.png" } },
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "mainEntityOfPage": `https://averionai.es/blog/posts/${slug}`,
+    "image": `https://averionai.es/logo-averion.png`
+  })}
+</script>

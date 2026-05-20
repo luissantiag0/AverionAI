@@ -267,13 +267,16 @@ const findUserBySessionToken = async (
   }
 };
 
-const getSessionSecret = () =>
-  (
-    process.env.SESSION_SECRET ||
-    process.env.AUTH_SECRET ||
-    process.env.DATABASE_URL ||
-    "averion-local-session-secret"
-  ).trim();
+const getSessionSecret = () => {
+  const secret = process.env.SESSION_SECRET || process.env.AUTH_SECRET;
+  if (!secret) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("SESSION_SECRET or AUTH_SECRET environment variable is required in production");
+    }
+    return "averion-local-dev-secret-do-not-use-in-production";
+  }
+  return secret.trim();
+};
 
 const signSessionPayload = (payload: string) =>
   createHmac("sha256", getSessionSecret())
