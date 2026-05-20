@@ -16,7 +16,7 @@
 
   <div
     id="lead-modal-panel"
-    class="relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/10 bg-[#090C12]/95 shadow-[0_30px_90px_-35px_rgba(34,211,238,0.7)] ring-1 ring-white/[0.04] transition duration-300"
+    class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto overflow-hidden rounded-2xl border border-white/10 bg-[#090C12]/95 shadow-[0_30px_90px_-35px_rgba(34,211,238,0.7)] ring-1 ring-white/[0.04] transition duration-300"
     style="transform: translateY(18px) scale(0.98); opacity: 0;"
   >
     <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent"></div>
@@ -29,7 +29,7 @@
             </p>
 
             <h2 id="lead-modal-title" class="mt-3 text-2xl font-semibold tracking-tight text-white">
-              Solicita tu analisis de operaciones
+              Solicita tu analisis gratuito
             </h2>
 
             <p class="mt-2 text-sm leading-relaxed text-white/55">
@@ -60,10 +60,11 @@
 
         <div class="grid gap-4 sm:grid-cols-2">
           <label class="space-y-2">
-            <span class="text-sm text-white/70">Nombre completo</span>
+            <span class="text-sm text-white/70">Nombre completo *</span>
             <input
               name="fullName"
               autocomplete="name"
+              required
               class="lead-input w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition placeholder:text-white/25 focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10"
               placeholder="Tu nombre"
             />
@@ -71,34 +72,117 @@
           </label>
 
           <label class="space-y-2">
-            <span class="text-sm text-white/70">Email</span>
+            <span class="text-sm text-white/70">Email corporativo *</span>
             <input
               type="email"
               name="email"
               autocomplete="email"
+              required
               class="lead-input w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition placeholder:text-white/25 focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10"
-              placeholder="tu@email.com"
+              placeholder="tu@empresa.com"
             />
             <span class="lead-field-error hidden text-xs text-red-300" data-error-for="email"></span>
           </label>
         </div>
 
         <label class="block space-y-2">
-          <span class="text-sm text-white/70">Empresa</span>
+          <span class="text-sm text-white/70">Empresa *</span>
           <input
             name="companyName"
             autocomplete="organization"
+            required
             class="lead-input w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition placeholder:text-white/25 focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10"
             placeholder="Nombre de tu empresa"
           />
           <span class="lead-field-error hidden text-xs text-red-300" data-error-for="companyName"></span>
         </label>
 
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="space-y-2">
+            <span class="text-sm text-white/70">Tamaño de empresa</span>
+            <select
+              name="companySize"
+              class="lead-input w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10 appearance-none"
+            >
+              <option value="" class="bg-[#090C12]">Seleccionar</option>
+              <option value="1-10" class="bg-[#090C12]">1-10 empleados</option>
+              <option value="11-50" class="bg-[#090C12]">11-50 empleados</option>
+              <option value="51-200" class="bg-[#090C12]">51-200 empleados</option>
+              <option value="201-500" class="bg-[#090C12]">201-500 empleados</option>
+              <option value="500+" class="bg-[#090C12]">500+ empleados</option>
+            </select>
+          </label>
+
+          <label class="space-y-2">
+            <span class="text-sm text-white/70">Leads mensuales estimados</span>
+            <select
+              name="leadVolume"
+              class="lead-input w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10 appearance-none"
+            >
+              <option value="" class="bg-[#090C12]">Seleccionar</option>
+              <option value="<50" class="bg-[#090C12]">Menos de 50</option>
+              <option value="50-200" class="bg-[#090C12]">50-200</option>
+              <option value="200-500" class="bg-[#090C12]">200-500</option>
+              <option value="500-1000" class="bg-[#090C12]">500-1.000</option>
+              <option value="1000+" class="bg-[#090C12]">1.000+</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="space-y-2">
+            <span class="text-sm text-white/70">CRM actual</span>
+            <select
+              name="currentCRM"
+              class="lead-input w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10 appearance-none"
+            >
+              <option value="" class="bg-[#090C12]">Seleccionar</option>
+              <option value="ninguno" class="bg-[#090C12]">Ninguno / hojas de calculo</option>
+              <option value="hubspot" class="bg-[#090C12]">HubSpot</option>
+              <option value="salesforce" class="bg-[#090C12]">Salesforce</option>
+              <option value="pipedrive" class="bg-[#090C12]">Pipedrive</option>
+              <option value="zoho" class="bg-[#090C12]">Zoho CRM</option>
+              <option value="otro" class="bg-[#090C12]">Otro</option>
+            </select>
+          </label>
+
+          <label class="space-y-2">
+            <span class="text-sm text-white/70">Presupuesto estimado</span>
+            <select
+              name="budget"
+              class="lead-input w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10 appearance-none"
+            >
+              <option value="" class="bg-[#090C12]">Seleccionar</option>
+              <option value="<500" class="bg-[#090C12]">Menos de 500€/mes</option>
+              <option value="500-1000" class="bg-[#090C12]">500-1.000€/mes</option>
+              <option value="1000-3000" class="bg-[#090C12]">1.000-3.000€/mes</option>
+              <option value="3000+" class="bg-[#090C12]">3.000€+/mes</option>
+              <option value="evaluando" class="bg-[#090C12]">Evaluando opciones</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="block space-y-2">
+          <span class="text-sm text-white/70">Mayor cuello de botella operativo</span>
+          <select
+            name="bottleneck"
+            class="lead-input w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10 appearance-none"
+          >
+            <option value="" class="bg-[#090C12]">Seleccionar</option>
+            <option value="respuesta-leads" class="bg-[#090C12]">Respuesta tarda a leads</option>
+            <option value="cualificacion" class="bg-[#090C12]">Cualificacion manual de leads</option>
+            <option value="seguimiento" class="bg-[#090C12]">Seguimiento de oportunidades</option>
+            <option value="documentos" class="bg-[#090C12]">Generacion de propuestas/facturas</option>
+            <option value="reporting" class="bg-[#090C12]">Reporting y metricas manuales</option>
+            <option value="integracion" class="bg-[#090C12]">Integracion entre herramientas</option>
+          </select>
+        </label>
+
         <label class="block space-y-2">
           <span class="text-sm text-white/70">Qué necesitas automatizar</span>
           <textarea
             name="message"
-            rows="4"
+            rows="3"
             class="lead-input w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition placeholder:text-white/25 focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10"
             placeholder="Cuéntanos el proceso, herramienta o cuello de botella..."
           ></textarea>
@@ -120,7 +204,7 @@
           class="group relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-white px-6 py-3.5 font-semibold text-black shadow-[0_18px_55px_-26px_rgba(255,255,255,0.9)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_70px_-24px_rgba(34,211,238,0.9)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
         >
           <span class="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-cyan-200/70 to-transparent transition duration-700 group-hover:translate-x-[120%]"></span>
-          <span id="lead-submit-label" class="relative">Solicitar analisis de operaciones</span>
+          <span id="lead-submit-label" class="relative">Solicitar analisis gratuito</span>
           <span
             id="lead-submit-spinner"
             class="relative ml-3 hidden h-4 w-4 animate-spin rounded-full border-2 border-black/20 border-t-black"
@@ -128,7 +212,7 @@
         </button>
 
         <p class="text-center text-xs text-white/35">
-          Tu solicitud se enviará directamente al equipo de AverionAI.
+          Respuesta en menos de 24h · Sin compromiso · Datos protegidos RGPD
         </p>
       </form>
     </div>
@@ -139,11 +223,11 @@
       </div>
 
       <h3 class="mt-6 text-2xl font-semibold text-white">
-        Solicitud enviada
+        Solicitud recibida
       </h3>
 
       <p class="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-white/60">
-        Hemos recibido tu información. Te contactaremos en menos de 24 horas.
+        Nuestro equipo analizara tu operativa y te contactara en menos de 24 horas con un plan de automatizacion personalizado.
       </p>
 
       <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
@@ -197,7 +281,6 @@
 
   const openModal = () => {
     lastFocusedElement = document.activeElement;
-    setSubmittedAt();
     hideError();
     clearErrors();
     formState.classList.remove("hidden");
@@ -233,7 +316,7 @@
   const setLoading = (state) => {
     isLoading = state;
     submitBtn.disabled = state;
-    submitLabel.textContent = state ? "Enviando..." : "Solicitar analisis de operaciones";
+    submitLabel.textContent = state ? "Enviando..." : "Solicitar analisis gratuito";
     submitSpinner.classList.toggle("hidden", !state);
   };
 
@@ -278,9 +361,8 @@
 
     if (!values.fullName) errors.fullName = "Indica tu nombre.";
     if (!values.email) errors.email = "Indica tu email.";
-    if (values.email && !emailPattern.test(values.email)) errors.email = "Introduce un email válido.";
+    if (values.email && !emailPattern.test(values.email)) errors.email = "Introduce un email valido.";
     if (!values.companyName) errors.companyName = "Indica tu empresa.";
-    if (!values.message) errors.message = "Cuéntanos qué necesitas automatizar.";
 
     return errors;
   };
@@ -323,6 +405,11 @@
       email: String(formData.get("email") || "").trim(),
       companyName: String(formData.get("companyName") || "").trim(),
       message: String(formData.get("message") || "").trim(),
+      companySize: String(formData.get("companySize") || ""),
+      leadVolume: String(formData.get("leadVolume") || ""),
+      currentCRM: String(formData.get("currentCRM") || ""),
+      budget: String(formData.get("budget") || ""),
+      bottleneck: String(formData.get("bottleneck") || ""),
       companyWebsite: String(formData.get("companyWebsite") || "").trim(),
       submittedAt: Number(formData.get("submittedAt") || Date.now()),
     };
@@ -358,7 +445,7 @@
       formState.classList.add("hidden");
       successState.classList.remove("hidden");
     } catch (error) {
-      showError(error.message || "Error enviando el formulario. Inténtalo de nuevo.");
+      showError(error.message || "Error enviando el formulario. Intentalo de nuevo.");
     } finally {
       setLoading(false);
       setSubmittedAt();

@@ -36,10 +36,11 @@ const isActive = (href: string) =>
 
   <body class="min-h-screen bg-[#07070A] text-white antialiased selection:bg-cyan-300/20 selection:text-cyan-100">
     <div class="min-h-screen lg:flex">
+      <!-- Desktop sidebar -->
       <aside class="hidden border-r border-white/10 bg-[#07070A]/92 px-5 py-6 shadow-[18px_0_70px_-58px_rgba(34,211,238,0.85)] backdrop-blur-xl lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col">
         <BrandLogo markClass="h-10 w-10" textClass="text-lg" />
 
-        <nav class="mt-10 grid gap-2 text-sm" aria-label="Navegación">
+        <nav class="mt-10 grid gap-2 text-sm" aria-label="Navegacion">
           {navItems.map((item) => (
             <a
               href={item.href}
@@ -98,6 +99,10 @@ const isActive = (href: string) =>
               <a href="/upgrade" data-track="upgrade_prompt" data-track-label="header_premium" class="hidden transition hover:text-cyan-100 sm:inline">
                 Premium
               </a>
+              <button type="button" id="mobile-menu-btn" class="lg:hidden grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.03] text-white/60 transition hover:border-white/25 hover:bg-white/10" aria-label="Abrir menu">
+                <svg id="menu-icon-open" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                <svg id="menu-icon-close" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
               <form method="POST" action="/logout">
                 <button class="btn-secondary px-4 py-2 text-xs">
                   Salir
@@ -105,27 +110,92 @@ const isActive = (href: string) =>
               </form>
             </div>
           </div>
-
-          <nav class="flex gap-2 overflow-x-auto border-t border-white/10 px-5 py-3 text-sm md:px-8 lg:hidden" aria-label="Navegación móvil">
-            {navItems.map((item) => (
-              <a
-                href={item.href}
-                class={`shrink-0 rounded-xl border px-3 py-2 transition ${
-                  isActive(item.href)
-                    ? "border-cyan-300/30 bg-cyan-300/10 text-cyan-100"
-                    : "border-white/10 bg-white/[0.02] text-white/55"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
         </header>
+
+        <!-- Mobile menu overlay -->
+        <div id="mobile-menu" class="fixed inset-0 z-50 hidden lg:hidden" role="dialog" aria-modal="true">
+          <div id="mobile-menu-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+          <div id="mobile-menu-panel" class="absolute right-0 top-0 h-full w-72 max-w-full border-l border-white/10 bg-[#0A0A0F] shadow-2xl transition-transform duration-300 translate-x-full">
+            <div class="flex h-16 items-center justify-between border-b border-white/10 px-5">
+              <BrandLogo markClass="h-7 w-7" textClass="text-sm" />
+              <button type="button" id="mobile-menu-close" class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.03] text-white/60" aria-label="Cerrar menu">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <nav class="p-4 grid gap-2" aria-label="Navegacion movil">
+              {navItems.map((item) => (
+                <a
+                  href={item.href}
+                  class={`rounded-xl border px-4 py-3 text-sm transition ${
+                    isActive(item.href)
+                      ? "border-cyan-300/30 bg-cyan-300/10 text-cyan-100"
+                      : "border-transparent text-white/55 hover:border-white/10 hover:bg-white/[0.04]"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            {user && !user.isPremium && !user.role?.match(/^(admin|owner)$/) && (
+              <div class="px-4">
+                <a href="/upgrade" class="block rounded-xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/10 to-emerald-300/5 px-4 py-3 text-sm font-medium text-cyan-100 text-center">
+                  Actualizar a Premium → 29€/mes
+                </a>
+              </div>
+            )}
+            <div class="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-[#0A0A0F] p-4">
+              <div class="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                <p class="text-xs text-white/40">{user?.name ?? "Usuario"}</p>
+                <p class="mt-1 truncate text-sm text-white/60">{user?.email ?? ""}</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <main class="flex-1 px-5 py-6 md:px-8 md:py-8 lg:px-10">
           <slot />
         </main>
       </div>
     </div>
+
+    <script>
+      (() => {
+        const menuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+        const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
+        const mobileMenuClose = document.getElementById("mobile-menu-close");
+
+        const openMenu = () => {
+          mobileMenu?.classList.remove("hidden");
+          mobileMenu?.classList.add("flex");
+          requestAnimationFrame(() => {
+            mobileMenuPanel?.classList.remove("translate-x-full");
+            mobileMenuPanel?.classList.add("translate-x-0");
+          });
+          document.body.style.overflow = "hidden";
+        };
+
+        const closeMenu = () => {
+          mobileMenuPanel?.classList.remove("translate-x-0");
+          mobileMenuPanel?.classList.add("translate-x-full");
+          setTimeout(() => {
+            mobileMenu?.classList.add("hidden");
+            mobileMenu?.classList.remove("flex");
+            document.body.style.overflow = "";
+          }, 300);
+        };
+
+        menuBtn?.addEventListener("click", openMenu);
+        mobileMenuClose?.addEventListener("click", closeMenu);
+        mobileMenuBackdrop?.addEventListener("click", closeMenu);
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && !mobileMenu?.classList.contains("hidden")) {
+            closeMenu();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

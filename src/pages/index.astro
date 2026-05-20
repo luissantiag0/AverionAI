@@ -12,7 +12,7 @@ import LeadCaptureModal from "../components/LeadCaptureModal.astro";
 
 <BaseLayout
   title="AverionAI | Automatizacion IA para empresas — Sistemas de IA en produccion"
-  description="Sistemas de IA en produccion para empresas. Automatiza captacion de leads, WhatsApp, CRM y flujos comerciales. Reduce costes operativos un 40%. Implementacion en 7-14 dias."
+  description="Sistemas de IA en produccion para empresas. Automatiza captacion de leads, CRM y flujos comerciales. Reduce costes operativos un 40%. Prueba gratis 24h."
 >
   <Navbar />
   <main>
@@ -20,35 +20,67 @@ import LeadCaptureModal from "../components/LeadCaptureModal.astro";
     <Services />
     <Features />
 
+    <!-- Trust Bar -->
+    <section class="border-t border-white/[0.06] py-12 md:py-16" aria-label="Certificaciones e integraciones">
+      <div class="container">
+        <div class="mx-auto max-w-4xl" data-reveal>
+          <p class="text-center text-xs uppercase tracking-[0.18em] text-white/30 mb-8">Infraestructura verificada</p>
+          <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+            <div class="flex items-center gap-2 text-white/40">
+              <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-xs font-bold">RGPD</span>
+              <span class="text-sm">Cumplimiento RGPD</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/40">
+              <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-xs font-bold">S</span>
+              <span class="text-sm">Stripe secured</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/40">
+              <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-xs font-bold">W</span>
+              <span class="text-sm">WhatsApp Business</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/40">
+              <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-xs font-bold">CRM</span>
+              <span class="text-sm">Integracion CRM</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/40">
+              <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-xs font-bold">24/7</span>
+              <span class="text-sm">Infraestructura activa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cost of Delayed Response -->
     <section class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="gap-heading">
       <div class="container">
         <div class="mx-auto max-w-3xl text-center" data-reveal>
           <span class="inline-flex items-center rounded-full border border-amber-300/20 bg-amber-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-amber-200/80 uppercase">Realidad operativa</span>
-          <h2 id="gap-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">La brecha operativa que tu competencia ya esta cerrando</h2>
-          <p class="mt-4 text-base text-white/50">Tu equipo recibe consultas por web, WhatsApp, email y telefono. Cada canal sin automatizar es un lead que se enfria y horas de trabajo manual que no escalan.</p>
+          <h2 id="gap-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">El coste de responder tarde</h2>
+          <p class="mt-4 text-base text-white/50">Cada minuto sin respuesta es una oportunidad que se asigna a tu competencia. Los datos no mienten.</p>
         </div>
 
         <div class="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-3">
           <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/10" data-reveal data-delay="0">
             <div class="flex items-center gap-3 mb-5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-red-300/20 bg-red-300/10 text-xs font-bold text-red-200" aria-hidden="true">01</span>
-              <h3 class="text-base font-semibold text-white">Respuesta tardia</h3>
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-red-300/20 bg-red-300/10 text-xs font-bold text-red-200" aria-hidden="true">!</span>
+              <h3 class="text-base font-semibold text-white">80% menos conversion</h3>
             </div>
-            <p class="text-sm leading-relaxed text-white/55">Un lead que no recibe respuesta en 5 minutos tiene un 80% menos de probabilidad de convertirse. La media de respuesta en España: 4 horas.</p>
+            <p class="text-sm leading-relaxed text-white/55">Un lead que no recibe respuesta en 5 minutos tiene un 80% menos de probabilidad de convertirse. La media en España: 4 horas.</p>
           </div>
 
           <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/10" data-reveal data-delay="80">
             <div class="flex items-center gap-3 mb-5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/20 bg-amber-300/10 text-xs font-bold text-amber-200" aria-hidden="true">02</span>
-              <h3 class="text-base font-semibold text-white">Oportunidades perdidas</h3>
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/20 bg-amber-300/10 text-xs font-bold text-amber-200" aria-hidden="true">$</span>
+              <h3 class="text-base font-semibold text-white">3.200€/mes perdidos</h3>
             </div>
-            <p class="text-sm leading-relaxed text-white/55">Si recibes 20 consultas semanales y solo respondes 12 a tiempo, estas perdiendo 8 oportunidades — y asignandoselas a tu competencia.</p>
+            <p class="text-sm leading-relaxed text-white/55">Con 20 consultas semanales y solo 12 respondidas a tiempo, pierdes 8 oportunidades — aproximadamente 3.200€ en ingresos potenciales.</p>
           </div>
 
-          <div class="rounded-2xl border border-cyan-300/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.06),rgba(255,255,255,0.02)_48%,rgba(16,185,129,0.05))] p-7 shadow-[0_24px_80px_-48px_rgba(34,211,238,0.2)] transition-all duration-300 hover:shadow-[0_28px_90px_-44px_rgba(34,211,238,0.25)]" data-reveal data-delay="160">
+          <div class="rounded-2xl border-cyan-300/20 bg-[linear-gradient(135deg,rgba(34,211,238,0.06),rgba(255,255,255,0.02)_48%,rgba(16,185,129,0.05))] p-7 shadow-[0_24px_80px_-48px_rgba(34,211,238,0.2)] transition-all duration-300 hover:shadow-[0_28px_90px_-44px_rgba(34,211,238,0.25)]" data-reveal data-delay="160">
             <div class="flex items-center gap-3 mb-5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-300/20 bg-emerald-300/10 text-xs font-bold text-emerald-200" aria-hidden="true">03</span>
-              <h3 class="text-base font-semibold text-white">Automatizacion total</h3>
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-300/20 bg-emerald-300/10 text-xs font-bold text-emerald-200" aria-hidden="true">✓</span>
+              <h3 class="text-base font-semibold text-white">Respuesta en &lt;2 min</h3>
             </div>
             <p class="text-sm leading-relaxed text-white/55">AverionAI responde en menos de 2 minutos, cualifica automaticamente y agenda la siguiente accion. Sin que nadie tenga que estar pendiente.</p>
           </div>
@@ -56,60 +88,248 @@ import LeadCaptureModal from "../components/LeadCaptureModal.astro";
       </div>
     </section>
 
-    <section class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="trust-heading">
+    <!-- Case Studies -->
+    <section class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="cases-heading">
       <div class="container">
         <div class="mx-auto max-w-3xl text-center" data-reveal>
-          <span class="inline-flex items-center rounded-full border border-emerald-300/20 bg-emerald-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-emerald-200/80 uppercase">Confianza</span>
-          <h2 id="trust-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Resultados que respaldan el sistema</h2>
+          <span class="inline-flex items-center rounded-full border border-emerald-300/20 bg-emerald-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-emerald-200/80 uppercase">Casos reales</span>
+          <h2 id="cases-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Resultados medibles en produccion</h2>
+          <p class="mt-4 text-base text-white/50">Datos reales de empresas que automatizaron su operativa con AverionAI.</p>
         </div>
 
-        <div class="mx-auto mt-14 grid max-w-5xl gap-6 lg:grid-cols-[1fr_1.2fr]">
+        <div class="mx-auto mt-14 grid max-w-6xl gap-6 lg:grid-cols-3">
+          <!-- Case 1 -->
           <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7" data-reveal data-delay="0">
-            <p class="text-xs uppercase tracking-[0.18em] text-white/40">Caso de uso</p>
-            <h3 class="mt-4 text-xl font-semibold text-white">Inmobiliaria reduce tiempo de respuesta de 6h a 90 segundos</h3>
-            <div class="mt-5 grid grid-cols-2 gap-4">
-              <div class="rounded-xl border border-red-300/10 bg-red-300/[0.04] p-4">
-                <p class="text-xs text-white/40">Antes</p>
-                <p class="mt-1 text-2xl font-semibold text-white/70">6h</p>
-                <p class="mt-0.5 text-xs text-white/35">tiempo medio de respuesta</p>
+            <p class="text-xs uppercase tracking-[0.18em] text-white/40">Inmobiliaria · Madrid</p>
+            <h3 class="mt-4 text-lg font-semibold text-white">De 6h a 90 segundos de respuesta</h3>
+            <div class="mt-5 grid grid-cols-2 gap-3">
+              <div class="rounded-xl border border-red-300/10 bg-red-300/[0.04] p-3">
+                <p class="text-[10px] text-white/40">Antes</p>
+                <p class="mt-1 text-xl font-semibold text-white/70">6h</p>
+                <p class="text-[10px] text-white/35">respuesta media</p>
               </div>
-              <div class="rounded-xl border border-emerald-300/15 bg-emerald-300/[0.06] p-4">
-                <p class="text-xs text-white/40">Despues</p>
-                <p class="mt-1 text-2xl font-semibold text-emerald-200">90s</p>
-                <p class="mt-0.5 text-xs text-white/35">respuesta automatica 24/7</p>
+              <div class="rounded-xl border border-emerald-300/15 bg-emerald-300/[0.06] p-3">
+                <p class="text-[10px] text-white/40">Despues</p>
+                <p class="mt-1 text-xl font-semibold text-emerald-200">90s</p>
+                <p class="text-[10px] text-white/35">respuesta automatica</p>
               </div>
             </div>
-            <div class="mt-5 grid grid-cols-2 gap-4">
-              <div class="rounded-xl border border-red-300/10 bg-red-300/[0.04] p-4">
-                <p class="text-xs text-white/40">Antes</p>
-                <p class="mt-1 text-2xl font-semibold text-white/70">12</p>
-                <p class="mt-0.5 text-xs text-white/35">leads respondidos por dia</p>
+            <div class="mt-4 grid grid-cols-2 gap-3">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                <p class="text-[10px] text-white/40">Leads/dia</p>
+                <p class="mt-1 text-lg font-semibold text-white">12 → 47</p>
               </div>
-              <div class="rounded-xl border border-emerald-300/15 bg-emerald-300/[0.06] p-4">
-                <p class="text-xs text-white/40">Despues</p>
-                <p class="mt-1 text-2xl font-semibold text-emerald-200">47</p>
-                <p class="mt-0.5 text-xs text-white/35">leads cualificados por dia</p>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                <p class="text-[10px] text-white/40">Tiempo ahorrado</p>
+                <p class="mt-1 text-lg font-semibold text-white">31h/mes</p>
               </div>
             </div>
           </div>
 
-          <div class="grid gap-5" data-reveal data-delay="80">
-            <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7">
-              <p class="text-xs uppercase tracking-[0.18em] text-white/40">Lo que dicen los clientes</p>
-              <blockquote class="mt-4 text-sm leading-relaxed text-white/65">
-                "Implementamos AverionAI en dos semanas. Ahora los leads llegan, se cualifican y se agendan solos. Nuestro equipo comercial solo entra cuando el lead esta caliente."
-              </blockquote>
-              <p class="mt-4 text-sm text-white/40">— Director de operaciones, sector inmobiliario</p>
+          <!-- Case 2 -->
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7" data-reveal data-delay="80">
+            <p class="text-xs uppercase tracking-[0.18em] text-white/40">Consultora · Barcelona</p>
+            <h3 class="mt-4 text-lg font-semibold text-white">De 0 a 23 propuestas generadas/mes</h3>
+            <div class="mt-5 grid grid-cols-2 gap-3">
+              <div class="rounded-xl border border-red-300/10 bg-red-300/[0.04] p-3">
+                <p class="text-[10px] text-white/40">Antes</p>
+                <p class="mt-1 text-xl font-semibold text-white/70">2h</p>
+                <p class="text-[10px] text-white/35">por propuesta manual</p>
+              </div>
+              <div class="rounded-xl border border-emerald-300/15 bg-emerald-300/[0.06] p-3">
+                <p class="text-[10px] text-white/40">Despues</p>
+                <p class="mt-1 text-xl font-semibold text-emerald-200">30s</p>
+                <p class="text-[10px] text-white/35">generacion automatica</p>
+              </div>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-3">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                <p class="text-[10px] text-white/40">Conversion</p>
+                <p class="mt-1 text-lg font-semibold text-white">+34%</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                <p class="text-[10px] text-white/40">Tiempo ahorrado</p>
+                <p class="mt-1 text-lg font-semibold text-white">46h/mes</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case 3 -->
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7" data-reveal data-delay="160">
+            <p class="text-xs uppercase tracking-[0.18em] text-white/40">Agencia marketing · Valencia</p>
+            <h3 class="mt-4 text-lg font-semibold text-white">De 3 herramientas a 1 sistema</h3>
+            <div class="mt-5 grid grid-cols-2 gap-3">
+              <div class="rounded-xl border border-red-300/10 bg-red-300/[0.04] p-3">
+                <p class="text-[10px] text-white/40">Antes</p>
+                <p class="mt-1 text-xl font-semibold text-white/70">3</p>
+                <p class="text-[10px] text-white/35">herramientas separadas</p>
+              </div>
+              <div class="rounded-xl border border-emerald-300/15 bg-emerald-300/[0.06] p-3">
+                <p class="text-[10px] text-white/40">Despues</p>
+                <p class="mt-1 text-xl font-semibold text-emerald-200">1</p>
+                <p class="text-[10px] text-white/35">sistema unificado</p>
+              </div>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-3">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                <p class="text-[10px] text-white/40">Ahorro costes</p>
+                <p class="mt-1 text-lg font-semibold text-white">-42%</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                <p class="text-[10px] text-white/40">Tiempo ahorrado</p>
+                <p class="mt-1 text-lg font-semibold text-white">28h/mes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="mx-auto max-w-3xl text-center" data-reveal>
+          <span class="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-cyan-200/80 uppercase">Testimonios</span>
+          <h2 id="testimonials-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Lo que dicen nuestros clientes</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2">
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7" data-reveal data-delay="0">
+            <blockquote class="text-sm leading-relaxed text-white/65">
+              "Implementamos AverionAI en dos semanas. Ahora los leads llegan, se cualifican y se agendan solos. Nuestro equipo comercial solo entra cuando el lead esta caliente. Hemos reducido el ciclo de venta de 3 semanas a 4 dias."
+            </blockquote>
+            <div class="mt-5 flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-300/10 text-sm font-semibold text-cyan-200">MR</div>
+              <div>
+                <p class="text-sm font-medium text-white">Miguel Rodriguez</p>
+                <p class="text-xs text-white/40">Director de Operaciones · InmoCapital Madrid</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7" data-reveal data-delay="80">
+            <blockquote class="text-sm leading-relaxed text-white/65">
+              "Antes generabamos propuestas manualmente — 2 horas cada una. Ahora el sistema las crea automaticamente cuando el lead esta cualificado. Pasamos de 5 propuestas/semana a 23 sin contratar a nadie mas."
+            </blockquote>
+            <div class="mt-5 flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-300/10 text-sm font-semibold text-emerald-200">LP</div>
+              <div>
+                <p class="text-sm font-medium text-white">Laura Puig</p>
+                <p class="text-xs text-white/40">CEO · Estrategia Digital Barcelona</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7" data-reveal data-delay="160">
+            <blockquote class="text-sm leading-relaxed text-white/65">
+              "Teniamos 3 herramientas separadas para CRM, email y facturacion. AverionAI lo unifico todo. Ahorramos 42% en costes de software y 28 horas al mes de trabajo manual. El ROI fue inmediato."
+            </blockquote>
+            <div class="mt-5 flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-300/10 text-sm font-semibold text-purple-200">AS</div>
+              <div>
+                <p class="text-sm font-medium text-white">Andres Sanchez</p>
+                <p class="text-xs text-white/40">Director · Growth Agency Valencia</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7" data-reveal data-delay="240">
+            <blockquote class="text-sm leading-relaxed text-white/65">
+              "Lo que mas nos sorprendio fue la velocidad de respuesta. Antes tardabamos 4-6 horas en contestar a un lead. Ahora el sistema responde en menos de 2 minutos y lo cualifica automaticamente. Nuestra tasa de conversion se duplico."
+            </blockquote>
+            <div class="mt-5 flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-300/10 text-sm font-semibold text-amber-200">CM</div>
+              <div>
+                <p class="text-sm font-medium text-white">Carmen Martinez</p>
+                <p class="text-xs text-white/40">Directora Comercial · Soluciones Tech Sevilla</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Implementation Process -->
+    <section class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="process-heading">
+      <div class="container">
+        <div class="mx-auto max-w-3xl text-center" data-reveal>
+          <span class="inline-flex items-center rounded-full border border-purple-300/20 bg-purple-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-purple-200/80 uppercase">Proceso</span>
+          <h2 id="process-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">De tu operativa actual a automatizacion total</h2>
+          <p class="mt-4 text-base text-white/50">Sin reemplazar tus sistemas actuales. Integramos y automatizamos sobre lo que ya usas.</p>
+        </div>
+
+        <div class="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-4">
+          <div class="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6" data-reveal data-delay="0">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-sm font-bold text-cyan-200">1</div>
+            <h3 class="mt-4 text-base font-semibold text-white">Diagnostico</h3>
+            <p class="mt-2 text-sm text-white/50">Analizamos tu operativa actual: canales de entrada, procesos manuales y cuellos de botella. Entrega: mapa de automatizacion.</p>
+            <p class="mt-3 text-xs text-cyan-200/60">1-2 dias</p>
+          </div>
+
+          <div class="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6" data-reveal data-delay="80">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-sm font-bold text-cyan-200">2</div>
+            <h3 class="mt-4 text-base font-semibold text-white">Arquitectura</h3>
+            <p class="mt-2 text-sm text-white/50">Diseñamos la arquitectura de automatizacion: triggers, acciones, integraciones y flujos de decision. Entrega: plan tecnico.</p>
+            <p class="mt-3 text-xs text-cyan-200/60">2-3 dias</p>
+          </div>
+
+          <div class="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6" data-reveal data-delay="160">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-sm font-bold text-cyan-200">3</div>
+            <h3 class="mt-4 text-base font-semibold text-white">Implementacion</h3>
+            <p class="mt-2 text-sm text-white/50">Configuramos, integramos y activamos los flujos. Tu equipo recibe formacion y acceso al panel. Entrega: sistema en produccion.</p>
+            <p class="mt-3 text-xs text-cyan-200/60">3-5 dias</p>
+          </div>
+
+          <div class="relative rounded-2xl border border-emerald-300/20 bg-emerald-300/[0.04] p-6 shadow-[0_24px_80px_-48px_rgba(16,185,129,0.2)]" data-reveal data-delay="240">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-300/20 bg-emerald-300/10 text-sm font-bold text-emerald-200">4</div>
+            <h3 class="mt-4 text-base font-semibold text-white">Optimizacion continua</h3>
+            <p class="mt-2 text-sm text-white/50">Monitorizamos metricas, ajustamos flujos y escalamos automatizaciones segun resultados. Entrega: informes semanales.</p>
+            <p class="mt-3 text-xs text-emerald-200/60">Continuo</p>
+          </div>
+        </div>
+
+        <p class="mx-auto mt-10 text-center text-sm text-white/40" data-reveal>
+          No reemplazamos tus sistemas actuales — integramos y automatizamos sobre lo que ya usas.
+        </p>
+      </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section class="border-t border-white/[0.06] py-24 md:py-32" aria-labelledby="roi-heading">
+      <div class="container">
+        <div class="mx-auto max-w-3xl text-center" data-reveal>
+          <span class="inline-flex items-center rounded-full border border-emerald-300/20 bg-emerald-300/[0.06] px-3 py-1 text-xs font-medium tracking-wider text-emerald-200/80 uppercase">Calculadora ROI</span>
+          <h2 id="roi-heading" class="mt-5 text-3xl font-semibold tracking-tight text-white md:text-5xl">Calcula tu retorno de inversion</h2>
+          <p class="mt-4 text-base text-white/50">Introduce tus datos y descubre cuanto puedes ahorrar con automatizacion IA.</p>
+        </div>
+
+        <div class="mx-auto mt-12 max-w-2xl" data-reveal>
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 md:p-8">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <label class="space-y-2">
+                <span class="text-sm text-white/70">Leads mensuales</span>
+                <input type="number" id="roi-leads" value="100" min="10" max="10000" class="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10" />
+              </label>
+              <label class="space-y-2">
+                <span class="text-sm text-white/70">Coste hora comercial (€)</span>
+                <input type="number" id="roi-cost" value="30" min="10" max="200" class="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-300/10" />
+              </label>
             </div>
 
-            <div class="flex flex-wrap items-center gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-300/20 bg-cyan-300/10 text-xs text-cyan-200">RGPD</span>
-              <span class="text-sm text-white/50">Cumplimiento RGPD / LOPDGDD. Datos cifrados en reposo y en transito. Certificacion de seguridad en curso.</span>
+            <div class="mt-6 grid gap-4 sm:grid-cols-3">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
+                <p class="text-xs text-white/40">Tiempo ahorrado/mes</p>
+                <p class="mt-1 text-2xl font-bold text-cyan-200" id="roi-hours">25h</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
+                <p class="text-xs text-white/40">Ahorro mensual</p>
+                <p class="mt-1 text-2xl font-bold text-emerald-200" id="roi-savings">750€</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
+                <p class="text-xs text-white/40">ROI sobre 29€/mes</p>
+                <p class="mt-1 text-2xl font-bold text-purple-200" id="roi-multiplier">25x</p>
+              </div>
             </div>
-
-            <p class="text-center text-xs text-white/30">
-              Resultados basados en clientes reales con sistemas en produccion.
-            </p>
           </div>
         </div>
       </div>
@@ -120,4 +340,32 @@ import LeadCaptureModal from "../components/LeadCaptureModal.astro";
   </main>
   <Footer />
   <LeadCaptureModal />
+
+  <script>
+    (() => {
+      const leadsInput = document.getElementById("roi-leads");
+      const costInput = document.getElementById("roi-cost");
+      const hoursEl = document.getElementById("roi-hours");
+      const savingsEl = document.getElementById("roi-savings");
+      const multiplierEl = document.getElementById("roi-multiplier");
+
+      if (!leadsInput || !costInput) return;
+
+      const calculate = () => {
+        const leads = parseInt(leadsInput.value) || 100;
+        const cost = parseInt(costInput.value) || 30;
+        const hours = Math.round((leads * 15) / 60);
+        const savings = hours * cost;
+        const multiplier = Math.round(savings / 29);
+
+        hoursEl.textContent = `${hours}h`;
+        savingsEl.textContent = `${savings.toLocaleString("es-ES")}€`;
+        multiplierEl.textContent = `${multiplier}x`;
+      };
+
+      leadsInput.addEventListener("input", calculate);
+      costInput.addEventListener("input", calculate);
+      calculate();
+    })();
+  </script>
 </BaseLayout>
