@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import LeadCaptureModal from "../../components/LeadCaptureModal.astro";
+
+export const prerender = false;
+---
+
+<BaseLayout
+  title="IA para Empresas en España — Sistemas en Producción | AverionAI"
+  description="Implementa IA operativa en tu empresa en España. Sistemas de automatizacion en produccion que reemplazan tareas manuales. Prueba gratis 24h."
+  canonicalUrl="https://averionai.es/ia-para-empresas"
+>
+  <Navbar />
+  <main class="min-h-screen bg-[#07070A]">
+    <section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.1),transparent_60%)]"></div>
+      <div class="container">
+        <div class="mx-auto max-w-3xl" data-reveal>
+          <span class="badge bg-cyan-300/10 text-cyan-100">IA Operativa</span>
+          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">IA para empresas en España</h1>
+          <p class="mt-5 text-lg text-white/60">Sistemas de inteligencia artificial en produccion que reemplazan operaciones manuales. No demos, no promesas — resultados medibles desde el dia uno.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="/register" class="btn-primary px-8 py-3 text-sm">Probar gratis 24h</a>
+            <button type="button" data-open-lead-modal class="btn-secondary px-8 py-3 text-sm">Solicitar demo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-16 md:py-20">
+      <div class="mx-auto max-w-5xl">
+        <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4" data-reveal>
+          <div class="premium-panel p-5 text-center">
+            <p class="text-2xl font-bold text-cyan-200">CRM</p>
+            <p class="mt-1 text-xs text-white/50">Gestion inteligente de leads</p>
+          </div>
+          <div class="premium-panel p-5 text-center">
+            <p class="text-2xl font-bold text-emerald-200">Automatizacion</p>
+            <p class="mt-1 text-xs text-white/50">Flujos autonomos de ventas</p>
+          </div>
+          <div class="premium-panel p-5 text-center">
+            <p class="text-2xl font-bold text-purple-200">Documentos</p>
+            <p class="mt-1 text-xs text-white/50">Propuestas y facturas auto</p>
+          </div>
+          <div class="premium-panel p-5 text-center">
+            <p class="text-2xl font-bold text-amber-200">SEO</p>
+            <p class="mt-1 text-xs text-white/50">Contenido generado por IA</p>
+          </div>
+        </div>
+
+        <div class="mt-16 space-y-8">
+          <div data-reveal>
+            <h2 class="text-2xl font-semibold text-white">¿Por que IA operativa y no solo "herramientas IA"?</h2>
+            <p class="mt-4 text-base leading-relaxed text-white/60">La mayoria de "soluciones IA" son chatbots bonitos que no se integran con tu operativa real. AverionAI es diferente: es un sistema que ejecuta tareas comerciales de principio a fin — desde que un lead entra hasta que se cierra la venta — sin que tengas que intervenir manualmente en cada paso.</p>
+          </div>
+
+          <div data-reveal>
+            <h2 class="text-2xl font-semibold text-white">Casos de uso reales</h2>
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-white">Inmobiliarias</p>
+                <p class="mt-2 text-xs text-white/60">Clasificacion automatica de interesados, seguimiento por zona y presupuesto, propuestas generadas automaticamente.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-white">Consultoras</p>
+                <p class="mt-2 text-xs text-white/60">Cualificacion de proyectos, generacion de propuestas personalizadas, seguimiento de oportunidades.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-white">Agencias de marketing</p>
+                <p class="mt-2 text-xs text-white/60">Gestion de leads entrantes, reporting automatico, facturacion y seguimiento de pagos.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-white">SaaS y tecnologia</p>
+                <p class="mt-2 text-xs text-white/60">Trial management, activacion automatica, seguimiento de conversion y expansion.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6 text-center" data-reveal>
+            <h2 class="text-xl font-semibold text-white">Empieza a automatizar hoy</h2>
+            <p class="mt-3 text-sm text-white/60">Prueba gratuita de 24 horas. Sin tarjeta, sin compromiso.</p>
+            <a href="/register" class="btn-primary mt-6 px-8 py-3 text-sm inline-block">Crear cuenta gratis</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script type="application/ld+json" is:inline>
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "IA Operativa para Empresas",
+        "provider": { "@type": "Organization", "name": "AverionAI", "url": "https://averionai.es" },
+        "serviceType": "Automatizacion con IA",
+        "areaServed": "ES",
+        "description": "Sistemas de IA en produccion para automatizar operaciones comerciales en empresas españolas"
+      })}
+    </script>
+  </main>
+  <Footer />
+  <LeadCaptureModal />
+</BaseLayout>

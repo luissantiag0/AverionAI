@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import LeadCaptureModal from "../../components/LeadCaptureModal.astro";
+
+export const prerender = false;
+---
+
+<BaseLayout
+  title="CRM con IA para Empresas en España | AverionAI 2026"
+  description="CRM inteligente con IA para empresas españolas. Clasificacion automatica de leads, pipeline automatizado, seguimiento inteligente. Prueba gratis 24h."
+  canonicalUrl="https://averionai.es/crm-ia-empresas"
+>
+  <Navbar />
+  <main class="min-h-screen bg-[#07070A]">
+    <section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.1),transparent_60%)]"></div>
+      <div class="container">
+        <div class="mx-auto max-w-3xl" data-reveal>
+          <span class="badge bg-cyan-300/10 text-cyan-100">CRM Inteligente</span>
+          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">CRM con IA para empresas en España</h1>
+          <p class="mt-5 text-lg text-white/60">El CRM que piensa por ti. Clasifica leads, mueve el pipeline y genera seguimientos automaticamente. Sin arrastrar tarjetas manualmente.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="/register" class="btn-primary px-8 py-3 text-sm">Probar gratis 24h</a>
+            <a href="/pricing" class="btn-secondary px-8 py-3 text-sm">Ver precios</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-16 md:py-20">
+      <div class="mx-auto max-w-5xl">
+        <div class="mt-8 grid gap-6 md:grid-cols-2" data-reveal>
+          <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
+            <h3 class="text-lg font-semibold text-white/40">CRM Tradicional</h3>
+            <ul class="mt-4 space-y-3 text-sm text-white/50">
+              <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> Registro manual de contactos</li>
+              <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> Pipeline que hay que actualizar a mano</li>
+              <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> Sin clasificacion inteligente</li>
+              <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> Seguimientos que se olvidan</li>
+              <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> Informes que hay que construir</li>
+            </ul>
+          </div>
+          <div class="rounded-xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6">
+            <h3 class="text-lg font-semibold text-cyan-200">CRM con IA (AverionAI)</h3>
+            <ul class="mt-4 space-y-3 text-sm text-white/70">
+              <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Captacion y registro automatico</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Pipeline que se mueve solo</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Clasificacion por intencion de compra</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Seguimientos automaticos inteligentes</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Informes generados automaticamente</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-16 space-y-8">
+          <div data-reveal>
+            <h2 class="text-2xl font-semibold text-white">Funcionalidades del CRM con IA</h2>
+            <div class="mt-6 grid gap-4 sm:grid-cols-3">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-cyan-200">Clasificacion automatica</p>
+                <p class="mt-2 text-xs text-white/60">Cada lead se clasifica por tamaño de empresa, sector y probabilidad de cierre automaticamente.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-cyan-200">Pipeline inteligente</p>
+                <p class="mt-2 text-xs text-white/60">Los leads avanzan en el pipeline segun su comportamiento. Sin arrastrar tarjetas manualmente.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-cyan-200">Seguimiento automatico</p>
+                <p class="mt-2 text-xs text-white/60">Emails, recordatorios y tareas se generan automaticamente segun la etapa del lead.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6" data-reveal>
+            <h2 class="text-xl font-semibold text-white">Prueba el CRM con IA gratis</h2>
+            <p class="mt-3 text-sm text-white/60">24 horas de acceso premium. Sin tarjeta, sin compromiso.</p>
+            <a href="/register" class="btn-primary mt-6 px-6 py-2.5 text-sm inline-block">Empezar gratis</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script type="application/ld+json" is:inline>
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AverionAI CRM con IA",
+        "description": "CRM inteligente con automatizacion IA para empresas españolas",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Plan gratuito disponible" }
+      })}
+    </script>
+  </main>
+  <Footer />
+  <LeadCaptureModal />
+</BaseLayout>

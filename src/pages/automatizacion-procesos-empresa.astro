@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import LeadCaptureModal from "../../components/LeadCaptureModal.astro";
+
+export const prerender = false;
+---
+
+<BaseLayout
+  title="Automatización de Procesos Empresariales con IA | AverionAI"
+  description="Automatiza procesos empresariales con IA: captacion, cualificacion, seguimiento y cierre. Reduce costes operativos 40%. Prueba gratis 24h."
+  canonicalUrl="https://averionai.es/automatizacion-procesos-empresa"
+>
+  <Navbar />
+  <main class="min-h-screen bg-[#07070A]">
+    <section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.1),transparent_60%)]"></div>
+      <div class="container">
+        <div class="mx-auto max-w-3xl" data-reveal>
+          <span class="badge bg-cyan-300/10 text-cyan-100">Automatizacion de Procesos</span>
+          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">Automatizacion de procesos empresariales con IA</h1>
+          <p class="mt-5 text-lg text-white/60">De la captacion de leads al cierre, sin intervencion manual. Sistemas de IA operativa que ejecutan tu proceso comercial completo.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="/register" class="btn-primary px-8 py-3 text-sm">Probar gratis 24h</a>
+            <a href="/automatizacion-ventas-roi-empresas" class="btn-secondary px-8 py-3 text-sm">Ver ROI</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-16 md:py-20">
+      <div class="mx-auto max-w-5xl">
+        <div class="mt-8" data-reveal>
+          <h2 class="text-2xl font-semibold text-white">Procesos que puedes automatizar</h2>
+          <div class="mt-6 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+              <p class="text-sm font-semibold text-cyan-200">Captacion de leads</p>
+              <p class="mt-2 text-xs text-white/60">Formularios inteligentes, landing pages optimizadas, integracion con redes sociales y Google Ads.</p>
+            </div>
+            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+              <p class="text-sm font-semibold text-cyan-200">Cualificacion automatica</p>
+              <p class="mt-2 text-xs text-white/60">Clasificacion por tamaño, sector, presupuesto e intencion. Solo leads calientes llegan a tu equipo.</p>
+            </div>
+            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+              <p class="text-sm font-semibold text-cyan-200">Seguimiento inteligente</p>
+              <p class="mt-2 text-xs text-white/60">Emails, recordatorios y tareas generados automaticamente segun comportamiento del lead.</p>
+            </div>
+            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+              <p class="text-sm font-semibold text-cyan-200">Propuestas automaticas</p>
+              <p class="mt-2 text-xs text-white/60">Generacion de propuestas comerciales personalizadas cuando el lead esta listo para comprar.</p>
+            </div>
+            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+              <p class="text-sm font-semibold text-cyan-200">Facturacion automatica</p>
+              <p class="mt-2 text-xs text-white/60">Facturas electronicas, seguimiento de pagos y recordatorios automaticos de cobro.</p>
+            </div>
+            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+              <p class="text-sm font-semibold text-cyan-200">Reporting automatico</p>
+              <p class="mt-2 text-xs text-white/60">Informes de rendimiento, conversion y ROI generados automaticamente cada semana.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-16 rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6" data-reveal>
+          <h2 class="text-xl font-semibold text-white">Automatiza tus procesos hoy</h2>
+          <p class="mt-3 text-sm text-white/60">Prueba gratuita de 24 horas. Sin tarjeta, sin compromiso.</p>
+          <a href="/register" class="btn-primary mt-6 px-6 py-2.5 text-sm inline-block">Empezar gratis</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <LeadCaptureModal />
+</BaseLayout>
