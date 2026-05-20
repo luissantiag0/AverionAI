@@ -574,7 +574,7 @@ export const registerUser = async (
   const passwordHash = await hash(password, 12);
 
   const now = new Date();
-  const trialEndsAt = new Date(now.getTime() + 30 * 60 * 1000);
+  const trialEndsAt = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
   const user = await prisma.user.create({
     data: {
@@ -590,7 +590,7 @@ export const registerUser = async (
 
   const { token, startedAt } = await createSession(user);
 
-  logger.audit("user.register", user.id, { name, email, trialMinutes: 30 });
+  logger.audit("user.register", user.id, { name, email, trialHours: 24 });
   sendWelcomeEmail(email, name).catch(() => {});
 
   return {

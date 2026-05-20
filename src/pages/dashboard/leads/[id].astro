@@ -88,6 +88,17 @@ if (Astro.request.method === "POST") {
     <div class="mt-4 rounded-xl border border-emerald-300/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">{actionSuccess}</div>
   )}
 
+  {!user?.isPremium && (
+    <div class="mt-4 rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.04] px-5 py-3">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <p class="text-sm text-white/70">
+          <span class="text-cyan-200 font-medium">Lead creado</span> — Actualiza a Premium para leads ilimitados, Ebooks IA, Pitch decks y SEO Swarm.
+        </p>
+        <a href="/upgrade" data-track="upgrade_prompt" data-track-label="lead_detail_upgrade" class="btn-primary px-4 py-1.5 text-xs shrink-0">Actualizar a Premium</a>
+      </div>
+    </div>
+  )}
+
   <section class="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
     <div class="premium-panel p-5 md:p-6">
       <h2 class="text-xl font-semibold text-white">Información</h2>

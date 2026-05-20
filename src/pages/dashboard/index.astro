@@ -9,12 +9,14 @@ export const prerender = false;
 
 const user = Astro.locals.user;
 const trialRemaining = getTrialRemainingMs(user);
-const trialMinutes = Math.floor(trialRemaining / 60000);
-const trialSeconds = Math.floor((trialRemaining % 60000) / 1000);
+const trialHours = Math.floor(trialRemaining / 3600000);
+const trialMinutes = Math.floor((trialRemaining % 3600000) / 60000);
 const isTrialActive = trialRemaining > 0;
 
 const counts = user ? await getUserLeadCounts(user.id) : null;
 const isNewUser = counts?.total === 0;
+const totalLeads = counts?.total ?? 0;
+const FREE_LEAD_LIMIT = 5;
 ---
 
 <DashboardLayout title="Dashboard">
@@ -26,7 +28,7 @@ const isNewUser = counts?.total === 0;
       Bienvenido{user?.name ? `, ${user.name}` : ""}
     </h2>
     <p class="mt-4 max-w-3xl text-sm leading-relaxed text-white/58 md:text-base">
-      Gestiona tus leads, revisa métricas y automatiza tus procesos desde un panel seguro.
+      Gestiona tus leads, revisa metricas y automatiza tus procesos desde un panel seguro.
     </p>
   </section>
 
@@ -39,11 +41,11 @@ const isNewUser = counts?.total === 0;
             <div>
               <p class="text-sm font-medium text-cyan-100">Prueba gratuita activa</p>
               <p class="text-xs text-white/50">
-                {trialMinutes}:{String(trialSeconds).padStart(2, "0")} restantes
+                {trialHours > 0 ? `${trialHours}h ` : ""}{trialMinutes}min restantes — desbloquea todas las funciones al hacer upgrade
               </p>
             </div>
           </div>
-          <a href="/upgrade" class="btn-secondary px-4 py-2 text-xs">Ir a Premium</a>
+          <a href="/upgrade" data-track="upgrade_prompt" data-track-label="trial_banner" class="btn-secondary px-4 py-2 text-xs">Ir a Premium</a>
         </div>
       </div>
     </section>
@@ -54,10 +56,44 @@ const isNewUser = counts?.total === 0;
       <div class="rounded-2xl border border-amber-300/20 bg-amber-500/5 px-5 py-4">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <p class="text-sm font-medium text-amber-100">Tu prueba gratuita terminó</p>
-            <p class="text-xs text-white/50">Suscríbete a Premium para seguir usando todas las funcionalidades.</p>
+            <p class="text-sm font-medium text-amber-100">Tu prueba gratuita termino</p>
+            <p class="text-xs text-white/50">Suscribete a Premium para seguir usando todas las funcionalidades y desbloquear Ebooks, Pitch decks y SEO.</p>
           </div>
-          <a href="/upgrade" class="btn-primary px-4 py-2 text-xs">Suscribirse ahora</a>
+          <a href="/upgrade" data-track="upgrade_prompt" data-track-label="trial_expired_banner" class="btn-primary px-4 py-2 text-xs">Suscribirse ahora</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {totalLeads >= FREE_LEAD_LIMIT && !user?.isPremium && (
+    <section class="mt-6">
+      <div class="rounded-2xl border border-amber-300/20 bg-amber-500/5 px-5 py-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p class="text-sm font-medium text-amber-100">{totalLeads} leads creados</p>
+            <p class="text-xs text-white/50">Has alcanzado el limite de leads en el plan gratuito. Actualiza a Premium para leads ilimitados + Ebooks, Pitch decks y SEO.</p>
+          </div>
+          <a href="/upgrade" data-track="upgrade_prompt" data-track-label="lead_limit_reached" class="btn-primary px-4 py-2 text-xs">Actualizar a Premium</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {totalLeads > 0 && totalLeads < FREE_LEAD_LIMIT && !user?.isPremium && (
+    <section class="mt-6">
+      <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="flex-1">
+              <p class="text-sm text-white/70">
+                <span class="text-white font-medium">{totalLeads}</span> de <span class="text-white font-medium">{FREE_LEAD_LIMIT}</span> leads en el plan gratuito
+              </p>
+              <div class="mt-2 h-1.5 w-48 max-w-full overflow-hidden rounded-full bg-white/10">
+                <span class="block h-full rounded-full bg-gradient-to-r from-cyan-300 to-emerald-300" style={`width: ${(totalLeads / FREE_LEAD_LIMIT) * 100}%`}></span>
+              </div>
+            </div>
+          </div>
+          <a href="/upgrade" data-track="upgrade_prompt" data-track-label="lead_limit_progress" class="btn-secondary px-4 py-2 text-xs">Premium ilimitado</a>
         </div>
       </div>
     </section>
@@ -73,6 +109,7 @@ const isNewUser = counts?.total === 0;
     <div class="premium-panel p-5">
       <p class="text-sm text-white/45">Leads totales</p>
       <p class="mt-3 text-3xl font-semibold text-white">{counts?.total ?? 0}</p>
+      {!user?.isPremium && totalLeads >= FREE_LEAD_LIMIT && <p class="mt-1 text-xs text-amber-200">Limite gratuito</p>}
     </div>
     <div class="premium-panel p-5">
       <p class="text-sm text-white/45">Este mes</p>
@@ -83,7 +120,7 @@ const isNewUser = counts?.total === 0;
       <p class="mt-3 text-3xl font-semibold text-emerald-100">{counts?.ganados ?? 0}</p>
     </div>
     <div class="premium-panel p-5">
-      <p class="text-sm text-white/45">Conversión</p>
+      <p class="text-sm text-white/45">Conversion</p>
       <p class="mt-3 text-3xl font-semibold text-purple-100">{counts?.conversion ?? 0}%</p>
     </div>
   </section>
@@ -92,7 +129,7 @@ const isNewUser = counts?.total === 0;
     <div class="premium-panel p-5 md:p-6">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 class="text-xl font-semibold text-white">Acceso rápido</h2>
+          <h2 class="text-xl font-semibold text-white">Acceso rapido</h2>
           <p class="mt-1 text-sm text-white/45">Herramientas principales</p>
         </div>
       </div>
@@ -103,7 +140,7 @@ const isNewUser = counts?.total === 0;
         </a>
         <a href="/dashboard/reports" class="rounded-2xl border border-white/10 bg-black/20 p-4 transition duration-300 hover:border-cyan-300/30 hover:bg-white/[0.055]">
           <p class="font-medium text-white">Informes</p>
-          <p class="mt-1 text-sm text-white/45">Revisa métricas de rendimiento y actividad.</p>
+          <p class="mt-1 text-sm text-white/45">Revisa metricas de rendimiento y actividad.</p>
         </a>
         <a href="/dashboard/settings" class="rounded-2xl border border-white/10 bg-black/20 p-4 transition duration-300 hover:border-cyan-300/30 hover:bg-white/[0.055]">
           <p class="font-medium text-white">Ajustes</p>
@@ -113,7 +150,12 @@ const isNewUser = counts?.total === 0;
     </div>
 
     <div class="premium-panel p-5 md:p-6">
-      <h2 class="text-xl font-semibold text-white">Estado de leads</h2>
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold text-white">Estado de leads</h2>
+        {!user?.isPremium && totalLeads > 0 && (
+          <a href="/upgrade" data-track="upgrade_prompt" data-track-label="sidebar_premium" class="text-xs text-cyan-200 hover:text-white transition">Premium →</a>
+        )}
+      </div>
       <div class="mt-5 grid gap-3">
         <div class="flex items-center justify-between border-b border-white/10 pb-3 text-sm">
           <span class="text-white/62">Activos</span>
@@ -131,15 +173,43 @@ const isNewUser = counts?.total === 0;
     </div>
   </section>
 
-  {counts && counts.total > 0 && (
+  {!user?.isPremium && totalLeads > 0 && (
+    <section class="mt-6">
+      <div class="premium-panel p-5 md:p-6 border-cyan-300/20">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-white">Funciones bloqueadas en el plan gratuito</h2>
+            <p class="mt-1 text-sm text-white/45">Actualiza a Premium y desbloquea todo el potencial de AverionAI.</p>
+          </div>
+          <a href="/upgrade" data-track="upgrade_prompt" data-track-label="locked_features_card" class="btn-primary px-5 py-2.5 text-sm shrink-0">Actualizar a Premium — 29€/mes</a>
+        </div>
+        <div class="mt-5 grid gap-3 sm:grid-cols-3">
+          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+            <p class="text-sm font-medium text-white/40">📄 Ebooks IA</p>
+            <p class="mt-1 text-xs text-white/35">Genera documentos automaticamente con IA</p>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+            <p class="text-sm font-medium text-white/40">📊 Pitch decks</p>
+            <p class="mt-1 text-xs text-white/35">Presentaciones comerciales en segundos</p>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+            <p class="text-sm font-medium text-white/40">🔍 SEO Swarm</p>
+            <p class="mt-1 text-xs text-white/35">Auditoria y optimizacion SEO automatica</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {counts && totalLeads > 0 && (
     <section class="mt-8 premium-panel p-5 md:p-6">
       <h2 class="text-xl font-semibold text-white">Logros</h2>
       <div class="mt-5 flex flex-wrap gap-4">
-        {counts.total >= 1 && <span class="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs text-cyan-200 icon-pulse-soft">🔰 Primer lead</span>}
+        {totalLeads >= 1 && <span class="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs text-cyan-200 icon-pulse-soft">🔰 Primer lead</span>}
         {counts.ganados >= 1 && <span class="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-xs text-emerald-200 icon-pulse-soft" style="animation-delay:0.5s">🏆 Primer cliente</span>}
-        {counts.total >= 10 && <span class="rounded-full border border-purple-300/20 bg-purple-300/10 px-4 py-2 text-xs text-purple-200">💎 10 leads</span>}
+        {totalLeads >= 10 && <span class="rounded-full border border-purple-300/20 bg-purple-300/10 px-4 py-2 text-xs text-purple-200">💎 10 leads</span>}
         {counts.ganados >= 5 && <span class="rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-xs text-amber-200">⭐ 5 ventas</span>}
-        {counts.total === 0 && <span class="text-sm text-white/40">Crea tu primer lead para desbloquear logros →</span>}
+        {totalLeads === 0 && <span class="text-sm text-white/40">Crea tu primer lead para desbloquear logros →</span>}
       </div>
     </section>
   )}

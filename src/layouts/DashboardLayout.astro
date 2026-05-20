@@ -52,6 +52,17 @@ const isActive = (href: string) =>
           ))}
         </nav>
 
+        {user && !user.isPremium && !user.role?.match(/^(admin|owner)$/) && (
+          <a
+            href="/upgrade"
+            data-track="upgrade_prompt"
+            data-track-label="sidebar_cta"
+            class="mt-4 rounded-xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/10 to-emerald-300/5 px-4 py-3 text-sm font-medium text-cyan-100 transition duration-300 hover:from-cyan-300/20 hover:to-emerald-300/10"
+          >
+            Actualizar a Premium → 29€/mes
+          </a>
+        )}
+
         <div class="mt-auto rounded-2xl border border-white/10 bg-white/[0.035] p-4">
           <p class="text-xs uppercase tracking-[0.16em] text-cyan-100/65">
             {user?.name ?? "Usuario"}
@@ -79,7 +90,7 @@ const isActive = (href: string) =>
             </div>
 
             <div class="flex items-center gap-3 text-sm text-white/50">
-              <a href="/pricing" class="hidden transition hover:text-cyan-100 sm:inline">
+              <a href="/upgrade" data-track="upgrade_prompt" data-track-label="header_premium" class="hidden transition hover:text-cyan-100 sm:inline">
                 Premium
               </a>
               <form method="POST" action="/logout">

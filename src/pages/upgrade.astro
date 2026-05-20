@@ -13,14 +13,14 @@ const isLoggedIn = !!user;
 const isPremium = user?.isPremium === true || user?.role === "admin" || user?.role === "owner";
 ---
 
-<BaseLayout title="Premium | AverionAI" description="Activa AverionAI Premium o Business y desbloquea todas las herramientas de automatización con IA.">
+<BaseLayout title="Premium | AverionAI — Automatizacion IA empresas, CRM inteligente" description="Actualiza a Premium o Business y desbloquea leads ilimitados, Ebooks IA, Pitch decks automaticos, SEO Swarm y soporte prioritario para tu negocio.">
   <Navbar />
   <main class="min-h-screen bg-[#07070A]">
     <section class="container py-20 md:py-28">
       <div class="mx-auto max-w-3xl text-center">
         <p class="text-xs uppercase tracking-[0.18em] text-cyan-100/70">Upgrade</p>
-        <h1 class="mt-4 text-4xl font-semibold tracking-tight text-white md:text-6xl">Elige tu plan</h1>
-        <p class="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/58 md:text-base">Empieza gratis y escala cuando lo necesites. Todos los planes incluyen acceso SSR seguro y datos en tiempo real.</p>
+        <h1 class="mt-4 text-4xl font-semibold tracking-tight text-white md:text-6xl">Desbloquea el maximo rendimiento</h1>
+        <p class="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/58 md:text-base">Leads ilimitados, documentos con IA, pitch decks automaticos y SEO. Todo en una plataforma.</p>
       </div>
 
       <div class="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-3">
@@ -48,7 +48,7 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
         <div class="premium-panel relative overflow-hidden border-cyan-300/30 bg-[linear-gradient(135deg,rgba(34,211,238,0.12),rgba(255,255,255,0.04)_48%,rgba(16,185,129,0.1))] p-6 shadow-[0_26px_95px_-58px_rgba(34,211,238,0.9)] md:p-8">
           <div class="absolute right-4 top-4 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.12em] text-cyan-200">Recomendado</div>
           <h2 class="text-2xl font-semibold text-white">Premium</h2>
-          <p class="mt-2 text-sm text-white/50">Para equipos y automatización avanzada</p>
+          <p class="mt-2 text-sm text-white/50">Leads ilimitados, Ebooks IA, pitch decks y SEO</p>
           <p class="mt-6"><span class="text-5xl font-bold text-white">29</span><span class="text-sm text-white/40"> €/mes</span></p>
           <ul class="mt-8 grid gap-3 text-sm" role="list">
             <li class="flex items-start gap-3 text-white/70"><span class="mt-0.5 h-4 w-4 shrink-0 rounded-full border border-emerald-400/30 bg-emerald-400/10 text-center text-[10px] leading-4 text-emerald-300">✓</span> Todo lo de Free</li>
@@ -62,9 +62,9 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
             {isLoggedIn && isPremium ? (
               <a href="/premium/dashboard" class="btn-primary w-full justify-center text-center">Ir al panel premium</a>
             ) : isLoggedIn ? (
-              <button type="button" data-checkout-trigger="premium" class="btn-primary w-full justify-center text-center">Suscribirse ahora</button>
+              <button type="button" data-checkout-trigger="premium" data-track="upgrade_click" data-track-label="upgrade_premium" class="btn-primary w-full justify-center text-center">Suscribirse ahora — 29€/mes</button>
             ) : (
-              <a href="/register" class="btn-primary w-full justify-center text-center">Iniciar sesión</a>
+              <a href="/register" data-track="upgrade_click" data-track-label="upgrade_register" class="btn-primary w-full justify-center text-center">Empezar gratis</a>
             )}
           </div>
         </div>
@@ -84,9 +84,9 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
           </ul>
           <div class="mt-8">
             {isLoggedIn ? (
-              <button type="button" data-checkout-trigger="business" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Elegir Business</button>
+              <button type="button" data-checkout-trigger="business" data-track="upgrade_click" data-track-label="upgrade_business" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Elegir Business — 79€/mes</button>
             ) : (
-              <a href="/register" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Empezar ahora</a>
+              <a href="/register" data-track="upgrade_click" data-track-label="upgrade_register_business" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Empezar ahora</a>
             )}
           </div>
         </div>
