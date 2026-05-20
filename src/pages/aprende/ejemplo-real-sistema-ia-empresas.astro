@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import LeadCaptureModal from "../../components/LeadCaptureModal.astro";
+
+export const prerender = false;
+---
+
+<BaseLayout
+  title="Ejemplo real de sistema de IA para empresas | AverionAI"
+  description="Caso real: cómo una empresa española automatizó su captación de leads, CRM y seguimiento comercial con inteligencia artificial operativa. Resultados: 40% menos costes, 4x más leads."
+>
+  <Navbar />
+  <main class="min-h-screen bg-[#07070A]">
+    <section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.1),transparent_60%)]"></div>
+      <div class="container">
+        <div class="mx-auto max-w-3xl" data-reveal>
+          <span class="badge bg-cyan-300/10 text-cyan-100">Caso real</span>
+          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">Ejemplo real de sistema de IA para empresas</h1>
+          <p class="mt-5 text-lg text-white/60">Cómo una empresa inmobiliaria transformó su operativa comercial con AverionAI: de 6 horas de respuesta a 90 segundos, de 12 leads a 47 leads por día.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-16 md:py-20">
+      <div class="mx-auto max-w-3xl">
+        <div class="space-y-10">
+          <div data-reveal class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+            <h2 class="text-xl font-semibold text-white">El desafío</h2>
+            <p class="mt-4 text-sm leading-relaxed text-white/60">Una inmobiliaria con 8 agentes comerciales recibía leads desde su web, Idealista y WhatsApp. Cada lead requería:</p>
+            <ul class="mt-3 space-y-2 text-sm text-white/50">
+              <li class="flex items-start gap-2"><span class="text-rose-300">→</span> Clasificación manual por un comercial (5-10 min)</li>
+              <li class="flex items-start gap-2"><span class="text-rose-300">→</span> Asignación al agente correspondiente (15-30 min)</li>
+              <li class="flex items-start gap-2"><span class="text-rose-300">→</span> Primer contacto en 24-48 horas (cuando había tiempo)</li>
+              <li class="flex items-start gap-2"><span class="text-rose-300">→</span> Seguimiento depende de la agenda del agente</li>
+            </ul>
+            <p class="mt-3 text-sm leading-relaxed text-white/60">El resultado: leads que se enfriaban, oportunidades perdidas y un equipo comercial dedicado a tareas administrativas en lugar de vender.</p>
+          </div>
+
+          <div data-reveal class="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6">
+            <h2 class="text-xl font-semibold text-white">La solución con AverionAI</h2>
+            <p class="mt-4 text-sm leading-relaxed text-white/60">Implementamos tres automatizaciones clave:</p>
+            <div class="mt-5 grid gap-4">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                <p class="text-sm font-semibold text-cyan-200">Automatización 1: Captación y clasificación</p>
+                <p class="mt-1 text-xs text-white/50">Cuando un lead entra por cualquier canal → el sistema lo clasifica por tipo de inmueble, presupuesto y urgencia → asigna etiqueta y puntuación.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                <p class="text-sm font-semibold text-cyan-200">Automatización 2: Pipeline autónomo</p>
+                <p class="mt-1 text-xs text-white/50">Cuando un lead se cualifica → se mueve automáticamente a "contactado" → se añade nota de seguimiento → se programa el próximo paso.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                <p class="text-sm font-semibold text-cyan-200">Automatización 3: Seguimiento inteligente</p>
+                <p class="mt-1 text-xs text-white/50">Cuando un lead supera cierto score → se prioriza en el panel del comercial → se genera tarea de llamada → se envía recordatorio si no hay respuesta.</p>
+              </div>
+            </div>
+          </div>
+
+          <div data-reveal>
+            <h2 class="text-2xl font-semibold text-white">Resultados en 30 días</h2>
+            <div class="mt-5 grid gap-4 sm:grid-cols-3">
+              <div class="premium-panel p-5 text-center">
+                <p class="text-3xl font-bold text-cyan-200">6h → 90s</p>
+                <p class="mt-2 text-xs text-white/45">Tiempo de respuesta al lead</p>
+              </div>
+              <div class="premium-panel p-5 text-center">
+                <p class="text-3xl font-bold text-emerald-200">12 → 47</p>
+                <p class="mt-2 text-xs text-white/45">Leads procesados por día</p>
+              </div>
+              <div class="premium-panel p-5 text-center">
+                <p class="text-3xl font-bold text-purple-200">-40%</p>
+                <p class="mt-2 text-xs text-white/45">Costes operativos comerciales</p>
+              </div>
+            </div>
+          </div>
+
+          <div data-reveal class="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6">
+            <h2 class="text-xl font-semibold text-white">Tu empresa puede lograr lo mismo</h2>
+            <p class="mt-3 text-sm text-white/60">No necesitas un equipo técnico ni meses de implementación. Configura tu primer flujo autónomo en minutos.</p>
+            <div class="mt-6 flex gap-4">
+              <a href="/register" class="btn-primary px-6 py-2.5 text-sm">Empezar gratis</a>
+              <button type="button" data-open-lead-modal class="btn-secondary px-6 py-2.5 text-sm">Solicitar demo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-white/10 bg-white/[0.02] py-20">
+      <div class="container text-center">
+        <h2 class="text-3xl font-semibold text-white md:text-4xl">Prueba AverionAI gratis</h2>
+        <p class="mt-4 text-white/60">24 horas de acceso premium. Sin tarjeta.</p>
+        <a href="/register" class="btn-primary mt-8 px-8 py-3 inline-flex">Empezar ahora</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <LeadCaptureModal />
+</BaseLayout>

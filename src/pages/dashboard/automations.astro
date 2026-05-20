@@ -27,20 +27,11 @@ const actions = [
 ];
 
 const templates = [
-  { trigger: "Cuando se crea un lead", action: "Clasificarlo con IA" },
-  { trigger: "Lead pasa a Interesado", action: "Enviar email de seguimiento" },
-  { trigger: "Lead pasa a Cliente", action: "Generar factura y enviar WhatsApp" },
-  { trigger: "Lead inactivo 7 dias", action: "Enviar recordatorio" },
-  { trigger: "Lead ganado", action: "Crear tarea y enviar email" },
-  { trigger: "Evento personalizado", action: "Enviar webhook" },
-];
-
-const logs = [
-  { time: "Hace 5 min", trigger: "Lead creado", status: "ok", detail: "Clasificacion completada" },
-  { time: "Hace 12 min", trigger: "Lead movido", status: "ok", detail: "Email enviado a cliente" },
-  { time: "Hace 1 h", trigger: "Documento generado", status: "ok", detail: "Factura #0012 generada" },
-  { time: "Hace 3 h", trigger: "Lead inactivo", status: "error", detail: "Fallo al enviar webhook" },
-  { time: "Hace 5 h", trigger: "Lead ganado", status: "ok", detail: "Tarea creada + notificacion" },
+  { name: "Respuesta automatica a leads", trigger: "lead.created", triggerLabel: "Cuando se crea un lead", actions: [{ type: "ai.classify", label: "Clasificar con IA" }, { type: "tag.add", label: "Anadir etiqueta" }], impact: "Responde a cada lead en <2 min sin intervencion manual. Aumenta tasa de contacto inicial un 40%.", icon: "⚡" },
+  { name: "Cualificacion y seguimiento", trigger: "lead.status_changed", triggerLabel: "Lead marcado como cualificado", triggerConfig: '{"to":"cualificado"}', actions: [{ type: "lead.move", label: "Mover a contactado" }, { type: "note.add", label: "Anadir nota automatica" }], impact: "Mueve leads cualificados automaticamente a la siguiente etapa. Reduce tiempo de ciclo comercial un 25%.", icon: "🎯" },
+  { name: "Pipeline inteligente", trigger: "lead.status_changed", triggerLabel: "Lead cambia a contactado", triggerConfig: '{"to":"contactado"}', actions: [{ type: "tag.add", label: "Etiquetar lead activo" }, { type: "note.add", label: "Registrar cambio de etapa" }], impact: "Pipeline siempre actualizado sin arrastrar estados manualmente. Evita leads olvidados.", icon: "📊" },
+  { name: "Lead scoring automatico", trigger: "lead.created", triggerLabel: "Cuando se crea un lead", actions: [{ type: "ai.classify", label: "Clasificar prioridad" }, { type: "tag.add", label: "Puntuar lead" }], impact: "Cada lead recibe una puntuacion automatica. El equipo comercial solo trabaja los leads calientes.", icon: "🏆" },
+  { name: "Cierre automatizado", trigger: "lead.status_changed", triggerLabel: "Lead ganado", triggerConfig: '{"to":"ganado"}', actions: [{ type: "note.add", label: "Registrar cierre" }, { type: "tag.add", label: "Marcar como ganado" }], impact: "Cuando un lead se convierte en cliente, el sistema lo registra y notifica automaticamente. Sin tareas manuales.", icon: "✅" },
 ];
 ---
 
@@ -58,13 +49,20 @@ const logs = [
 
   <section class="mt-8 grid gap-6 xl:grid-cols-2">
     <div class="premium-panel p-5 md:p-6">
-      <h2 class="text-xl font-semibold text-white">Plantillas</h2>
+      <h2 class="text-xl font-semibold text-white">Plantillas en produccion</h2>
+      <p class="mt-1 text-sm text-white/45">Preconfiguradas con impacto real. Un clic y estan activas.</p>
       <div class="mt-5 grid gap-3">
         {templates.map((t, i) => (
-          <button class="use-template group flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/20" data-reveal data-delay={i * 40}>
-            <span class="rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 text-[11px] font-mono text-cyan-200/60 shrink-0">{t.trigger}</span>
-            <svg class="h-3.5 w-3.5 shrink-0 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            <span class="rounded-lg border border-emerald-300/20 bg-emerald-300/[0.06] px-2.5 py-1 text-[11px] font-mono text-emerald-200/60 truncate">{t.action}</span>
+          <button class="use-template group flex flex-col rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/20 hover:bg-white/[0.04]" data-reveal data-delay={i * 40} data-template={i}>
+            <div class="flex items-center gap-3">
+              <span class="text-base shrink-0">{t.icon}</span>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-white">{t.name}</p>
+                <p class="mt-0.5 text-[11px] text-white/40">{t.triggerLabel} → {t.actions.map(a => a.label).join(" + ")}</p>
+              </div>
+              <span class="rounded-lg border border-white/[0.08] bg-white/[0.03] px-2 py-1 text-[10px] text-cyan-200/70 shrink-0">+ Activar</span>
+            </div>
+            <p class="mt-2 text-[11px] leading-relaxed text-emerald-200/60">{t.impact}</p>
           </button>
         ))}
       </div>
@@ -73,20 +71,19 @@ const logs = [
     <div class="premium-panel p-5 md:p-6">
       <h2 class="text-xl font-semibold text-white">Tus automatizaciones</h2>
       <div id="auto-list" class="mt-5 grid gap-3"></div>
+      <div class="mt-4 border-t border-white/10 pt-4">
+        <p class="text-xs text-white/30 text-center">
+          <a href="/referrals" class="text-cyan-200/50 hover:text-cyan-200 transition">Invita a otra empresa → desbloquea automatizaciones ilimitadas</a>
+        </p>
+      </div>
     </div>
   </section>
 
   <section class="mt-8 premium-panel p-5 md:p-6">
-    <h2 class="text-xl font-semibold text-white">Logs de ejecucion</h2>
-    <p class="mt-1 text-sm text-white/45">Ultimas ejecuciones de tus automatizaciones.</p>
-    <div class="mt-5 grid gap-2">
-      {logs.map((l, i) => (
-        <div class="flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3" data-reveal data-delay={i * 40}>
-          <span class={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${l.status === "ok" ? "bg-emerald-400/20 text-emerald-300" : "bg-red-400/20 text-red-300"}`}>{l.status === "ok" ? "OK" : "!"}</span>
-          <div class="flex-1 min-w-0"><p class="text-sm text-white/80 truncate">{l.detail}</p><p class="text-xs text-white/35">{l.trigger} — {l.time}</p></div>
-          <span class={`text-[11px] font-medium px-2 py-0.5 rounded-full ${l.status === "ok" ? "text-emerald-300 bg-emerald-300/10" : "text-red-300 bg-red-300/10"}`}>{l.status === "ok" ? "Exito" : "Error"}</span>
-        </div>
-      ))}
+    <h2 class="text-xl font-semibold text-white">Registro de actividad del sistema</h2>
+    <p class="mt-1 text-sm text-white/45">Cada ejecucion de automatizacion se registra aqui.</p>
+    <div id="execution-logs" class="mt-5 grid gap-2">
+      <p class="text-sm text-white/40">Cargando ejecuciones...</p>
     </div>
   </section>
 
@@ -113,6 +110,14 @@ const logs = [
     let selectedActions = [];
     let automations = [];
 
+    const TEMPLATE_DATA = [
+      { triggerType: "lead.created", triggerConfig: null, actions: [{ actionType: "ai.classify", order: 0 }, { actionType: "tag.add", config: '{"tag":"auto-respondido"}', order: 1 }] },
+      { triggerType: "lead.status_changed", triggerConfig: '{"to":"cualificado"}', actions: [{ actionType: "lead.move", config: '{"targetStatus":"contactado"}', order: 0 }, { actionType: "note.add", config: '{"text":"Lead cualificado y movido automaticamente a seguimiento"}', order: 1 }] },
+      { triggerType: "lead.status_changed", triggerConfig: '{"to":"contactado"}', actions: [{ actionType: "tag.add", config: '{"tag":"activo-auto"}', order: 0 }, { actionType: "note.add", config: '{"text":"Pipeline actualizado automaticamente"}', order: 1 }] },
+      { triggerType: "lead.created", triggerConfig: null, actions: [{ actionType: "ai.classify", config: null, order: 0 }, { actionType: "tag.add", config: '{"tag":"scored-auto"}', order: 1 }] },
+      { triggerType: "lead.status_changed", triggerConfig: '{"to":"ganado"}', actions: [{ actionType: "note.add", config: '{"text":"¡Lead ganado! Cerrado automaticamente por el sistema"}', order: 0 }, { actionType: "tag.add", config: '{"tag":"cerrado-auto"}', order: 1 }] },
+    ];
+
     async function fetchAutos() {
       try {
         const res = await fetch("/api/automations");
@@ -122,11 +127,41 @@ const logs = [
       } catch { automations = []; renderAutos(); }
     }
 
+    async function fetchLogs() {
+      const container = document.getElementById("execution-logs");
+      if (!container) return;
+      try {
+        const res = await fetch("/api/automations?stats=true");
+        if (!res.ok) { container.innerHTML = '<p class="text-sm text-white/40">Sin ejecuciones recientes.</p>'; return; }
+        const stats = await res.json();
+        if (!stats.recentExecutions || stats.recentExecutions.length === 0) {
+          container.innerHTML = '<p class="text-sm text-white/40">Aun no hay ejecuciones. Crea leads para ver el sistema en accion.</p>';
+          return;
+        }
+        container.innerHTML = stats.recentExecutions.map((e) => {
+          const isOk = e.status === "success";
+          const timeAgo = timeSince(new Date(e.startedAt));
+          return `<div class="flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${isOk ? "bg-emerald-400/20 text-emerald-300" : "bg-red-400/20 text-red-300"}">${isOk ? "OK" : "!"}</span><div class="flex-1 min-w-0"><p class="text-sm text-white/80 truncate">${e.automation?.name || e.triggeredBy || "Automatizacion"} ejecutada</p><p class="text-xs text-white/35">${e.triggeredBy || ""} — ${timeAgo}</p></div><span class="text-[11px] font-medium px-2 py-0.5 rounded-full ${isOk ? "text-emerald-300 bg-emerald-300/10" : "text-red-300 bg-red-300/10"}">${isOk ? "Exito" : "Error"}</span></div>`;
+        }).join("");
+      } catch { container.innerHTML = '<p class="text-sm text-white/40">Error al cargar ejecuciones.</p>'; }
+    }
+
+    function timeSince(date) {
+      const sec = Math.floor((Date.now() - date.getTime()) / 1000);
+      if (sec < 60) return "Ahora";
+      const min = Math.floor(sec / 60);
+      if (min < 60) return `Hace ${min} min`;
+      const h = Math.floor(min / 60);
+      if (h < 24) return `Hace ${h} h`;
+      const d = Math.floor(h / 24);
+      return `Hace ${d} d`;
+    }
+
     function renderAutos() {
       const list = document.getElementById("auto-list");
       if (!list) return;
       if (automations.length === 0) { list.innerHTML = '<p class="text-sm text-white/40">Sin automatizaciones creadas.</p>'; return; }
-      list.innerHTML = automations.map((a, i) => {
+      list.innerHTML = automations.map((a) => {
         const triggerLabel = document.getElementById("modal-trigger")?.querySelector(`option[value="${a.triggerType}"]`)?.textContent || a.triggerType;
         const actionLabels = a.actions?.map((act) => {
           const opt = document.getElementById("modal-action")?.querySelector(`option[value="${act.actionType}"]`);
@@ -147,23 +182,19 @@ const logs = [
 
     document.querySelectorAll(".use-template").forEach((btn) => {
       btn.addEventListener("click", async () => {
-        const spans = btn.querySelectorAll("span");
-        if (spans.length < 2) return;
-        const triggerText = spans[0].textContent?.trim() || "";
-        const actionText = spans[1].textContent?.trim() || "";
-        const triggerSel = document.getElementById("modal-trigger");
-        const actionSel = document.getElementById("modal-action");
-        if (!triggerSel || !actionSel) return;
-        let triggerId = "";
-        let actionId = "";
-        for (const opt of triggerSel.options) { if (opt.textContent?.includes(triggerText)) { triggerId = opt.value; break; } }
-        for (const opt of actionSel.options) { if (opt.textContent?.includes(actionText)) { actionId = opt.value; break; } }
-        if (!triggerId || !actionId) return;
+        const idx = parseInt(btn.dataset.template);
+        const tpl = TEMPLATE_DATA[idx];
+        if (!tpl) return;
         try {
           await fetch("/api/automations", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: triggerText, triggerType: triggerId, actions: [{ actionType: actionId, order: 0 }] }),
+            body: JSON.stringify({
+              name: btn.querySelector("p")?.textContent?.trim() || "Plantilla",
+              triggerType: tpl.triggerType,
+              triggerConfig: tpl.triggerConfig,
+              actions: tpl.actions,
+            }),
           });
           await fetchAutos();
         } catch {}
@@ -216,5 +247,6 @@ const logs = [
     });
 
     fetchAutos();
+    fetchLogs();
   })();
 </script>

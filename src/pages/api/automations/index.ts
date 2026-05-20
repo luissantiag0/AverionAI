@@ -19,7 +19,14 @@ export const GET: APIRoute = async ({ cookies, url }) => {
   const stats = url.searchParams.get("stats") === "true";
   if (stats) {
     const data = await getUserAutomationStats(user.id);
-    return json(200, data);
+    return json(200, {
+      ...data,
+      recentExecutions: data.recentExecutions.map((e) => ({
+        ...e,
+        startedAt: e.startedAt.toISOString(),
+        completedAt: e.completedAt?.toISOString() || null,
+      })),
+    });
   }
 
   const automations = await getUserAutomations(user.id);

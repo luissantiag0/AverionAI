@@ -3,12 +3,14 @@ import DashboardLayout from "../../../layouts/DashboardLayout.astro";
 import { getUserLead, LEAD_STATUSES, type LeadStatus } from "../../../lib/crm";
 import { getCurrentUser } from "../../../lib/auth";
 import { SESSION_COOKIE } from "../../../lib/session";
+import { getLeadExecutions } from "../../../lib/automations";
 
 export const prerender = false;
 
 const user = Astro.locals.user;
 const leadId = Astro.params.id!;
 const lead = user ? await getUserLead(leadId, user.id) : null;
+const leadExecutions = user && lead ? await getLeadExecutions(leadId, user.id) : [];
 
 if (!lead) {
   return Astro.redirect("/dashboard/leads");
@@ -110,6 +112,24 @@ if (Astro.request.method === "POST") {
       <a href="/referrals" class="text-emerald-200/70 hover:text-white transition">Invitar a tu equipo →</a>
     </div>
   </div>
+
+  {leadExecutions.length > 0 && (
+    <section class="mt-4 premium-panel p-4">
+      <p class="text-xs uppercase tracking-wider text-white/45">⚙️ Actividad del sistema en este lead</p>
+      <div class="mt-3 grid gap-2">
+        {leadExecutions.map((ex) => (
+          <div class="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2.5">
+            <span class={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${ex.status === "success" ? "bg-emerald-400/20 text-emerald-300" : "bg-red-400/20 text-red-300"}`}>{ex.status === "success" ? "OK" : "!"}</span>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-white/80 truncate">{ex.automation?.name || "Automatizacion"} — {ex.triggeredBy || ""}</p>
+              <p class="text-[10px] text-white/35">{ex.actions?.length || 0} acciones ejecutadas</p>
+            </div>
+            <span class="text-[10px] text-white/30">{ex.createdAt.toLocaleDateString("es-ES", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
 
   <section class="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
     <div class="premium-panel p-5 md:p-6">

@@ -162,12 +162,17 @@ const hasAutomations = (autoStats?.total ?? 0) > 0;
         <p class="text-xs text-white/40">{autoStats.successToday} exitosas</p>
       </div>
       <div class="premium-panel p-5">
-        <p class="text-xs text-white/45 uppercase tracking-wider">📊 Tasa de exito</p>
-        <p class="mt-2 text-2xl font-semibold text-purple-100">{autoStats.executionsToday > 0 ? Math.round((autoStats.successToday / autoStats.executionsToday) * 100) : 0}%</p>
+        <p class="text-xs text-white/45 uppercase tracking-wider">⏱️ Tiempo ahorrado hoy</p>
+        <p class="mt-2 text-2xl font-semibold text-purple-100">{autoStats.minutesSaved} min</p>
+        <p class="text-xs text-white/40">{autoStats.leadsProcessed} leads procesados</p>
       </div>
       <div class="premium-panel p-5 border-cyan-300/10">
-        <p class="text-xs text-white/45 uppercase tracking-wider">🔧 Lo que el sistema hizo</p>
-        <p class="mt-2 text-sm text-white/70">{autoStats.active > 0 ? `${autoStats.active} automatizaciones procesando leads en segundo plano` : "Crea automatizaciones para que el sistema trabaje solo"}</p>
+        <p class="text-xs text-white/45 uppercase tracking-wider">🔧 Salud del sistema</p>
+        <p class="mt-2 flex items-center gap-2">
+          <span class={`inline-block h-2.5 w-2.5 rounded-full ${autoStats.health >= 90 ? "bg-emerald-400" : autoStats.health >= 70 ? "bg-amber-400" : "bg-red-400"}`}></span>
+          <span class="text-2xl font-semibold text-white">{autoStats.health}%</span>
+        </p>
+        <p class="text-xs text-white/40">{autoStats.active > 0 ? "Sistema operativo normal" : "Sin automatizaciones activas"}</p>
         <a href="/dashboard/automations" class="mt-2 inline-block text-xs text-cyan-200 hover:text-white transition">Gestionar automatizaciones →</a>
       </div>
     </section>
@@ -217,7 +222,10 @@ const hasAutomations = (autoStats?.total ?? 0) > 0;
             <h2 class="text-base font-semibold text-white">Automatiza tu flujo de leads</h2>
             <p class="text-sm text-white/45 mt-0.5">Crea una automatizacion para que los leads se clasifiquen solos al entrar.</p>
           </div>
-          <a href="/dashboard/automations" class="btn-secondary px-5 py-2.5 text-sm shrink-0">Configurar automatizacion</a>
+          <div class="flex gap-2 shrink-0">
+            <a href="/dashboard/automations" class="btn-secondary px-4 py-2.5 text-sm">Configurar automatizacion</a>
+            <a href="/referrals" class="btn-secondary px-4 py-2.5 text-sm text-emerald-200/80 border-emerald-300/20">Invitar equipo</a>
+          </div>
         </div>
       </div>
     </section>

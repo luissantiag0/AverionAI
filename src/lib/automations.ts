@@ -209,15 +209,42 @@ export async function getUserAutomationStats(userId: string) {
       automation: { userId },
       createdAt: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
     },
-    include: { actions: true },
+    include: { actions: true, automation: { select: { name: true } } },
     orderBy: { createdAt: "desc" },
     take: 10,
   });
 
   const todayTotal = executions.length;
   const todaySuccess = executions.filter((e) => e.status === "success").length;
+  const todayErrors = todayTotal - todaySuccess;
+  const minutesSaved = todayTotal * 15;
+  const health = todayTotal > 0 ? Math.round((todaySuccess / todayTotal) * 100) : 100;
 
-  return { total, active, executionsToday: todayTotal, successToday: todaySuccess, recentExecutions: executions };
+  const leadsProcessed = executions.filter((e) => e.triggerEntityId).length;
+
+  return {
+    total,
+    active,
+    executionsToday: todayTotal,
+    successToday: todaySuccess,
+    errorsToday: todayErrors,
+    minutesSaved,
+    health,
+    leadsProcessed,
+    recentExecutions: executions,
+  };
+}
+
+export async function getLeadExecutions(leadId: string, userId: string) {
+  return prisma.automationExecution.findMany({
+    where: {
+      triggerEntityId: leadId,
+      automation: { userId },
+    },
+    include: { actions: true, automation: { select: { name: true } } },
+    orderBy: { createdAt: "desc" },
+    take: 10,
+  });
 }
 
 export async function fireAutomationTriggers(
