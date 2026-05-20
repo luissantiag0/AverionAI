@@ -29,19 +29,11 @@
             </p>
 
             <h2 id="lead-modal-title" class="mt-3 text-2xl font-semibold tracking-tight text-white">
-              Solicita tu analisis gratuito
+              Solicita tu analisis de operaciones
             </h2>
 
             <p class="mt-2 text-sm leading-relaxed text-white/55">
-              Identificamos que procesos de tu negocio pueden automatizarse con IA y te entregamos un plan claro.
-            </p>
-
-            <h2 id="lead-modal-title" class="mt-3 text-2xl font-semibold tracking-tight text-white">
-              Cuéntanos qué quieres automatizar
-            </h2>
-
-            <p class="mt-2 text-sm leading-relaxed text-white/55">
-              Revisamos tu flujo actual y te respondemos con oportunidades claras de automatización.
+              Identificamos que procesos de tu negocio pueden automatizarse con IA y te entregamos un plan claro de implementacion.
             </p>
           </div>
 
@@ -123,6 +115,8 @@
         <button
           id="lead-submit-btn"
           type="submit"
+          data-track="lead_form_submit"
+          data-track-label="modal_solicitar_analisis"
           class="group relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-white px-6 py-3.5 font-semibold text-black shadow-[0_18px_55px_-26px_rgba(255,255,255,0.9)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_70px_-24px_rgba(34,211,238,0.9)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
         >
           <span class="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-cyan-200/70 to-transparent transition duration-700 group-hover:translate-x-[120%]"></span>
@@ -152,13 +146,24 @@
         Hemos recibido tu información. Te contactaremos en menos de 24 horas.
       </p>
 
-      <button
-        type="button"
-        data-close-lead-modal
-        class="mt-7 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/10"
-      >
-        Cerrar
-      </button>
+      <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <a
+          href="/pricing"
+          data-track="cta_click"
+          data-track-label="success_ver_planes"
+          class="btn-primary text-sm"
+        >
+          Ver planes disponibles
+        </a>
+
+        <button
+          type="button"
+          data-close-lead-modal
+          class="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/10"
+        >
+          Cerrar
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -352,8 +357,6 @@
       form.reset();
       formState.classList.add("hidden");
       successState.classList.remove("hidden");
-
-      window.setTimeout(closeModal, 2200);
     } catch (error) {
       showError(error.message || "Error enviando el formulario. Inténtalo de nuevo.");
     } finally {

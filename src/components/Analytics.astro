@@ -1,0 +1,61 @@
+---
+const gaId = import.meta.env.PUBLIC_GA_ID as string | undefined;
+const hasGa = !!gaId;
+---
+
+{hasGa && (
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+)}
+
+<script define:vars={{ gaId, hasGa }}>
+(() => {
+  if (!hasGa) return;
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag("js", new Date());
+  gtag("config", gaId, { anonymize_ip: true, send_page_view: true });
+
+  const track = (event, params = {}) => {
+    if (typeof gtag !== "undefined") {
+      gtag("event", event, params);
+    }
+  };
+
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest("[data-track]");
+    if (!el) return;
+    const eventName = el.getAttribute("data-track");
+    const label = el.getAttribute("data-track-label") || "";
+    track(eventName, { event_category: "engagement", event_label: label });
+  });
+
+  if (window.location.pathname === "/pricing") {
+    track("view_pricing", { event_category: "engagement" });
+  }
+
+  const leadForm = document.getElementById("lead-capture-form");
+  if (leadForm) {
+    leadForm.addEventListener("submit", () => {
+      track("lead_form_submit", { event_category: "conversion" });
+    });
+  }
+
+  const successState = document.getElementById("lead-modal-success-state");
+  if (successState) {
+    new MutationObserver(() => {
+      if (!successState.classList.contains("hidden")) {
+        track("lead_conversion", { event_category: "conversion" });
+      }
+    }).observe(successState, { attributes: true, attributeFilter: ["class"] });
+  }
+
+  const scrollDepths = new Set();
+  window.addEventListener("scroll", () => {
+    const pct = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    [25, 50, 75, 100].forEach((d) => {
+      if (pct >= d && !scrollDepths.has(d)) { scrollDepths.add(d); track("scroll_depth", { event_category: "engagement", event_label: `${d}%`, value: d }); }
+    });
+  }, { passive: true });
+})();
+</script>

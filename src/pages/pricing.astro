@@ -46,7 +46,7 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
             {isLoggedIn ? (
               <a href={isPremium ? "/premium/dashboard" : "/dashboard"} class="btn-secondary w-full justify-center text-center">{isPremium ? "Ir al panel" : "Acceder gratis"}</a>
             ) : (
-              <a href="/register" class="btn-secondary w-full justify-center text-center">Empezar ahora</a>
+              <a href="/register" data-track="cta_click" data-track-label="pricing_free_empezar" class="btn-secondary w-full justify-center text-center">Empezar ahora</a>
             )}
           </div>
         </div>
@@ -69,9 +69,9 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
             {isLoggedIn && isPremium ? (
               <a href="/premium/dashboard" class="btn-primary w-full justify-center text-center">Ir al panel premium</a>
             ) : isLoggedIn ? (
-              <button type="button" data-checkout-trigger="premium" class="btn-primary w-full justify-center text-center">Suscribirse ahora</button>
+              <button type="button" data-checkout-trigger="premium" data-track="cta_click" data-track-label="pricing_premium_suscribirse" class="btn-primary w-full justify-center text-center">Suscribirse ahora</button>
             ) : (
-              <a href="/register" class="btn-primary w-full justify-center text-center">Empezar ahora</a>
+              <a href="/register" data-track="cta_click" data-track-label="pricing_premium_empezar" class="btn-primary w-full justify-center text-center">Empezar ahora</a>
             )}
           </div>
         </div>
@@ -94,9 +94,9 @@ const isPremium = user?.isPremium === true || user?.role === "admin" || user?.ro
             {isLoggedIn && isPremium ? (
               <a href="/premium/dashboard" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Ir al panel</a>
             ) : isLoggedIn ? (
-              <button type="button" data-checkout-trigger="business" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Elegir Business</button>
+              <button type="button" data-checkout-trigger="business" data-track="cta_click" data-track-label="pricing_business_elegir" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Elegir Business</button>
             ) : (
-              <a href="/register" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Empezar ahora</a>
+              <a href="/register" data-track="cta_click" data-track-label="pricing_business_empezar" class="btn-primary w-full justify-center text-center bg-emerald-400 hover:bg-emerald-300 text-black shadow-[0_18px_45px_-26px_rgba(16,185,129,0.9)] hover:shadow-[0_24px_70px_-28px_rgba(16,185,129,0.9)]">Empezar ahora</a>
             )}
           </div>
         </div>

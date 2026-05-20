@@ -15,21 +15,23 @@ const isLoggedIn = !!user;
     <BrandLogo markClass="h-8 w-8" textClass="text-lg" />
 
     <nav class="hidden items-center gap-7 text-sm md:flex md:flex-1 md:justify-center" aria-label="Navegacion principal">
-      <a href="/pricing" class="text-white/55 transition hover:text-cyan-100">
-        Pricing
+      <a href="/pricing" data-track="nav_click" data-track-label="planes" class="text-white/55 transition hover:text-cyan-100">
+        Planes
       </a>
 
       {!isLoggedIn && (
         <>
-          <a href="/#systems" class="text-white/55 transition hover:text-cyan-100">
+          <a href="/#systems" data-track="nav_click" data-track-label="sistemas" class="text-white/55 transition hover:text-cyan-100">
             Sistemas
           </a>
-          <a href="/#technology" class="text-white/55 transition hover:text-cyan-100">
+          <a href="/#technology" data-track="nav_click" data-track-label="tecnologia" class="text-white/55 transition hover:text-cyan-100">
             Tecnologia
           </a>
           <button
             type="button"
             data-open-lead-modal
+            data-track="nav_click"
+            data-track-label="contacto"
             class="text-white/55 transition hover:text-cyan-100"
           >
             Contacto
@@ -39,14 +41,14 @@ const isLoggedIn = !!user;
 
       {isLoggedIn && (
         <>
-          <a href="/dashboard" class="text-white/55 transition hover:text-cyan-100">
+          <a href="/dashboard" data-track="nav_click" data-track-label="dashboard" class="text-white/55 transition hover:text-cyan-100">
             Dashboard
           </a>
-          <a href="/dashboard/settings" class="text-white/55 transition hover:text-cyan-100">
+          <a href="/dashboard/settings" data-track="nav_click" data-track-label="cuenta" class="text-white/55 transition hover:text-cyan-100">
             Cuenta
           </a>
           <form method="POST" action="/logout" class="inline">
-            <button type="submit" class="text-white/55 transition hover:text-cyan-100">
+            <button type="submit" data-track="nav_click" data-track-label="salir" class="text-white/55 transition hover:text-cyan-100">
               Salir
             </button>
           </form>
@@ -57,8 +59,8 @@ const isLoggedIn = !!user;
     <div class="flex items-center gap-3">
       {!isLoggedIn && (
         <>
-          <a href="/login" class="btn-secondary px-4 py-2.5 text-sm hidden sm:inline-flex">Iniciar sesion</a>
-          <a href="/register" class="btn-primary px-5 py-2.5 text-sm">Empezar ahora</a>
+          <a href="/login" data-track="cta_click" data-track-label="nav_iniciar_sesion" class="btn-secondary px-4 py-2.5 text-sm hidden sm:inline-flex">Iniciar sesion</a>
+          <a href="/register" data-track="cta_click" data-track-label="nav_empezar" class="btn-primary px-5 py-2.5 text-sm">Empezar ahora</a>
         </>
       )}
       {isLoggedIn && (

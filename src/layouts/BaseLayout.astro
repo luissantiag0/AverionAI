@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Analytics from "../components/Analytics.astro";
 
 const {
   title = "AverionAI | Infraestructura de IA para Empresas — Automatiza sin contratar mas",
@@ -105,6 +106,7 @@ const fullUrl = canonicalUrl || `https://averionai.es${Astro.url.pathname}`;
         }
       })}
     </script>
+    <Analytics />
   </head>
 
   <body class="min-h-screen bg-[#07070A] text-white antialiased selection:bg-cyan-300/20 selection:text-cyan-100">
