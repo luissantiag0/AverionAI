@@ -91,6 +91,38 @@ export async function matchAutomations(
   });
 }
 
+function generateReasoning(
+  trigger: string,
+  context: Record<string, unknown>,
+  actionCount: number
+): { reasoning: string; confidenceScore: number } {
+  let reasoning = "";
+  let confidenceScore = 85;
+
+  switch (trigger) {
+    case "lead.created":
+      reasoning = "Nuevo lead registrado en el sistema. El motor de automatización detectó la entrada y activó las reglas configuradas para clasificación y etiquetado automático.";
+      confidenceScore = 90;
+      break;
+    case "lead.status_changed": {
+      const from = context.oldStatus || "etapa anterior";
+      const to = context.newStatus || "etapa nueva";
+      reasoning = `El lead cambió de "${from}" a "${to}". El sistema detectó la transición en el pipeline y ejecutó ${actionCount} acciones configuradas para esta etapa.`;
+      confidenceScore = 88;
+      break;
+    }
+    case "lead.inactive":
+      reasoning = `Lead sin actividad durante ${context.inactiveDays || "varios"} días. El sistema identificó inactividad prolongada y activó el flujo de re-engagement.`;
+      confidenceScore = 82;
+      break;
+    default:
+      reasoning = `Evento "${trigger}" detectado. El sistema ejecutó las acciones configuradas automáticamente.`;
+      confidenceScore = 75;
+  }
+
+  return { reasoning, confidenceScore };
+}
+
 export async function executeAutomation(
   automation: {
     id: string;
@@ -99,14 +131,23 @@ export async function executeAutomation(
   },
   userId: string,
   triggerEntityId?: string,
-  triggerType?: string
+  triggerType?: string,
+  context?: Record<string, unknown>
 ) {
+  const { reasoning, confidenceScore } = generateReasoning(
+    triggerType || automation.triggerType,
+    context || {},
+    automation.actions.length
+  );
+
   const execution = await prisma.automationExecution.create({
     data: {
       id: randomUUID(),
       status: "running",
       triggeredBy: triggerType || automation.triggerType,
       triggerEntityId,
+      reasoning,
+      confidenceScore,
       automationId: automation.id,
     },
   });
@@ -209,7 +250,7 @@ export async function getUserAutomationStats(userId: string) {
       automation: { userId },
       createdAt: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
     },
-    include: { actions: true, automation: { select: { name: true } } },
+    include: { actions: true, automation: { select: { name: true, triggerType: true } } },
     orderBy: { createdAt: "desc" },
     take: 10,
   });
@@ -219,7 +260,6 @@ export async function getUserAutomationStats(userId: string) {
   const todayErrors = todayTotal - todaySuccess;
   const minutesSaved = todayTotal * 15;
   const health = todayTotal > 0 ? Math.round((todaySuccess / todayTotal) * 100) : 100;
-
   const leadsProcessed = executions.filter((e) => e.triggerEntityId).length;
 
   return {
@@ -241,7 +281,7 @@ export async function getLeadExecutions(leadId: string, userId: string) {
       triggerEntityId: leadId,
       automation: { userId },
     },
-    include: { actions: true, automation: { select: { name: true } } },
+    include: { actions: true, automation: { select: { name: true, triggerType: true } } },
     orderBy: { createdAt: "desc" },
     take: 10,
   });
@@ -255,7 +295,7 @@ export async function fireAutomationTriggers(
 ) {
   const automations = await matchAutomations(userId, trigger, context);
   return Promise.allSettled(
-    automations.map((a) => executeAutomation(a, userId, triggerEntityId, trigger))
+    automations.map((a) => executeAutomation(a, userId, triggerEntityId, trigger, context))
   );
 }
 
@@ -279,4 +319,125 @@ export async function applyReferral(referralCode: string, newUserId: string) {
     data: { referredBy: referrer.id, referralDiscount: 20 },
   });
   return referrer.id;
+}
+
+export async function getUserSuggestions(userId: string) {
+  const automations = await prisma.automation.findMany({
+    where: { userId },
+    select: { triggerType: true, active: true },
+  });
+
+  const leadCounts = await prisma.lead.groupBy({
+    by: ["status"],
+    where: { userId },
+    _count: true,
+  });
+
+  const statusMap: Record<string, number> = {};
+  leadCounts.forEach((l) => { statusMap[l.status] = l._count; });
+
+  const now = new Date();
+  const inactiveLeads = await prisma.lead.count({
+    where: {
+      userId,
+      status: { in: ["nuevo", "contactado"] },
+      updatedAt: { lt: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000) },
+    },
+  });
+
+  const staleLeads = await prisma.lead.count({
+    where: {
+      userId,
+      status: { in: ["nuevo", "contactado"] },
+      updatedAt: { lt: new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000) },
+    },
+  });
+
+  const hasLeads = Object.keys(statusMap).length > 0;
+  const hasCreatedTrigger = automations.some((a) => a.triggerType === "lead.created" && a.active);
+  const hasStatusTrigger = automations.some((a) => a.triggerType === "lead.status_changed" && a.active);
+  const hasInactiveTrigger = automations.some((a) => a.triggerType === "lead.inactive" && a.active);
+
+  const suggestions = [];
+
+  if (hasLeads && !hasCreatedTrigger) {
+    suggestions.push({
+      type: "automation",
+      priority: "high",
+      title: "Automatiza la clasificación de leads",
+      description: "Crea una automatización para clasificar leads automáticamente al entrar.",
+      action: { label: "Crear automatización", href: "/dashboard/automations" },
+      reason: "Tienes leads pero ninguna automatización al crearlos.",
+    });
+  }
+
+  if (hasCreatedTrigger && !hasStatusTrigger) {
+    suggestions.push({
+      type: "automation",
+      priority: "medium",
+      title: "Automatiza el pipeline",
+      description: "Configura movimientos automáticos cuando los leads cambien de etapa.",
+      action: { label: "Añadir automatización", href: "/dashboard/automations" },
+      reason: "Ya clasificas leads al entrar, ahora automatiza su avance en el pipeline.",
+    });
+  }
+
+  if ((statusMap["nuevo"] || 0) > 0 && hasStatusTrigger && !hasInactiveTrigger) {
+    suggestions.push({
+      type: "automation",
+      priority: "medium",
+      title: "Recupera leads inactivos",
+      description: "Crea una automatización para leads sin actividad tras varios días.",
+      action: { label: "Configurar", href: "/dashboard/automations" },
+      reason: "Tienes leads en etapas iniciales y automatizaciones de pipeline, pero nadie sigue a los que se quedan atrás.",
+    });
+  }
+
+  if (inactiveLeads > 0) {
+    suggestions.push({
+      type: "risk",
+      priority: "high",
+      title: "Leads sin contacto",
+      description: `${inactiveLeads} lead${inactiveLeads > 1 ? "s" : ""} sin actividad en más de 7 días.`,
+      action: { label: "Revisar leads", href: "/dashboard/leads" },
+      reason: "El tiempo de respuesta es crítico. Leads sin contacto pierden interés rápidamente.",
+    });
+  }
+
+  if (staleLeads > 0 && inactiveLeads === 0) {
+    suggestions.push({
+      type: "risk",
+      priority: "low",
+      title: "Seguimiento pendiente",
+      description: `${staleLeads} lead${staleLeads > 1 ? "s" : ""} requieren atención en los próximos días.`,
+      action: { label: "Revisar pipeline", href: "/dashboard/leads" },
+      reason: "Leads en etapas iniciales sin actualización reciente.",
+    });
+  }
+
+  const cualificados = statusMap["cualificado"] || 0;
+  if (cualificados > 0) {
+    suggestions.push({
+      type: "opportunity",
+      priority: "high",
+      title: "Leads listos para propuesta",
+      description: `${cualificados} lead${cualificados > 1 ? "s" : ""} cualificado${cualificados > 1 ? "s" : ""} esperando propuesta comercial.`,
+      action: { label: "Ver leads", href: "/dashboard/leads?status=cualificado" },
+      reason: "Son tus mejores oportunidades de cierre inmediato.",
+    });
+  }
+
+  const ganados = statusMap["ganado"] || 0;
+  if (ganados > 0 && ganados >= 3) {
+    suggestions.push({
+      type: "milestone",
+      priority: "low",
+      title: `¡${ganados} clientes ganados!`,
+      description: `${ganados} conversiones exitosas. Tu sistema está funcionando.`,
+      action: { label: "Compartir logro", href: "/referrals" },
+      reason: "Invita a otra empresa y ambos obtenéis descuento.",
+    });
+  }
+
+  return suggestions;
 }

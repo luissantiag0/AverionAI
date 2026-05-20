@@ -169,6 +169,8 @@ model AutomationExecution {
   triggeredBy     String?
   triggerEntityId String?
   result          String?
+  reasoning       String?
+  confidenceScore Int?
   startedAt       DateTime @default(now())
   completedAt     DateTime?
 

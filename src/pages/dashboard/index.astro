@@ -2,7 +2,7 @@
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import { getTrialRemainingMs } from "../../lib/auth";
 import { getUserLeadCounts, getUserRecentActivity } from "../../lib/crm";
-import { getUserAutomationStats } from "../../lib/automations";
+import { getUserAutomationStats, getUserSuggestions } from "../../lib/automations";
 import OnboardingTour from "../../components/OnboardingTour.astro";
 import ActivationChecklist from "../../components/ActivationChecklist.astro";
 
@@ -24,6 +24,7 @@ const hasRecentChanges = recentActivity.length > 0;
 const justCreatedFirstLead = totalLeads === 1;
 const autoStats = user ? await getUserAutomationStats(user.id) : null;
 const hasAutomations = (autoStats?.total ?? 0) > 0;
+const suggestions = user ? await getUserSuggestions(user.id) : [];
 ---
 
 <DashboardLayout title="Dashboard">
@@ -228,6 +229,51 @@ const hasAutomations = (autoStats?.total ?? 0) > 0;
           </div>
         </div>
       </div>
+    </section>
+  )}
+
+  {suggestions.length > 0 && (
+    <section class="mt-8 grid gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-cyan-200/80 font-medium">💡 Sistema inteligente</span>
+        <span class="text-xs text-white/35">Recomendaciones basadas en tu actividad</span>
+      </div>
+      {suggestions.filter(s => s.priority === "high").map((s, i) => (
+        <div class={`rounded-2xl border px-5 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between ${s.type === "risk" ? "border-amber-300/15 bg-amber-300/[0.04]" : "border-cyan-300/15 bg-cyan-300/[0.04]"}`} data-reveal data-delay={i * 60}>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class={`text-base ${s.type === "risk" ? "" : ""}`}>{s.type === "risk" ? "⚠️" : s.type === "opportunity" ? "🎯" : "🤖"}</span>
+              <p class="text-sm font-semibold text-white">{s.title}</p>
+              <span class={`rounded-full px-2 py-0.5 text-[10px] font-medium ${s.priority === "high" ? "bg-amber-400/15 text-amber-200" : "bg-cyan-400/15 text-cyan-200"}`}>{s.priority === "high" ? "Prioritario" : "Recomendado"}</span>
+            </div>
+            <p class="mt-1 text-sm text-white/55">{s.description}</p>
+            <p class="mt-0.5 text-[11px] text-white/30">{s.reason}</p>
+          </div>
+          <a href={s.action.href} class="btn-secondary px-4 py-2 text-xs shrink-0 whitespace-nowrap">{s.action.label} →</a>
+        </div>
+      ))}
+      {suggestions.filter(s => s.priority !== "high").length > 0 && (
+        <details class="group">
+          <summary class="cursor-pointer text-xs text-white/35 hover:text-white/60 transition list-none flex items-center gap-2">
+            <span>{suggestions.filter(s => s.priority !== "high").length} recomendaciones adicionales</span>
+            <span class="text-white/20 group-open:rotate-180 transition">▼</span>
+          </summary>
+          <div class="mt-3 grid gap-3">
+            {suggestions.filter(s => s.priority !== "high").map((s, i) => (
+              <div class={`rounded-xl border px-4 py-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between ${s.type === "milestone" ? "border-emerald-300/15 bg-emerald-300/[0.04]" : "border-white/[0.06] bg-white/[0.02]"}`}>
+                <div class="flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm">{s.type === "milestone" ? "🎉" : "💡"}</span>
+                    <p class="text-sm font-medium text-white">{s.title}</p>
+                  </div>
+                  <p class="mt-0.5 text-xs text-white/50">{s.reason}</p>
+                </div>
+                <a href={s.action.href} class="btn-secondary px-3 py-1.5 text-xs shrink-0 whitespace-nowrap">{s.action.label} →</a>
+              </div>
+            ))}
+          </div>
+        </details>
+      )}
     </section>
   )}
 

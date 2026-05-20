@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LeadCaptureModal from "../components/LeadCaptureModal.astro";
+
+export const prerender = false;
+---
+
+<BaseLayout
+  title="Precio automatización IA empresas España 2026 | AverionAI"
+  description="Precios de automatización con IA para empresas en España desde 0€. Plan gratuito con CRM, leads ilimitados en Premium (29€/mes) y Business (79€/mes). Sin costes ocultos."
+>
+  <Navbar />
+  <main class="min-h-screen bg-[#07070A]">
+    <section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.1),transparent_60%)]"></div>
+      <div class="container">
+        <div class="mx-auto max-w-3xl" data-reveal>
+          <span class="badge bg-cyan-300/10 text-cyan-100">Precios</span>
+          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">Precio automatización IA para empresas en España</h1>
+          <p class="mt-5 text-lg text-white/60">Planes transparentes sin costes ocultos. Desde 0€ el plan gratuito hasta 79€/mes para equipos completos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-16 md:py-20">
+      <div class="mx-auto max-w-5xl">
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="premium-panel p-6 text-center" data-reveal>
+            <p class="text-sm uppercase tracking-wider text-white/40">Gratuito</p>
+            <p class="mt-4 text-4xl font-bold text-white">0€</p>
+            <p class="mt-2 text-xs text-white/40">Siempre gratis</p>
+            <ul class="mt-6 space-y-3 text-left text-sm text-white/60">
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> CRM con hasta 5 leads</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Panel de control básico</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Automatizaciones limitadas</li>
+              <li class="flex items-start gap-2"><span class="text-white/20 mt-0.5">✗</span> Ebooks IA</li>
+              <li class="flex items-start gap-2"><span class="text-white/20 mt-0.5">✗</span> Pitch decks</li>
+              <li class="flex items-start gap-2"><span class="text-white/20 mt-0.5">✗</span> SEO Swarm</li>
+            </ul>
+            <a href="/register" class="btn-secondary mt-8 w-full py-2.5 text-sm">Empezar gratis</a>
+          </div>
+          <div class="premium-panel p-6 text-center border-cyan-300/20" data-reveal data-delay="100">
+            <p class="text-sm uppercase tracking-wider text-cyan-200">Premium</p>
+            <p class="mt-4 text-4xl font-bold text-white">29€</p>
+            <p class="mt-2 text-xs text-white/40">Por mes</p>
+            <ul class="mt-6 space-y-3 text-left text-sm text-white/60">
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Leads ilimitados</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Automatizaciones ilimitadas</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Ebooks IA</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Pitch decks automáticos</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> SEO Swarm</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Soporte prioritario</li>
+            </ul>
+            <a href="/register" class="btn-primary mt-8 w-full py-2.5 text-sm">Empezar ahora</a>
+          </div>
+          <div class="premium-panel p-6 text-center" data-reveal data-delay="200">
+            <p class="text-sm uppercase tracking-wider text-white/40">Business</p>
+            <p class="mt-4 text-4xl font-bold text-white">79€</p>
+            <p class="mt-2 text-xs text-white/40">Por mes</p>
+            <ul class="mt-6 space-y-3 text-left text-sm text-white/60">
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Todo Premium</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Usuarios múltiples</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Roles y permisos</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> API dedicada</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> Integraciones personalizadas</li>
+              <li class="flex items-start gap-2"><span class="text-emerald-300 mt-0.5">✓</span> SLA garantizado</li>
+            </ul>
+            <a href="/register" class="btn-secondary mt-8 w-full py-2.5 text-sm">Contactar</a>
+          </div>
+        </div>
+
+        <div class="mt-12 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6" data-reveal>
+          <h2 class="text-lg font-semibold text-white">¿Cuánto cuesta realmente la automatización con IA?</h2>
+          <p class="mt-3 text-sm leading-relaxed text-white/60">El coste de un sistema de automatización con IA para empresas en España depende del alcance. Con AverionAI no hay tarifas de implementación ni consultoría. El plan gratuito te permite probar el sistema sin riesgo, y el plan Premium (29€/mes) incluye todo lo necesario para automatizar tu operativa comercial completa.</p>
+          <p class="mt-3 text-sm leading-relaxed text-white/60">Comparado con contratar a un desarrollador (40.000-60.000€/año) o una agencia de automatización (5.000-15.000€ por proyecto), AverionAI ofrece un ROI inmediato desde el primer mes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-white/10 bg-white/[0.02] py-20">
+      <div class="container text-center">
+        <h2 class="text-3xl font-semibold text-white md:text-4xl">Prueba AverionAI gratis</h2>
+        <p class="mt-4 text-white/60">24 horas de acceso premium. Sin tarjeta.</p>
+        <a href="/register" class="btn-primary mt-8 px-8 py-3 inline-flex">Empezar ahora</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <LeadCaptureModal />
+</BaseLayout>

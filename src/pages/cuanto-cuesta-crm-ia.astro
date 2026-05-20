@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LeadCaptureModal from "../components/LeadCaptureModal.astro";
+
+export const prerender = false;
+---
+
+<BaseLayout
+  title="Cuánto cuesta un CRM con IA para empresas | AverionAI 2026"
+  description="Descubre cuánto cuesta un CRM con inteligencia artificial para tu empresa. Precios desde 0€ (gratuito) hasta 79€/mes. Sin costes de implantación ni equipos técnicos."
+>
+  <Navbar />
+  <main class="min-h-screen bg-[#07070A]">
+    <section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.1),transparent_60%)]"></div>
+      <div class="container">
+        <div class="mx-auto max-w-3xl" data-reveal>
+          <span class="badge bg-cyan-300/10 text-cyan-100">CRM IA</span>
+          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">¿Cuánto cuesta un CRM con IA?</h1>
+          <p class="mt-5 text-lg text-white/60">Comparativa de costes: CRM tradicional vs CRM con inteligencia artificial. Precios, implantación y retorno de inversión.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-16 md:py-20">
+      <div class="mx-auto max-w-3xl">
+        <div class="space-y-8">
+          <div data-reveal>
+            <h2 class="text-xl font-semibold text-white">Coste de un CRM con IA vs CRM tradicional</h2>
+            <div class="mt-5 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-white/40">CRM Tradicional</p>
+                <ul class="mt-3 space-y-2 text-sm text-white/50">
+                  <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> 15-50€/mes por usuario</li>
+                  <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> 2.000-10.000€ implantación</li>
+                  <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> 500-2.000€/año soporte</li>
+                  <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> Automatización limitada</li>
+                  <li class="flex items-start gap-2"><span class="text-rose-300">✗</span> Sin IA integrada</li>
+                </ul>
+              </div>
+              <div class="rounded-xl border border-cyan-300/20 bg-cyan-300/[0.04] p-5">
+                <p class="text-sm font-semibold text-cyan-200">CRM con IA (AverionAI)</p>
+                <ul class="mt-3 space-y-2 text-sm text-white/70">
+                  <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Desde 0€/mes</li>
+                  <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Sin coste de implantación</li>
+                  <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Soporte incluido</li>
+                  <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> Automatización completa</li>
+                  <li class="flex items-start gap-2"><span class="text-emerald-300">✓</span> IA integrada desde el día 1</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6" data-reveal>
+            <h2 class="text-lg font-semibold text-white">¿Merece la pena pagar por un CRM con IA?</h2>
+            <p class="mt-3 text-sm leading-relaxed text-white/60">Un CRM con IA como AverionAI cuesta 29€/mes en el plan Premium. Para una empresa que gestiona 100 leads al mes, el ahorro de tiempo es de 25 horas mensuales (15 min por lead). A un coste de 30€/hora de comercial, eso son 750€/mes ahorrados — un retorno de 25x sobre la inversión.</p>
+            <p class="mt-3 text-sm leading-relaxed text-white/60">Además, la velocidad de respuesta mejora de 24-48h a menos de 2 minutos, lo que multiplica la tasa de conversión de leads en clientes.</p>
+          </div>
+
+          <div data-reveal class="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6">
+            <h2 class="text-xl font-semibold text-white">Prueba gratis sin tarjeta</h2>
+            <p class="mt-3 text-sm text-white/60">24 horas de acceso premium para que compruebes el ROI por ti mismo.</p>
+            <div class="mt-6 flex gap-4">
+              <a href="/register" class="btn-primary px-6 py-2.5 text-sm">Empezar gratis</a>
+              <button type="button" data-open-lead-modal class="btn-secondary px-6 py-2.5 text-sm">Solicitar demo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-white/10 bg-white/[0.02] py-20">
+      <div class="container text-center">
+        <h2 class="text-3xl font-semibold text-white md:text-4xl">Prueba AverionAI gratis</h2>
+        <p class="mt-4 text-white/60">24 horas de acceso premium. Sin tarjeta.</p>
+        <a href="/register" class="btn-primary mt-8 px-8 py-3 inline-flex">Empezar ahora</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <LeadCaptureModal />
+</BaseLayout>

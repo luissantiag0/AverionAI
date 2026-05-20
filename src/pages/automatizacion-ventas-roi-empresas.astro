@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LeadCaptureModal from "../components/LeadCaptureModal.astro";
+
+export const prerender = false;
+---
+
+<BaseLayout
+  title="ROI automatización ventas con IA para empresas | AverionAI"
+  description="Calcula el ROI de automatizar tus ventas con IA. Ahorra 25h/mes por cada 100 leads, reduce costes operativos un 40% y multiplica tu tasa de conversión."
+>
+  <Navbar />
+  <main class="min-h-screen bg-[#07070A]">
+    <section class="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.1),transparent_60%)]"></div>
+      <div class="container">
+        <div class="mx-auto max-w-3xl" data-reveal>
+          <span class="badge bg-cyan-300/10 text-cyan-100">ROI</span>
+          <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">ROI de automatización de ventas con IA</h1>
+          <p class="mt-5 text-lg text-white/60">Cuánto dinero ahorra y genera una empresa al automatizar su proceso de ventas con inteligencia artificial. Datos y cálculos reales.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container py-16 md:py-20">
+      <div class="mx-auto max-w-3xl">
+        <div class="space-y-8">
+          <div class="grid gap-4 sm:grid-cols-3" data-reveal>
+            <div class="premium-panel p-5 text-center">
+              <p class="text-3xl font-bold text-cyan-200">-40%</p>
+              <p class="mt-2 text-xs text-white/45">Costes operativos comerciales</p>
+            </div>
+            <div class="premium-panel p-5 text-center">
+              <p class="text-3xl font-bold text-emerald-200">25h</p>
+              <p class="mt-2 text-xs text-white/45">Ahorradas al mes por cada 100 leads</p>
+            </div>
+            <div class="premium-panel p-5 text-center">
+              <p class="text-3xl font-bold text-purple-200">25x</p>
+              <p class="mt-2 text-xs text-white/45">Retorno sobre la inversión mensual</p>
+            </div>
+          </div>
+
+          <div data-reveal>
+            <h2 class="text-xl font-semibold text-white">Calcula el ROI de tu empresa</h2>
+            <div class="mt-5 space-y-4">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-white">Escenario: 50 leads/mes</p>
+                <ul class="mt-3 space-y-1 text-sm text-white/60">
+                  <li>• Tiempo manual por lead: 15 min → 12.5h/mes</li>
+                  <li>• Coste comercial: 30€/h → 375€/mes</li>
+                  <li>• Plan AverionAI Premium: 29€/mes</li>
+                  <li class="text-emerald-200 font-medium">• ROI: 375€ / 29€ = 12.9x</li>
+                </ul>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-white">Escenario: 200 leads/mes</p>
+                <ul class="mt-3 space-y-1 text-sm text-white/60">
+                  <li>• Tiempo manual por lead: 15 min → 50h/mes</li>
+                  <li>• Coste comercial: 30€/h → 1.500€/mes</li>
+                  <li>• Plan AverionAI Business: 79€/mes</li>
+                  <li class="text-emerald-200 font-medium">• ROI: 1.500€ / 79€ = 19x</li>
+                </ul>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                <p class="text-sm font-semibold text-white">Escenario: 500 leads/mes</p>
+                <ul class="mt-3 space-y-1 text-sm text-white/60">
+                  <li>• Tiempo manual por lead: 15 min → 125h/mes</li>
+                  <li>• Coste comercial: 30€/h → 3.750€/mes</li>
+                  <li>• Plan AverionAI Business: 79€/mes</li>
+                  <li class="text-emerald-200 font-medium">• ROI: 3.750€ / 79€ = 47.5x</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div data-reveal>
+            <h2 class="text-xl font-semibold text-white">Beneficios adicionales</h2>
+            <div class="mt-5 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                <p class="text-sm font-semibold text-cyan-200">Velocidad de respuesta</p>
+                <p class="mt-2 text-xs text-white/60">De 24-48h a &lt;2 min. Los leads reciben atención inmediata, multiplicando la tasa de contacto inicial.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                <p class="text-sm font-semibold text-cyan-200">Leads no perdidos</p>
+                <p class="mt-2 text-xs text-white/60">El sistema sigue a todos los leads. Ninguno se queda sin seguimiento por olvido o falta de tiempo.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                <p class="text-sm font-semibold text-cyan-200">Pipeline actualizado</p>
+                <p class="mt-2 text-xs text-white/60">Sin necesidad de arrastrar tarjetas ni actualizar estados manualmente. El sistema lo hace solo.</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                <p class="text-sm font-semibold text-cyan-200">Sin equipo técnico</p>
+                <p class="mt-2 text-xs text-white/60">No necesitas desarrolladores ni consultores. La automatización se configura en minutos desde el panel.</p>
+              </div>
+            </div>
+          </div>
+
+          <div data-reveal class="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6">
+            <h2 class="text-xl font-semibold text-white">Calcula tu ROI real</h2>
+            <p class="mt-3 text-sm text-white/60">Prueba AverionAI gratis durante 24 horas y mide el impacto en tu operativa.</p>
+            <div class="mt-6 flex gap-4">
+              <a href="/register" class="btn-primary px-6 py-2.5 text-sm">Empezar gratis</a>
+              <button type="button" data-open-lead-modal class="btn-secondary px-6 py-2.5 text-sm">Solicitar demo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-white/10 bg-white/[0.02] py-20">
+      <div class="container text-center">
+        <h2 class="text-3xl font-semibold text-white md:text-4xl">Prueba AverionAI gratis</h2>
+        <p class="mt-4 text-white/60">24 horas de acceso premium. Sin tarjeta.</p>
+        <a href="/register" class="btn-primary mt-8 px-8 py-3 inline-flex">Empezar ahora</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <LeadCaptureModal />
+</BaseLayout>
