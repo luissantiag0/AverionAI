@@ -99,6 +99,16 @@ if (Astro.request.method === "POST") {
     </div>
   )}
 
+  <div class="mt-4 rounded-2xl border border-emerald-300/10 bg-emerald-300/[0.03] px-5 py-3">
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+      <span class="text-emerald-200/80 font-medium">✓ Lead registrado</span>
+      <span class="text-white/45">Siguiente paso:</span>
+      <a href="/dashboard/leads" class="text-cyan-200 hover:text-white transition">Gestionar pipeline</a>
+      <span class="text-white/20">·</span>
+      <a href="/dashboard/automations" class="text-cyan-200 hover:text-white transition">Crear automatizacion</a>
+    </div>
+  </div>
+
   <section class="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
     <div class="premium-panel p-5 md:p-6">
       <h2 class="text-xl font-semibold text-white">Información</h2>

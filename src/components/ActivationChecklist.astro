@@ -1,11 +1,11 @@
 ---
 const { totalLeads = 0, totalDocuments = 0 } = Astro.props;
 const items = [
-  { label: "Crear tu primer lead", key: "lead", done: totalLeads >= 1 },
-  { label: "Explorar el pipeline", key: "pipeline", done: false },
-  { label: "Generar tu primer documento", key: "document", done: totalDocuments >= 1 },
-  { label: "Mover un lead en el pipeline", key: "move", done: false },
-  { label: "Configurar tu primer workflow", key: "workflow", done: false },
+  { label: "Crear tu primer lead", key: "lead", done: totalLeads >= 1, href: "/dashboard/leads/new" },
+  { label: "Explorar el pipeline", key: "pipeline", done: false, href: "/dashboard/leads" },
+  { label: "Generar tu primer documento", key: "document", done: totalDocuments >= 1, href: "/premium/ebooks" },
+  { label: "Mover un lead en el pipeline", key: "move", done: false, href: "/dashboard/leads" },
+  { label: "Configurar tu primer workflow", key: "workflow", done: false, href: "/dashboard/automations" },
 ];
 const completed = items.filter((i) => i.done).length;
 const total = items.length;
@@ -26,13 +26,18 @@ const total = items.length;
     <div class="grid gap-3">
       {items.map((item, i) => {
         const isCompleted = item.done;
+        const Tag = isCompleted ? "div" : "a";
         return (
-          <div class={`flex items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 ${isCompleted ? "border-emerald-300/20 bg-emerald-300/[0.04]" : "border-white/[0.06] bg-white/[0.02]"}`}>
+          <Tag
+            href={isCompleted ? undefined : item.href}
+            class={`flex items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 ${isCompleted ? "border-emerald-300/20 bg-emerald-300/[0.04]" : "border-white/[0.06] bg-white/[0.02] hover:border-cyan-300/20 hover:bg-white/[0.04] hover:-translate-y-0.5"}`}
+          >
             <span class={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all duration-300 ${isCompleted ? "bg-emerald-400/20 text-emerald-300" : "border border-white/[0.15] text-white/30"}`}>
               {isCompleted ? "✓" : i + 1}
             </span>
             <span class={`text-sm ${isCompleted ? "text-emerald-200/70 line-through" : "text-white/60"}`}>{item.label}</span>
-          </div>
+            {!isCompleted && <span class="ml-auto text-xs text-cyan-200/50">→</span>}
+          </Tag>
         );
       })}
     </div>

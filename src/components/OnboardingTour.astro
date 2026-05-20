@@ -10,13 +10,12 @@ const { show = false } = Astro.props;
           <svg class="h-7 w-7 text-cyan-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
         <h2 class="text-2xl font-semibold tracking-tight text-white">Bienvenido a AverionAI</h2>
-        <p class="mt-3 text-sm leading-relaxed text-white/50">Tu plataforma de CRM, documentos y automatizacion con IA. En los proximos pasos te guiaremos por las funcionalidades principales.</p>
+        <p class="mt-3 text-sm leading-relaxed text-white/50">En los siguientes pasos crearas tu primer lead y veras como funciona el sistema. No te llevara mas de un minuto.</p>
         <div class="mt-8 grid gap-3">
           {[
-            { step: "01", label: "Crear tu primer lead", desc: "Anade un contacto y deja que la IA lo clasifique" },
-            { step: "02", label: "Explorar el pipeline", desc: "Visualiza y mueve leads entre etapas comerciales" },
-            { step: "03", label: "Generar documentos", desc: "Crea facturas, pitch decks e informes con un clic" },
-            { step: "04", label: "Automatizar procesos", desc: "Configura flujos automaticos para tus tareas repetitivas" },
+            { step: "01", label: "Crear tu primer lead", desc: "Anade un contacto para empezar a usar el CRM" },
+            { step: "02", label: "Explorar el pipeline", desc: "Visualiza tus leads organizados por etapa comercial" },
+            { step: "03", label: "Crear tu primera automatizacion", desc: "Configura un flujo automatico desde una plantilla" },
           ].map((item) => (
             <div class="flex items-start gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] px-5 py-4">
               <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] text-xs font-mono text-white/40">{item.step}</span>
@@ -27,8 +26,14 @@ const { show = false } = Astro.props;
             </div>
           ))}
         </div>
-        <button id="onboarding-start" class="mt-8 w-full rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-20px_rgba(34,211,238,0.6)] active:translate-y-0">Comenzar recorrido</button>
-        <button id="onboarding-skip" class="mt-3 w-full text-center text-xs text-white/30 transition hover:text-white/50">Omitir</button>
+        <a
+          href="/dashboard/leads/new"
+          id="onboarding-start"
+          class="mt-8 flex w-full items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-20px_rgba(34,211,238,0.6)] active:translate-y-0"
+        >
+          Crear mi primer lead
+        </a>
+        <button id="onboarding-skip" class="mt-3 w-full text-center text-xs text-white/30 transition hover:text-white/50">Omitir — ire al dashboard</button>
       </div>
     </div>
   )
@@ -48,11 +53,10 @@ const { show = false } = Astro.props;
       try { localStorage.setItem("averionai_onboarding_done", "true"); } catch {}
     };
 
-    startBtn?.addEventListener("click", () => {
+    startBtn?.addEventListener("click", dismiss);
+    skipBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
       dismiss();
-      try { localStorage.setItem("averionai_onboarding_done", "true"); } catch {}
     });
-
-    skipBtn?.addEventListener("click", dismiss);
   })();
 </script>
