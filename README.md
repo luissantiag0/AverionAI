@@ -1,43 +1,69 @@
-# Astro Starter Kit: Minimal
+# AverionAI — Plataforma de Automatización y Agentes IA
+AverionAI es una plataforma enfocada en automatización con IA, creación de agentes inteligentes, y herramientas diseñadas para potenciar la productividad de emprendedores, iglesias, negocios y creadores digitales.
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Este repositorio contiene el código de la web oficial https://averionai.es, desarrollada con un enfoque minimalista, rápido y optimizado para SEO.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+# Características
+- Rendimiento extremo gracias a Astro
+- Diseño moderno y minimalista con TailwindCSS
+- Integración con agentes IA y automatizaciones
+- Totalmente responsive
+- SEO avanzado y metadatos optimizados
+- Componentes reutilizables y escalables
+- Código limpio, modular y fácil de mantener
 
-## 🚀 Project Structure
+# Stack Tecnológico
+- Astro
+- TailwindCSS
+- TypeScript
+- Vercel
+- Multi Agents
+- Iconos SVG optimizados
 
-Inside of your Astro project, you'll see the following folders and files:
+# Instalación
+Clonar el repositorio
+- git clone https://github.com/tuusuario/averionai.git
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Entrar en el proyecto
+- cd averionai
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Instalar dependencias
+- npm install
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Ejecutar en desarrollo
+- npm run dev
 
-Any static assets, like images, can be placed in the `public/` directory.
+# Estructura del repositorio
+├── .opencode/agents                
+├── .vscode                         
+├── agency-agents                  
+├── data                            
+├── prisma                         
+├── public                         
+├── src                            
+├── LAUNCH.md                      
+├── README.md                      
+├── astro.config.mjs                
+├── banner-averion.png             
+├── install.ps1                     
+├── install.sh                     
+├── logo-averion.png               
+├── package-lock.json
+├── package.json
+├── postcss.config.cjs
+├── prisma.config.ts
+├── tsconfig.json
+└── .gitignore
 
-## 🧞 Commands
+# Contribuciones
+Las contribuciones son bienvenidas.
+Puedes abrir un issue o enviar un pull request.
 
-All commands are run from the root of the project, from a terminal:
+# Contacto
+luissantiagomorales07@gmail.com
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+# Licencia
+Este proyecto está bajo la licencia MIT.
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+# Apoya el proyecto
+Si te gusta este proyecto, dale una estrella ⭐ en GitHub.
